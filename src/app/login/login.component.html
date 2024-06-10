@@ -1,17 +1,57 @@
-<div class="card flex flex-column md:flex-row gap-3">
-  <p-inputGroup>
-      <p-inputGroupAddon>
-          <i class="pi pi-user"></i>
-      </p-inputGroupAddon>
-      <input pInputText placeholder="Username" />
-  </p-inputGroup>
-  <p-inputGroup>
-      <p-inputGroupAddon>$</p-inputGroupAddon>
-      <input type="text" pInputText placeholder="Price" />
-      <p-inputGroupAddon>.00</p-inputGroupAddon>
-  </p-inputGroup>
-  <p-inputGroup>
-      <p-inputGroupAddon>www</p-inputGroupAddon>
-      <input type="text" pInputText placeholder="Website" />
-  </p-inputGroup>
-</div>
+<header>
+  <img src="assets/img/join_logo.svg" alt="join-logo.svg" />
+  <div>
+    <span>Not a Join user?</span>
+    <p-button label="Sign Up" />
+  </div>
+</header>
+
+<main class="flexCenter">
+  <div class="flexCenterColumn loginMask">
+    <form action="">
+      <h1>Log In</h1>
+      <div class="separator"></div>
+      <div class="card flex flex-column md:flex-row gap-3">
+        <p-inputGroup>
+          <p-inputGroupAddon>
+            <i class="pi pi-envelope"></i>
+          </p-inputGroupAddon>
+          <input pInputText placeholder="Username" autocomplete="username" />
+        </p-inputGroup>
+        <p-inputGroup>
+          <p-inputGroupAddon (click)="togglePasswordVisibility()">
+            <i
+              class="pi"
+              [ngClass]="{
+                'pi-lock': !showPassword,
+                'pi-lock-open': showPassword
+              }"
+            ></i>
+          </p-inputGroupAddon>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            pInputText
+            placeholder="Password"
+          />
+        </p-inputGroup>
+      </div>
+
+      <div>
+        <div>
+          <p-checkbox
+            [(ngModel)]="rememberMe"
+            [binary]="true"
+            name="rememberMe"
+          ></p-checkbox>
+          <span>Remember Me</span>
+        </div>
+        <a href="">I forgot my password</a>
+      </div>
+
+      <div>
+        <p-button label="Login" />
+        <p-button label="Guest-Login" />
+      </div>
+    </form>
+  </div>
+</main>

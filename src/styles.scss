@@ -1,2 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+
+$blue-primary: #29ABE2;
+$blue-dark: #2a3647;
+
+@mixin flexCenter($jc: center, $ai: center, $g: 0px, $fd: row) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  gap: $g;
+  flex-direction: $fd;
+}
+
+.flexCenter {
+  @include flexCenter();
+}
+
+.flexCenterColumn {
+  @include flexCenter($fd: column);
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}

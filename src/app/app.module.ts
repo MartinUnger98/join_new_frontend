@@ -7,11 +7,12 @@ import { AppComponent } from './app.component';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { LoginComponent } from './login/login.component';
-import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { InputOtpModule } from 'primeng/inputotp';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
@@ -19,11 +20,10 @@ import { InputOtpModule } from 'primeng/inputotp';
     AppRoutingModule,
     InputGroupModule,
     InputGroupAddonModule,
-    InputSwitchModule,
     InputTextModule,
-    InputNumberModule,
-    InputTextareaModule,
-    InputOtpModule
+    ButtonModule,
+    CheckboxModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
