@@ -6,52 +6,57 @@
   </div>
 </header>
 
-<main class="flexCenter">
-  <div class="flexCenterColumn loginMask">
-    <form action="">
-      <h1>Log In</h1>
-      <div class="separator"></div>
-      <div class="card flex flex-column md:flex-row gap-3">
-        <p-inputGroup>
-          <p-inputGroupAddon>
-            <i class="pi pi-envelope"></i>
-          </p-inputGroupAddon>
-          <input pInputText placeholder="Username" autocomplete="username" />
-        </p-inputGroup>
-        <p-inputGroup>
-          <p-inputGroupAddon (click)="togglePasswordVisibility()">
-            <i
-              class="pi"
-              [ngClass]="{
-                'pi-lock': !showPassword,
-                'pi-lock-open': showPassword
-              }"
-            ></i>
-          </p-inputGroupAddon>
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            pInputText
-            placeholder="Password"
-          />
-        </p-inputGroup>
-      </div>
+<main class="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2">
+  <form class="w-110 shadow-custom rounded-3xl flex items-center flex-col px-6 py-6">
+    <h1 class="text-6xl mb-8">Log In</h1>
+    <div class="rounded-sm bg-blue-primary h-1 w-24 mb-8"></div>
+    <div class="loginMask__inputFields w-3/4">
+      <p-inputGroup class="mb-8">
+        <input
+          class="border border-gray-input"
+          pInputText
+          placeholder="Username"
+          autocomplete="username"
+        />
+        <p-inputGroupAddon>
+          <i class="pi pi-envelope"></i>
+        </p-inputGroupAddon>
+      </p-inputGroup>
+      <p-inputGroup class="mb-8">
+        <input
+          class="border border-gray-input"
+          [type]="showPassword ? 'text' : 'password'"
+          pInputText
+          placeholder="Password"
+        />
+        <p-inputGroupAddon (click)="togglePasswordVisibility()">
+          <i
+            class="pi"
+            [ngClass]="{
+              'pi-lock': !showPassword,
+              'pi-lock-open': showPassword
+            }"
+          ></i>
+        </p-inputGroupAddon>
+      </p-inputGroup>
+    </div>
 
+    <div class="flex justify-between w-3/4 mb-8">
       <div>
-        <div>
-          <p-checkbox
-            [(ngModel)]="rememberMe"
-            [binary]="true"
-            name="rememberMe"
-          ></p-checkbox>
-          <span>Remember Me</span>
-        </div>
-        <a href="">I forgot my password</a>
+        <p-checkbox
+          class="border-2 border-gray-input rounded-sm mr-2"
+          [(ngModel)]="rememberMe"
+          [binary]="true"
+          name="rememberMe"
+        ></p-checkbox>
+        <span>Remember Me</span>
       </div>
+      <a class="text-blue-primary hover:underline" href="">I forgot my password</a>
+    </div>
 
-      <div>
-        <p-button label="Login" />
-        <p-button label="Guest-Login" />
-      </div>
-    </form>
-  </div>
+    <div class="loginMask__buttons">
+      <p-button class="bg-blue-dark text-white font-bold	" label="Login" />
+      <p-button class="" label="Guest-Login" />
+    </div>
+  </form>
 </main>
