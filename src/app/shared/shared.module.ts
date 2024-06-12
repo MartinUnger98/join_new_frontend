@@ -1,15 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainHeaderComponent } from '../main-header/main-header.component'; // Passe den Pfad entsprechend an
+import { MainHeaderComponent } from '../main-header/main-header.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    MainHeaderComponent
+    MainHeaderComponent,
+    SidebarComponent
   ],
   declarations: [],
   exports: [
-    MainHeaderComponent
+    MainHeaderComponent,
+    SidebarComponent
   ]
 })
 export class SharedModule { }

@@ -1,1 +1,17 @@
-<p>sidebar works!</p>
+<nav class="bg-blue-dark h-20 w-full absolute bottom-0 z-10 flex justify-between items-center 800:w-60 800:h-screen 800:top-0 800:py-16 800:flex-col">
+  <img src="assets/img/join_logo_white.svg" alt="join-logo-nav" class="h-32 w-24 hidden 800:block">
+  <div class="flex 800:flex-col gap-4 w-full justify-between px-5 800:px-0">
+      @for (icon of icons; track icon) {
+        <div class="flex justify-center w-20 h-20 800:py-2 cursor-pointer 800:w-full hover:bg-blue-secondary ease-in-out duration-200 rounded-xl 800:rounded-none">
+          <div class="flex-col 800:flex-row 800:w-32 flex items-center justify-center 800:justify-start">
+            <i [class]="icon.icon" class="pi text-gray-300 text-3xl 800:mr-4"></i>
+            <span class="text-gray-300 font-normal text-base">{{ icon.text }}</span>
+          </div>
+        </div>
+      }
+  </div>
+  <div class="hidden 800:flex flex-col gap-4 w-full items-center">
+    <a class="text-gray-400 text-lg font-normal hover:font-bold hover:text-blue-primary" href="">Privacy Policy</a>
+    <a class="text-gray-400 text-lg font-normal hover:font-bold hover:text-blue-primary" href="">Legal notice</a>
+  </div>
+</nav>

@@ -14,6 +14,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { SharedModule } from './shared/shared.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { SharedModule } from './shared/shared.module';
     ButtonModule,
     CheckboxModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()) // Neue Provider
