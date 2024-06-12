@@ -8,6 +8,7 @@ module.exports = {
       spacing: {
         '128': '32rem',
         '110': '30rem',
+        '88' : '22rem',
       },
       colors: {
         'blue-primary': '#29ABE2',
@@ -18,6 +19,10 @@ module.exports = {
         'custom': '0px 0px 17px 5px rgba(0, 0, 0, 0.08)',
       },
     },
+    screens: {
+      '800': '800px',
+
+    }
   },
   plugins: [],
 }

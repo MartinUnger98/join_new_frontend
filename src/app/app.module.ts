@@ -10,9 +10,16 @@ import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; // Neue Importe
+import { ContactsComponent } from './contacts/contacts.component';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    ContactsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,7 +28,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
     InputTextModule,
     ButtonModule,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()) // Neue Provider
