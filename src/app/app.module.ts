@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; // Neue Importe
 import { ContactsComponent } from './contacts/contacts.component';
 import { SharedModule } from './shared/shared.module';
+import { SignUpComponent } from './login/sign-up/sign-up.component';
 
 
 
@@ -20,6 +21,8 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     LoginComponent,
     ContactsComponent,
+    SignUpComponent,
+
   ],
   imports: [
     BrowserModule,

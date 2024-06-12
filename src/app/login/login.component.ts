@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-login',
   standalone: false,
-  /* imports: [], */
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -16,7 +16,7 @@ export class LoginComponent {
   showPassword: boolean = false;
   rememberMe: boolean = false;
 
-  constructor(public AuthService: AuthService) {}
+  constructor(public AuthService: AuthService, private router: Router) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -26,11 +26,11 @@ export class LoginComponent {
 
     try {
       let response = await this.AuthService.loginWithUsernameAndPassword(this.username, this.password);
+      this.router.navigate(['/contacts'])
       console.log(response)
     } catch(e) {
       console.log(e);
     }
   }
-
 
 }
