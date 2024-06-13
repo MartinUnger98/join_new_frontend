@@ -2,9 +2,18 @@
   <img class="h-32 w-24" src="assets/img/join_logo.svg" alt="join-logo.svg" />
 </header>
 
-<main class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="w-110 shadow-custom rounded-3xl flex flex-col items-center px-6 py-6 relative">
-    <i routerLink="/login" class="pi pi-arrow-left absolute top-10 left-10 text-blue-primary text-2xl hover:scale-125 transition duration-200 cursor-pointer"></i>
+<main
+  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+>
+  <form
+    [formGroup]="signUpForm"
+    (ngSubmit)="onSubmit()"
+    class="w-110 shadow-custom rounded-3xl flex flex-col items-center px-6 py-6 relative"
+  >
+    <i
+      routerLink="/login"
+      class="pi pi-arrow-left absolute top-10 left-10 text-blue-primary text-2xl hover:scale-125 transition duration-200 cursor-pointer"
+    ></i>
     <h1 class="text-6xl mb-8">Sign Up</h1>
     <div class="rounded-sm bg-blue-primary h-1 w-24 mb-8"></div>
 
@@ -16,7 +25,11 @@
         name="username"
         autocomplete="username"
         iconClass="pi pi-user"
-        [errorMessage]="f['username'].touched && f['username'].invalid ? 'Username is required' : ''"
+        [errorMessage]="
+          f['username'].touched && f['username'].invalid
+            ? 'Username is required'
+            : ''
+        "
       ></app-input-field>
 
       <app-input-field
@@ -34,7 +47,10 @@
         formControlName="password"
         placeholder="Password"
         name="password"
-        [iconDynamicClass]="{ 'pi-lock': !showPassword, 'pi-lock-open': showPassword }"
+        [iconDynamicClass]="{
+          'pi-lock': !showPassword,
+          'pi-lock-open': showPassword
+        }"
         (iconClick)="toggleVisibility('password')"
         [errorMessage]="f['password'].touched && f['password'].invalid ? (f['password'].errors?.['required'] ? 'Password is required' : 'Password must be at least 6 characters') : ''"
       ></app-input-field>
@@ -44,7 +60,10 @@
         formControlName="confirmPassword"
         placeholder="Confirm Password"
         name="confirmPassword"
-        [iconDynamicClass]="{ 'pi-lock': !showConfirmPassword, 'pi-lock-open': showConfirmPassword }"
+        [iconDynamicClass]="{
+          'pi-lock': !showConfirmPassword,
+          'pi-lock-open': showConfirmPassword
+        }"
         (iconClick)="toggleVisibility('confirm_password')"
         [errorMessage]="f['confirmPassword'].touched && f['confirmPassword'].invalid ? (f['confirmPassword'].errors?.['required'] ? 'Confirm Password is required' : 'Passwords must match') : ''"
       ></app-input-field>
@@ -60,16 +79,15 @@
         ></p-checkbox>
         <span>
           I accept the
-          <a class="text-blue-primary font-bold hover:underline" href="">Privacy Policy</a>
+          <a class="text-blue-primary font-bold hover:underline" href=""
+            >Privacy Policy</a
+          >
         </span>
       </div>
       @if (f['acceptTerms'].touched && f['acceptTerms'].invalid) {
-        <div class="text-red-600">
-          **Please accept the terms.
-        </div>
+      <div class="text-red-600">**Please accept the terms.</div>
       }
     </div>
-
 
     <div class="w-3/4 flex justify-center items-center gap-3">
       <p-button
@@ -79,19 +97,15 @@
         label="Sign Up"
       ></p-button>
       @if(isLoading) {
-        <p-progressSpinner
+      <p-progressSpinner
         styleClass="custom-spinner"
         strokeWidth="3"
         fill="var(--surface-ground)"
-        animationDuration="1s" />
+        animationDuration="1s"
+      />
       }
-
-
     </div>
-
-    <p-toast />
-
   </form>
-
-
 </main>
+
+<p-toast />
