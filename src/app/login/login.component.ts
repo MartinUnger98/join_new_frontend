@@ -16,7 +16,7 @@ export class LoginComponent {
   showPassword: boolean = false;
   rememberMe: boolean = false;
 
-  constructor(public AuthService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -25,7 +25,7 @@ export class LoginComponent {
   async login() {
 
     try {
-      let response = await this.AuthService.loginWithUsernameAndPassword(this.username, this.password);
+      let response = await this.authService.loginWithUsernameAndPassword(this.username, this.password);
       this.router.navigate(['/contacts'])
       console.log(response)
     } catch(e) {

@@ -1,15 +1,19 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import Validation from './password-match.validator';
+import { AuthService } from 'src/app/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
+  providers: [MessageService]
 })
 export class SignUpComponent implements OnInit {
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
+  isLoading: boolean = false;
 
   signUpForm: FormGroup = new FormGroup( {
     username: new FormControl(''),
@@ -20,7 +24,8 @@ export class SignUpComponent implements OnInit {
   })
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, public authService: AuthService, private messageService: MessageService) {}
+
 
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group(
@@ -55,16 +60,32 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.controls;
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
-    if (this.signUpForm.invalid) {
-      console.log('invalid')
-      return;
+    let signUpJson = this.signUpForm.value;
+    try {
+      this.isLoading = true;
+      await this.authService.registerUser(signUpJson.username, signUpJson.password, signUpJson.email);
+      this.isLoading = false;
+      this.showSuccess();
+      this.resetForm();
+    } catch (error:any) {
+      this.isLoading = false;
+      this.showError();
+      console.error('Error during registration', error);
+      console.error('Error details:', error.error);
     }
-    console.log(JSON.stringify(this.signUpForm.value, null, 2));
   }
 
-  onReset(): void {
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You' });
+  }
+
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Message Content' });
+  }
+
+  resetForm(): void {
     this.submitted = false;
     this.signUpForm.reset();
   }

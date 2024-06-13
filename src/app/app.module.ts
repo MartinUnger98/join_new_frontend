@@ -13,6 +13,10 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { ContactsComponent } from './contacts/contacts.component';
 import { SharedModule } from './shared/shared.module';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -35,7 +39,10 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-
+    ProgressSpinnerModule,
+    ToastModule,
+    RippleModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi())

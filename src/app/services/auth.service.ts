@@ -11,10 +11,20 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public loginWithUsernameAndPassword(username: string, password: string) {
-    const url = environment.baseUrl + '/login/'
+    const url = environment.baseUrl + '/login/';
     const body = {
       "username": username,
       "password": password,
+    }
+    return lastValueFrom(this.http.post(url, body));
+  }
+
+  public registerUser(username: string, password: string, email: string) {
+    const url = environment.baseUrl + '/register/';
+    const body = {
+      "username": username,
+      "password": password,
+      "email": email
     }
     return lastValueFrom(this.http.post(url, body));
   }
