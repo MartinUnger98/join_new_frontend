@@ -3,53 +3,60 @@
 </header>
 
 <main class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-  <form class="w-110 shadow-custom rounded-3xl flex flex-col items-center px-6 py-6">
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="w-110 shadow-custom rounded-3xl flex flex-col items-center px-6 py-6">
     <i routerLink="/login" class="pi pi-arrow-left absolute top-10 left-10 text-blue-primary text-2xl hover:scale-125 transition duration-200 cursor-pointer"></i>
     <h1 class="text-6xl mb-8">Sign Up</h1>
     <div class="rounded-sm bg-blue-primary h-1 w-24 mb-8"></div>
 
-    <div class="w-3/4">
+    <div class="w-3/4 flex flex-col gap-8">
       <app-input-field
         type="text"
-        [(model)]="username"
+        formControlName="username"
         placeholder="Username"
         name="username"
+        autocomplete="username"
         iconClass="pi pi-user"
+        [errorMessage]="f['username'].touched && f['username'].invalid ? 'Username is required' : ''"
       ></app-input-field>
 
       <app-input-field
         type="email"
-        [(model)]="email"
+        formControlName="email"
         placeholder="Email"
         name="email"
+        autocomplete="email"
         iconClass="pi pi-envelope"
+        [errorMessage]="f['email'].touched && f['email'].invalid ? (f['email'].errors?.['required'] ? 'Email is required' : 'Invalid email') : ''"
       ></app-input-field>
 
       <app-input-field
         [type]="showPassword ? 'text' : 'password'"
-        [(model)]="password"
+        formControlName="password"
         placeholder="Password"
         name="password"
         [iconDynamicClass]="{ 'pi-lock': !showPassword, 'pi-lock-open': showPassword }"
         (iconClick)="toggleVisibility('password')"
+        [errorMessage]="f['password'].touched && f['password'].invalid ? (f['password'].errors?.['required'] ? 'Password is required' : 'Password must be at least 6 characters') : ''"
       ></app-input-field>
 
       <app-input-field
         [type]="showConfirmPassword ? 'text' : 'password'"
-        [(model)]="confirm_password"
+        formControlName="confirmPassword"
         placeholder="Confirm Password"
-        name="confirm_password"
+        name="confirmPassword"
         [iconDynamicClass]="{ 'pi-lock': !showConfirmPassword, 'pi-lock-open': showConfirmPassword }"
         (iconClick)="toggleVisibility('confirm_password')"
+        [errorMessage]="f['confirmPassword'].touched && f['confirmPassword'].invalid ? (f['confirmPassword'].errors?.['required'] ? 'Confirm Password is required' : 'Passwords must match') : ''"
       ></app-input-field>
     </div>
 
-    <div class="flex justify-center items-center w-3/4 mb-8">
+    <div class="flex justify-center items-center w-3/4 my-8">
       <p-checkbox
+
+        formControlName="acceptTerms"
         class="border-2 border-gray-input rounded-sm mr-2"
-        [(ngModel)]="rememberMe"
         [binary]="true"
-        name="rememberMe"
+        name="accenptTerms"
       ></p-checkbox>
       <span>
         I accept the
@@ -57,7 +64,7 @@
       </span>
     </div>
 
-    <div class="flex justify-center w-3/4">
+    <div class="w-3/4 flex justify-center">
       <p-button
         type="submit"
         class="bg-blue-dark text-white font-bold text-xl py-2.5 px-5 rounded-xl hover:bg-blue-primary"

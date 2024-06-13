@@ -1,15 +1,22 @@
-<p-inputGroup class="mb-8">
-  <input
-    [type]="type"
-    [ngModel]="model"
-    (ngModelChange)="modelChange.emit($event)"
-    class="border border-gray-input pl-2"
-    pInputText
-    [placeholder]="placeholder"
-    [name]="name"
-    required
-  />
-  <p-inputGroupAddon (click)="onIconClick()">
-    <i class="pi" [ngClass]="iconDynamicClass ? iconDynamicClass : iconClass"></i>
-  </p-inputGroupAddon>
-</p-inputGroup>
+<div>
+  <p-inputGroup>
+    <input
+      [type]="type"
+      [value]="value"
+      (input)="onInputChange($event)"
+      class="border border-gray-input pl-2"
+      pInputText
+      [placeholder]="placeholder"
+      [name]="name"
+      required
+    />
+    <p-inputGroupAddon (click)="onIconClick()" class="cursor-pointer">
+      <i class="pi" [ngClass]="iconDynamicClass ? iconDynamicClass : iconClass"></i>
+    </p-inputGroupAddon>
+  </p-inputGroup>
+  @if (errorMessage) {
+    <div class="text-red-600 mt-2">
+      {{ errorMessage }}
+    </div>
+  }
+</div>

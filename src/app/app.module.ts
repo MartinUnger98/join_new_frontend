@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; // Neue Importe
 import { ContactsComponent } from './contacts/contacts.component';
 import { SharedModule } from './shared/shared.module';
@@ -33,11 +33,12 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
     ButtonModule,
     CheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
 
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi()) // Neue Provider
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent],
 })
