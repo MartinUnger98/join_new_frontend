@@ -6,30 +6,3 @@
 @import "tailwindcss/utilities";
 
 
-$blue-primary: #29ABE2;
-$blue-dark: #2a3647;
-
-@mixin flexCenter($jc: center, $ai: center, $g: 0px, $fd: row) {
-  display: flex;
-  justify-content: $jc;
-  align-items: $ai;
-  gap: $g;
-  flex-direction: $fd;
-}
-
-.flexCenter {
-  @include flexCenter();
-}
-
-.flexCenterColumn {
-  @include flexCenter($fd: column);
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
