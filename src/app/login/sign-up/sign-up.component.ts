@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR
 import Validation from './password-match.validator';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,7 +25,7 @@ export class SignUpComponent implements OnInit {
   })
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, public authService: AuthService, private messageService: MessageService) {}
+  constructor(private formBuilder: FormBuilder, public authService: AuthService, private messageService: MessageService, private router: Router) {}
 
 
   ngOnInit(): void {
@@ -68,7 +69,10 @@ export class SignUpComponent implements OnInit {
       await this.authService.registerUser(signUpJson.username, signUpJson.password, signUpJson.email);
       this.isLoading = false;
       this.showSuccess();
-      this.resetForm();
+      setTimeout(() => {
+        this.router.navigate(["/login"])
+        this.resetForm();
+      }, 3000);
     } catch (error:any) {
       this.isLoading = false;
       this.showError();
