@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainHeaderComponent } from '../main-header/main-header.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { MainHeaderComponent } from '../standalone-components/main-header/main-header.component';
+import { SidebarComponent } from '../standalone-components/sidebar/sidebar.component';
+import { InputFieldComponent } from '../standalone-components/input-field/input-field.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     MainHeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    InputFieldComponent
   ],
   declarations: [],
   exports: [
     MainHeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    InputFieldComponent
   ]
 })
 export class SharedModule { }

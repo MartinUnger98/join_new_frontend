@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-sign-up',
-  standalone: false,
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.scss'
+  styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  showPassword: boolean = false;
-  showConfirmPassword: boolean = false;
-  rememberMe: boolean = false;
   username: string = '';
+  email: string = '';
   password: string = '';
   confirm_password: string = '';
-  email: string = '';
+  rememberMe: boolean = false;
+
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   toggleVisibility(field: string) {
     if (field === 'password') {
@@ -22,5 +22,4 @@ export class SignUpComponent {
       this.showConfirmPassword = !this.showConfirmPassword;
     }
   }
-
 }

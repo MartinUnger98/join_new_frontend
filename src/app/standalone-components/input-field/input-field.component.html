@@ -1,0 +1,15 @@
+<p-inputGroup class="mb-8">
+  <input
+    [type]="type"
+    [ngModel]="model"
+    (ngModelChange)="modelChange.emit($event)"
+    class="border border-gray-input pl-2"
+    pInputText
+    [placeholder]="placeholder"
+    [name]="name"
+    required
+  />
+  <p-inputGroupAddon (click)="onIconClick()">
+    <i class="pi" [ngClass]="iconDynamicClass ? iconDynamicClass : iconClass"></i>
+  </p-inputGroupAddon>
+</p-inputGroup>
