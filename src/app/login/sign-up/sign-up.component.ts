@@ -49,7 +49,7 @@ export class SignUpComponent implements OnInit {
   async onSubmit() {
     let signUpJson = this.signUpForm.value;
     try {
-      this.registerUser(signUpJson);
+      await this.registerUser(signUpJson);
     } catch (error:any) {
       this.setToastErrorMessage(error);
     }

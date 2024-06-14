@@ -10,45 +10,31 @@
   <form (ngSubmit)="login()" class="w-110 shadow-custom rounded-3xl flex items-center flex-col px-6 py-6">
     <h1 class="text-6xl mb-8">Login</h1>
     <div class="rounded-sm bg-blue-primary h-1 w-24 mb-8"></div>
-    <div class="w-3/4">
-      <p-inputGroup class="mb-8">
-        <input
-          type="text"
-          name="username"
-          [(ngModel)]="username"
-          class="border border-gray-input pl-2"
-          pInputText
-          placeholder="Username"
-          autocomplete="username"
-          required
-        />
-        <p-inputGroupAddon>
-          <i class="pi pi-user"></i>
-        </p-inputGroupAddon>
-      </p-inputGroup>
-      <p-inputGroup class="mb-8">
-        <input
-          class="border border-gray-input pl-2"
-          [type]="showPassword ? 'text' : 'password'"
-          pInputText
-          placeholder="Password"
-          name="password"
-          [(ngModel)]="password"
-          required
-        />
-        <p-inputGroupAddon (click)="togglePasswordVisibility()">
-          <i
-            class="pi"
-            [ngClass]="{
-              'pi-lock': !showPassword,
-              'pi-lock-open': showPassword
-            }"
-          ></i>
-        </p-inputGroupAddon>
-      </p-inputGroup>
+    <div class="w-3/4 flex flex-col gap-8">
+      <app-input-field
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        placeholder="Username"
+        iconClass="pi pi-user"
+
+      ></app-input-field>
+
+      <app-input-field
+        [type]="showPassword ? 'text' : 'password'"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Password"
+        [iconDynamicClass]="{
+          'pi-lock': !showPassword,
+          'pi-lock-open': showPassword
+        }"
+        (iconClick)="togglePasswordVisibility()"
+
+      ></app-input-field>
     </div>
 
-    <div class="flex justify-between w-3/4 mb-8">
+    <div class="flex justify-between w-3/4 my-8">
       <div>
         <p-checkbox
           class="border-2 border-gray-input rounded-sm mr-2"
@@ -67,3 +53,6 @@
     </div>
   </form>
 </main>
+
+<p-toast />
+

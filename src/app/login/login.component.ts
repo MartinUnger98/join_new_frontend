@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
   standalone: false,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  providers: [MessageService]
 })
 
 export class LoginComponent {
@@ -16,21 +18,32 @@ export class LoginComponent {
   showPassword: boolean = false;
   rememberMe: boolean = false;
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router, private messageService: MessageService) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   async login() {
-
     try {
-      let response = await this.authService.loginWithUsernameAndPassword(this.username, this.password);
-      this.router.navigate(['/contacts'])
-      console.log(response)
+      await this.authService.loginWithUsernameAndPassword(this.username, this.password);
+      this.showSuccess();
+      setTimeout(() => {
+        this.router.navigate(['/contacts'])
+      }, 3000);
+
+
     } catch(e) {
-      console.log(e);
+      this.showError();
     }
+  }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have successfully logged in!' });
+  }
+
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid username or password' });
   }
 
 }
