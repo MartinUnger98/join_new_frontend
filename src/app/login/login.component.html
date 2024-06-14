@@ -1,8 +1,12 @@
 <header class="flex justify-between items-center mt-7 ml-7">
   <img class="h-32 w-24" src="assets/img/join_logo.svg" alt="join-logo.svg" />
-  <div class="mr-9">
+  <div class="mr-9 flex">
     <span class="font-normal text-xl mr-9">Not a Join user?</span>
-    <p-button routerLink="/signUp" class="bg-blue-dark text-white font-bold text-xl py-2.5 px-5 rounded-xl hover:bg-blue-primary" label="Sign Up" />
+    <app-button
+      text="Sign Up"
+      btnstyle="primary"
+      routerLink="/signUp"
+    ></app-button>
   </div>
 </header>
 
@@ -55,10 +59,6 @@
       <app-button
         text="Guest-Login"
         btnstyle="secondary"
-      ></app-button>
-      <app-button
-        icon="pi pi-plus"
-        btnstyle="primary"
       ></app-button>
     </div>
   </form>

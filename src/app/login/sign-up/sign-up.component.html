@@ -90,12 +90,12 @@
     </div>
 
     <div class="w-3/4 flex justify-center items-center gap-3">
-      <p-button
+      <app-button
         type="submit"
-        class="bg-blue-dark text-white font-bold text-xl py-2.5 px-5 rounded-xl hover:bg-blue-primary"
         [disabled]="signUpForm.invalid"
-        label="Sign Up"
-      ></p-button>
+        text="Sign Up"
+        btnstyle="primary"
+      ></app-button>
       @if(isLoading) {
       <p-progressSpinner
         styleClass="custom-spinner"

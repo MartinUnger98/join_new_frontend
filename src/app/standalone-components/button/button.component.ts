@@ -15,6 +15,7 @@ export class ButtonComponent {
   @Input() type: string ='';
   @Input() icon: string ='';
   @Input() iconPos?: 'left' | 'right' = 'right';
+  @Input() disabled: boolean = false;
   @Output() buttonClick = new EventEmitter<void>();
 
   onButtonClick() {
