@@ -1,0 +1,20 @@
+<p-button
+  class="w-full h-full"
+  *ngIf="iconPos; else noIconPos"
+  [type]="type"
+  [ngClass]="getButtonClass()"
+  (click)="onButtonClick()"
+  [label]="text"
+  [icon]="icon"
+  [iconPos]="iconPos">
+</p-button>
+<ng-template #noIconPos>
+  <p-button
+    class="w-full h-full"
+    [type]="type"
+    [ngClass]="getButtonClass()"
+    (click)="onButtonClick()"
+    label="text"
+    [icon]="icon">
+  </p-button>
+</ng-template>

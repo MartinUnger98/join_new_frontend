@@ -17,7 +17,6 @@
         [(ngModel)]="username"
         placeholder="Username"
         iconClass="pi pi-user"
-
       ></app-input-field>
 
       <app-input-field
@@ -48,8 +47,19 @@
     </div>
 
     <div class="flex justify-between w-3/4">
-      <p-button type="submit" class="bg-blue-dark text-white font-bold text-xl py-2.5 px-5 rounded-xl hover:bg-blue-primary" label="Login" />
-      <p-button class="text-blue-dark font-bold text-xl py-2.5 px-5 rounded-xl hover:text-blue-primary border-2 border-blue-dark hover:border-blue-primary" label="Guest-Login" />
+      <app-button
+        type="submit"
+        text="Login"
+        btnstyle="primary"
+      ></app-button>
+      <app-button
+        text="Guest-Login"
+        btnstyle="secondary"
+      ></app-button>
+      <app-button
+        icon="pi pi-plus"
+        btnstyle="primary"
+      ></app-button>
     </div>
   </form>
 </main>
