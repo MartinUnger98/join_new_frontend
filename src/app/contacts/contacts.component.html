@@ -1,7 +1,7 @@
 <app-main-header></app-main-header>
 <app-sidebar></app-sidebar>
 
-<section class="flex mt 800:ml-60 ">
+<section class="flex mt 800:ml-60">
   <div class="mt-16 w-128 flex flex-col items-center">
     <app-button
       text="Add new Contact"
@@ -11,6 +11,22 @@
       btnSize="big"
       class="fixed"
     ></app-button>
+    <div class="mt-16">
+      @for (initial of contactsInitials;track initial) {
+        <h1>{{initial}}</h1>
+        <div>
+          @for (contact of contacts;track contact){
+            @if(contact.name[0] === initial) {
+              <span>{{contact.name}}</span>
+            }
+          }
+        </div>
+      }
+
+
+
+      <span>{{contactsInitials}}</span>
+    </div>
   </div>
   <div class="mt-12">
     <div class="flex items-center justify-center">
