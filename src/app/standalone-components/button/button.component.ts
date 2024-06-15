@@ -10,8 +10,15 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
+  btnStylePrimary: string ='bg-blue-dark text-white font-bold rounded-xl hover:bg-blue-primary'
+  btnSizeStandard:string = 'text-xl py-3.5 px-5';
+  btnSizeBig:string = 'text-2xl py-3.5 px-14';
+  btnStyleSecondary:string = 'text-blue-dark font-bold text-xl py-3.5 px-5 rounded-xl hover:text-blue-primary border-2 border-blue-dark hover:border-blue-primary';
+
   @Input() text: string = '';
-  @Input() btnstyle: string ='';
+  @Input() btnStyle: string ='';
+  @Input() btnStyleBonus: string ='';
+  @Input() btnSize: string ='';
   @Input() type: string ='';
   @Input() icon: string ='';
   @Input() iconPos?: 'left' | 'right' = 'right';
@@ -23,11 +30,19 @@ export class ButtonComponent {
   }
 
   getButtonClass(): string {
-    switch(this.btnstyle){
+    let styleBonus = '';
+    let btnSize = this.btnSizeStandard;
+    if (this.btnStyleBonus) {
+      styleBonus = this.btnStyleBonus;
+    }
+    if (this.btnSize === "big") {
+      btnSize = this.btnSizeBig;
+    }
+    switch(this.btnStyle){
       case 'primary':
-        return 'bg-blue-dark text-white font-bold text-xl py-3.5 px-5 rounded-xl hover:bg-blue-primary';
+        return [this.btnStylePrimary, btnSize, styleBonus].join(' ');
       case 'secondary':
-        return 'text-blue-dark font-bold text-xl py-3.5 px-5 rounded-xl hover:text-blue-primary border-2 border-blue-dark hover:border-blue-primary'
+        return [this.btnStyleSecondary,btnSize,styleBonus].join(' ');
       default:
         return '';
     }

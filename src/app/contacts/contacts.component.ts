@@ -20,7 +20,5 @@ export class ContactsComponent implements OnInit {
   loadContacts() {
     const url = environment.baseUrl + '/contacts/';
     return lastValueFrom(this.http.get(url));
-
-
   }
 }

@@ -1,6 +1,5 @@
 <div class="cursor-pointer">
   <p-button
-    class="w-full h-full"
     *ngIf="iconPos; else noIconPos"
     [type]="type"
     [ngClass]="getButtonClass()"
@@ -13,7 +12,6 @@
   </p-button>
   <ng-template #noIconPos>
     <p-button
-      class="w-full h-full"
       [type]="type"
       [ngClass]="getButtonClass()"
       (click)="onButtonClick()"
