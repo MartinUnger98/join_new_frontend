@@ -1,26 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Contact } from './contact.model';
+import { BgColorsService } from '../services/bg-colors.service';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss'],
 })
-export class ContactsComponent implements OnInit {
+export class ContactsComponent implements OnInit, AfterViewInit {
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
+  bgColorsAvatar: string[] = [];
 
-
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private bgColorService: BgColorsService,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   async ngOnInit() {
+    this.bgColorsAvatar = this.bgColorService.bgColors;
     let contacts = await this.loadContacts();
     this.contacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
     this.getContactsInitials();
+    this.setContactColors();
+  }
 
+  ngAfterViewInit() {
+    this.cdRef.detectChanges();
   }
 
   loadContacts(): Promise<Contact[]> {
@@ -29,9 +39,30 @@ export class ContactsComponent implements OnInit {
   }
 
   getContactsInitials() {
-    this.contacts.forEach(contact => {
-      this.contactsInitials.push(contact.name.charAt(0))
-    })
+    this.contacts.forEach((contact) => {
+      if (!this.contactsInitials.includes(contact.name[0])) {
+        this.contactsInitials.push(contact.name[0]);
+      }
+    });
   }
+
+  getBgColorForAvatar() {
+    return this.bgColorsAvatar[
+      Math.floor(Math.random() * this.bgColorsAvatar.length)
+    ];
+  }
+
+  setContactColors() {
+    this.contacts.forEach(contact => {
+      contact['bgColor'] = this.getBgColorForAvatar();
+    });
+  }
+
+  getInitialsForAvatar(contact: string) {
+    let nameParts = contact.split(' ');
+    let initials = nameParts.slice(0, 2).map((part) => part[0].toUpperCase());
+    return initials.join('');
+  }
+
 
 }

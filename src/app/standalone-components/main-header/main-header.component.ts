@@ -7,7 +7,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 @Component({
   selector: 'app-main-header',
   standalone: true,
-  imports: [AvatarModule, AvatarGroupModule, OverlayPanelModule,],
+  imports: [AvatarModule, AvatarGroupModule, ],
   templateUrl: './main-header.component.html',
   styleUrl: './main-header.component.scss'
 })

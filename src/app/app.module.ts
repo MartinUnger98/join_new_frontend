@@ -17,6 +17,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 
 
@@ -43,6 +45,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToastModule,
     RippleModule,
     BrowserAnimationsModule,
+    AvatarModule,
+    AvatarGroupModule,
+
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi())

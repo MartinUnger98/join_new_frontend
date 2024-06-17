@@ -10,6 +10,7 @@ module.exports = {
         '110': '30rem',
         '88' : '22rem',
         '104': '104px',
+        '1px': '1px',
       },
       colors: {
         'blue-primary': '#29ABE2',
