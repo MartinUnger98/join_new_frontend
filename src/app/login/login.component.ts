@@ -26,7 +26,8 @@ export class LoginComponent {
 
   async login() {
     try {
-      await this.authService.loginWithUsernameAndPassword(this.username, this.password);
+      let response: any = await this.authService.loginWithUsernameAndPassword(this.username, this.password);
+      localStorage.setItem('token', response['token'])
       this.showSuccess();
       setTimeout(() => {
         this.router.navigate(['/contacts'])

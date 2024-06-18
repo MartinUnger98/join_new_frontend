@@ -1,7 +1,8 @@
 import { Component, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
+
 
 
 @Component({
@@ -14,7 +15,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 export class MainHeaderComponent {
   showLinks: boolean = false;
 
-  constructor(private eRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private eRef: ElementRef, private renderer: Renderer2, private router: Router) {}
 
   toggleLinks() {
     this.showLinks = !this.showLinks;
@@ -26,5 +27,10 @@ export class MainHeaderComponent {
     if (this.showLinks && !this.eRef.nativeElement.contains(targetElement)) {
       this.showLinks = false;
     }
+  }
+
+  logout() {
+    localStorage.removeItem('token')
+    this.router.navigate(['/login'])
   }
 }
