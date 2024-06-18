@@ -1,0 +1,39 @@
+::ng-deep .p-dialog-header {
+  padding: 48px;
+  background-color: #2a3647;
+  color: white;
+  align-items: flex-start;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+}
+
+::ng-deep .p-dialog-header-icon {
+  &:hover {
+    background-color: #29ABE2;
+  }
+}
+
+::ng-deep .p-dialog {
+  border-radius: 32px;
+}
+
+::ng-deep .p-dialog-content {
+  padding: 48px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+}
+
+::ng-deep .avatar-no-btn {
+  div {
+    width: 7.5rem;
+    height: 7.5rem;
+    span{
+      font-size: 2.5rem;
+    }
+    &:hover {
+      border: none;
+    }
+  }
+
+}
+

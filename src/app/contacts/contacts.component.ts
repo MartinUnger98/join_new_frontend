@@ -1,24 +1,36 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  AfterViewInit,
+} from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Contact } from './contact.model';
 import { BgColorsService } from '../services/bg-colors.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss'],
+  providers: [MessageService]
 })
 export class ContactsComponent implements OnInit, AfterViewInit {
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
   bgColorsAvatar: string[] = [];
+  visible: boolean = false;
+  newContactName: string = '';
+  newContactEmail: string = '';
+  newContactPhone: string = '';
 
   constructor(
     private http: HttpClient,
     private bgColorService: BgColorsService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private messageService: MessageService
   ) {}
 
   async ngOnInit() {
@@ -53,7 +65,7 @@ export class ContactsComponent implements OnInit, AfterViewInit {
   }
 
   setContactColors() {
-    this.contacts.forEach(contact => {
+    this.contacts.forEach((contact) => {
       contact['bgColor'] = this.getBgColorForAvatar();
     });
   }
@@ -64,5 +76,19 @@ export class ContactsComponent implements OnInit, AfterViewInit {
     return initials.join('');
   }
 
+  toggleDialog() {
+    this.visible = !this.visible;
+  }
 
+  createContact() {
+    console.log("account created")
+  }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have successfully logged in!' });
+  }
+
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid username or password' });
+  }
 }

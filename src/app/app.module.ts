@@ -19,6 +19,7 @@ import { RippleModule } from 'primeng/ripple';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { DialogModule } from 'primeng/dialog';
 
 
 
@@ -47,6 +48,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
     BrowserAnimationsModule,
     AvatarModule,
     AvatarGroupModule,
+    DialogModule
 
   ],
   providers: [
