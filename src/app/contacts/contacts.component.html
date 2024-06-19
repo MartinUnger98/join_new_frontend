@@ -2,14 +2,14 @@
 <app-sidebar></app-sidebar>
 
 <section class="flex mt 800:ml-60">
-  <div class="mt-16 w-128 flex flex-col items-center">
+  <div class="mt-16 w-128 flex flex-col items-center overflow-y-auto calcHeight min-w-128">
     <app-button
       text="Add new Contact"
       icon="pi pi-user-plus"
       iconPos="right"
       btnStyle="primary"
       btnSize="big"
-      class="fixed"
+      class="fixed z-10"
       (click)="toggleDialog()"
     ></app-button>
     <div class="mt-16 w-80">
@@ -20,10 +20,11 @@
         @for (contact of contacts;track contact){ @if(contact.name[0] ===
         initial) {
         <p-button
-          class="flex items-center rounded-xl h-20 w-full gap-5 hover:bg-gray-200 mt-2 p-2"
+          class="flex items-center rounded-xl h-20 w-full gap-5 hover:bg-gray-200 mt-2 p-2 cursor-pointer"
+          (click)="showContactDetails(contact)"
         >
           <div
-            [style.background-color]="contact.bgColor"
+            [style.background-color]="contact.bg_color"
             class="flex justify-center items-center h-10 w-10 rounded-full text-white text-base border-white border-2 border-solid"
           >
             {{ getInitialsForAvatar(contact.name) }}
@@ -48,12 +49,26 @@
       <span>{{ contactsInitials }}</span>
     </div>
   </div>
-  <div class="mt-12">
-    <div class="flex items-center justify-center">
+  <div class="pt-12 pl-8 calcHeight w-full">
+    <div class="flex items-center justify-start">
       <h1 class="text-6xl font-bold mb-3">Contacts</h1>
       <span class="h-12 w-1 bg-blue-primary mx-4"></span>
       <h2 class="text-2xl">Better with a team</h2>
     </div>
+
+    @if(selectedContact) {
+    <div>
+      <div
+        [style.background-color]="selectedContact.bg_color"
+        class="flex justify-center items-center h-10 w-10 rounded-full text-white text-base border-white border-2 border-solid"
+      >
+        {{ getInitialsForAvatar(selectedContact.name) }}
+      </div>
+      <span>{{ selectedContact.name }}</span>
+      <p-button label="Edit" icon="pi pi-pencil" />
+      <p-button label="Delete" icon="pi pi-trash" />
+    </div>
+    }
   </div>
 
   @if(showDialog) {

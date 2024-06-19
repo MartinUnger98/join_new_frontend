@@ -3,5 +3,5 @@ export interface Contact {
   name: string;
   email: string;
   phone: string;
-  bgColor: string;
+  bg_color: string;
 }

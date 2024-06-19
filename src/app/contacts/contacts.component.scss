@@ -9,7 +9,7 @@
 
 ::ng-deep .p-dialog-header-icon {
   &:hover {
-    background-color: #29ABE2;
+    background-color: #29abe2;
   }
 }
 
@@ -27,13 +27,29 @@
   div {
     width: 7.5rem;
     height: 7.5rem;
-    span{
+    span {
       font-size: 2.5rem;
     }
     &:hover {
       border: none;
     }
   }
-
 }
 
+.calcHeight {
+  height: calc(100vh - 168px);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #A8A8A8;
+  border-radius: 32px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #29ABE2;
+}
+::-webkit-scrollbar-track {
+  background-color: white;
+}

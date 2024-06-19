@@ -8,9 +8,7 @@ import {
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Contact } from './contact.model';
-import { BgColorsService } from '../services/bg-colors.service';
 import { MessageService } from 'primeng/api';
-import { BackendServicesService } from '../services/backend-services.service';
 
 @Component({
   selector: 'app-contacts',
@@ -21,22 +19,19 @@ import { BackendServicesService } from '../services/backend-services.service';
 export class ContactsComponent implements OnInit, AfterViewInit {
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
-  bgColorsAvatar: string[] = [];
   showDialog: boolean = false;
+  selectedContact: Contact | null = null;
 
   constructor(
     private http: HttpClient,
-    private bgColorService: BgColorsService,
     private cdRef: ChangeDetectorRef,
     private messageService: MessageService
   ) {}
 
   async ngOnInit() {
-    this.bgColorsAvatar = this.bgColorService.bgColors;
     let contacts = await this.loadContacts();
     this.contacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
     this.getContactsInitials();
-    this.setContactColors();
   }
 
   ngAfterViewInit() {
@@ -56,17 +51,7 @@ export class ContactsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getBgColorForAvatar() {
-    return this.bgColorsAvatar[
-      Math.floor(Math.random() * this.bgColorsAvatar.length)
-    ];
-  }
 
-  setContactColors() {
-    this.contacts.forEach((contact) => {
-      contact['bgColor'] = this.getBgColorForAvatar();
-    });
-  }
 
   getInitialsForAvatar(contact: string) {
     let nameParts = contact.split(' ');
@@ -91,5 +76,11 @@ export class ContactsComponent implements OnInit, AfterViewInit {
       summary: 'Success',
       detail: 'You have successfully added a contact!',
     });
+  }
+
+  showContactDetails(contact: Contact) {
+    this.selectedContact = contact
+    console.log(contact);
+
   }
 }
