@@ -10,21 +10,19 @@ import { environment } from 'src/environments/environment';
 import { Contact } from './contact.model';
 import { BgColorsService } from '../services/bg-colors.service';
 import { MessageService } from 'primeng/api';
+import { BackendServicesService } from '../services/backend-services.service';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class ContactsComponent implements OnInit, AfterViewInit {
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
   bgColorsAvatar: string[] = [];
-  visible: boolean = false;
-  newContactName: string = '';
-  newContactEmail: string = '';
-  newContactPhone: string = '';
+  showDialog: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -77,18 +75,21 @@ export class ContactsComponent implements OnInit, AfterViewInit {
   }
 
   toggleDialog() {
-    this.visible = !this.visible;
+    this.showDialog = true;
   }
 
-  createContact() {
-    console.log("account created")
+  closeDialog(success: boolean) {
+    this.showDialog = false;
+    if (success) {
+      this.showSuccess();
+    }
   }
 
   showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have successfully logged in!' });
-  }
-
-  showError() {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid username or password' });
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'You have successfully added a contact!',
+    });
   }
 }

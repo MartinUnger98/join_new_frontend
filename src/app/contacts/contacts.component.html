@@ -56,77 +56,11 @@
     </div>
   </div>
 
-  <p-dialog
-    class="rounded-3xl"
-    [modal]="true"
-    draggable="false"
-    [(visible)]="visible"
-    [style]="{ width: '50rem' }"
-  >
-    <ng-template pTemplate="header">
-      <div>
-        <img
-          class="w-14 h-16 mb-8"
-          src="assets/img/join_logo_white.svg"
-          alt=""
-        />
-        <h2 class="text-5xl mb-2">Add contact</h2>
-        <span class="text-lg mb-2">Tasks are better with a team!</span>
-        <div class="h-1 w-20 bg-blue-primary"></div>
-      </div>
-    </ng-template>
-
-    <div class="flex items-center w-full">
-      <p-avatar
-        class="avatar-no-btn mr-20 ml-8"
-        icon="pi pi-user"
-        styleClass="mr-2"
-        size="xlarge"
-        shape="circle"
-      />
-      <form class="w-full flex flex-col gap-8" (ngSubmit)="createContact()">
-        <app-input-field
-          type="text"
-          name="newContactName"
-          [(ngModel)]="newContactName"
-          placeholder="Name"
-          iconClass="pi pi-user"
-          required
-        ></app-input-field>
-        <app-input-field
-          type="email"
-          name="newContactEmail"
-          [(ngModel)]="newContactEmail"
-          placeholder="Email"
-          iconClass="pi pi-envelope"
-          required
-        ></app-input-field>
-        <app-input-field
-          type="tel"
-          name="newContactPhone"
-          [(ngModel)]="newContactPhone"
-          placeholder="Telefon"
-          iconClass="pi pi-phone"
-          required
-        ></app-input-field>
-        <div class="flex gap-8 mt-4">
-          <app-button
-            text="Cancel"
-            btnStyle="secondary"
-            icon="pi pi-times"
-            iconPos="right"
-            (click)="toggleDialog()"
-          ></app-button>
-          <app-button
-            type="submit"
-            text="Create Contact"
-            btnStyle="primary"
-            icon="pi pi-check"
-            iconPos="right"
-          ></app-button>
-        </div>
-      </form>
-    </div>
-  </p-dialog>
+  @if(showDialog) {
+  <app-dialog-create-contact
+    (close)="closeDialog($event)"
+  ></app-dialog-create-contact>
+  }
 </section>
-<section></section>
+
+<p-toast />

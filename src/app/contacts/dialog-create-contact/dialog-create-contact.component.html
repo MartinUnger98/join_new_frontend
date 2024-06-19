@@ -1,0 +1,101 @@
+<p-dialog
+  class="rounded-3xl"
+  [modal]="true"
+  draggable="false"
+  [style]="{ width: '50rem' }"
+  [(visible)]="visible"
+  (onHide)="closeDialog()"
+>
+  <ng-template pTemplate="header">
+    <div>
+      <img class="w-14 h-16 mb-8" src="assets/img/join_logo_white.svg" alt="" />
+      <h2 class="text-5xl mb-2">Add contact</h2>
+      <span class="text-lg mb-2">Tasks are better with a team!</span>
+      <div class="h-1 w-20 bg-blue-primary"></div>
+    </div>
+  </ng-template>
+
+  <div class="flex items-center w-full">
+    <p-avatar
+      class="avatar-no-btn mr-20 ml-8"
+      icon="pi pi-user"
+      styleClass="mr-2"
+      size="xlarge"
+      shape="circle"
+    />
+    <form
+      [formGroup]="createContactForm"
+      class="w-full flex flex-col gap-8"
+      (ngSubmit)="onSubmit()"
+    >
+      <app-input-field
+        type="text"
+        formControlName="name"
+        placeholder="Name"
+        name="name"
+        autocomplete="name"
+        iconClass="pi pi-user"
+        [errorMessage]="
+          f['name'].touched && f['name'].invalid
+            ? 'Name is required'
+            : ''
+        "
+      ></app-input-field>
+      <app-input-field
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        name="email"
+        iconClass="pi pi-envelope"
+        [errorMessage]="
+          f['email'].touched && f['email'].invalid
+            ? f['email'].errors?.['required']
+              ? 'Email is required'
+              : 'Invalid email'
+            : ''
+        "
+      ></app-input-field>
+      <app-input-field
+        type="tel"
+        formControlName="phone"
+        placeholder="Telefon"
+        name="phone"
+        iconClass="pi pi-phone"
+        pattern="^\+?[0-9]{8,}$"
+        [errorMessage]="
+          f['phone'].touched && f['phone'].invalid
+            ? f['phone'].errors?.['required']
+              ? 'Phonenumber is required'
+              : 'Invalid phonenumber'
+            : ''
+        "
+      ></app-input-field>
+      <div class="flex gap-8 mt-4">
+        <app-button
+          text="Cancel"
+          btnStyle="secondary"
+          icon="pi pi-times"
+          iconPos="right"
+          (click)="closeDialog()"
+        ></app-button>
+        <app-button
+          type="submit"
+          text="Create Contact"
+          [disabled]="createContactForm.invalid"
+          btnStyle="primary"
+          icon="pi pi-check"
+          iconPos="right"
+        ></app-button>
+        @if(isLoading) {
+          <p-progressSpinner
+            styleClass="custom-spinner"
+            strokeWidth="3"
+            fill="var(--surface-ground)"
+            animationDuration="1s"
+          />
+          }
+      </div>
+    </form>
+  </div>
+</p-dialog>
+<p-toast />

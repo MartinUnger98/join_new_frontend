@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Validation from './password-match.validator';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'primeng/api';
@@ -50,7 +50,7 @@ export class SignUpComponent implements OnInit {
     let signUpJson = this.signUpForm.value;
     try {
       await this.registerUser(signUpJson);
-    } catch (error:any) {
+    } catch (error) {
       this.setToastErrorMessage(error);
     }
   }
