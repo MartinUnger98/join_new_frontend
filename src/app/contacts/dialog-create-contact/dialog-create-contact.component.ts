@@ -13,6 +13,7 @@ export class DialogCreateContactComponent implements OnInit{
   @Output() close = new EventEmitter<boolean>();
   visible: boolean = true;
   isLoading: boolean = false;
+  bg_colors: string[] = ['#FF7A00','#462F8A','#FFBB2B','#FC71FF','#6E52FF','#1FD7C1','#9327FF','#FF4646']
   phoneNumberValidator = Validators.pattern(/^\+?[0-9]{8,}$/);
 
 
@@ -51,7 +52,8 @@ export class DialogCreateContactComponent implements OnInit{
 
   async createContact(createContactJson: Contact) {
     this.isLoading = true;
-    await this.backendService.createContact(createContactJson.name, createContactJson.email, createContactJson.phone);
+    let randomBgColor = this.bg_colors[Math.floor(Math.random() * this.bg_colors.length)];
+    await this.backendService.createContact(createContactJson.name, createContactJson.email, createContactJson.phone, randomBgColor);
     this.isLoading = false;
     this.resetForm();
     this.closeDialog(true);

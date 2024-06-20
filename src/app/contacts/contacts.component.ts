@@ -1,14 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-  AfterViewInit,
-} from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, lastValueFrom, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Contact } from './contact.model';
 import { MessageService } from 'primeng/api';
+import { BackendServicesService } from '../services/backend-services.service';
 
 @Component({
   selector: 'app-contacts',
@@ -16,21 +12,22 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./contacts.component.scss'],
   providers: [MessageService],
 })
-export class ContactsComponent implements OnInit, AfterViewInit {
+export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
   showDialog: boolean = false;
   selectedContact: Contact | null = null;
+  private destroyed$ = new Subject<void>();
 
   constructor(
-    private http: HttpClient,
     private cdRef: ChangeDetectorRef,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private backendService: BackendServicesService
   ) {}
 
   async ngOnInit() {
-    let contacts = await this.loadContacts();
-    this.contacts = contacts.sort((a, b) => a.name.localeCompare(b.name));
+    this.subscribeObservables();
+    await this.backendService.loadContacts();
     this.getContactsInitials();
   }
 
@@ -38,15 +35,18 @@ export class ContactsComponent implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
   }
 
-  loadContacts(): Promise<Contact[]> {
-    const url = environment.baseUrl + '/contacts/';
-    return lastValueFrom(this.http.get<Contact[]>(url));
+  subscribeObservables() {
+    this.backendService.contacts$.pipe(takeUntil(this.destroyed$)).subscribe(contacts => {
+      this.contacts = contacts;
+    })
   }
+
 
   getContactsInitials() {
     this.contacts.forEach((contact) => {
-      if (!this.contactsInitials.includes(contact.name[0])) {
-        this.contactsInitials.push(contact.name[0]);
+      const initial = contact.name[0].toUpperCase();
+      if (!this.contactsInitials.includes(initial)) {
+        this.contactsInitials.push(initial);
       }
     });
   }
@@ -82,5 +82,11 @@ export class ContactsComponent implements OnInit, AfterViewInit {
     this.selectedContact = contact
     console.log(contact);
 
+  }
+
+
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }

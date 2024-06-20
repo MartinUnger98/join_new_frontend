@@ -17,7 +17,7 @@
       <h1 class="py-8 pl-11 text-2xl font-normal">{{ initial }}</h1>
       <div class="w-full bg-gray-300 h-1px"></div>
       <div>
-        @for (contact of contacts;track contact){ @if(contact.name[0] ===
+        @for (contact of contacts;track contact){ @if(contact.name[0].toUpperCase() ===
         initial) {
         <p-button
           class="flex items-center rounded-xl h-20 w-full gap-5 hover:bg-gray-200 mt-2 p-2 cursor-pointer"
