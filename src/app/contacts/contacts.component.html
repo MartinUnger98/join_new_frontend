@@ -2,7 +2,9 @@
 <app-sidebar></app-sidebar>
 
 <section class="flex mt 800:ml-60">
-  <div class="mt-16 w-128 flex flex-col items-center overflow-y-auto calcHeight min-w-128">
+  <div
+    class="mt-16 w-128 flex flex-col items-center overflow-y-auto calcHeight min-w-128"
+  >
     <app-button
       text="Add new Contact"
       icon="pi pi-user-plus"
@@ -17,8 +19,8 @@
       <h1 class="py-8 pl-11 text-2xl font-normal">{{ initial }}</h1>
       <div class="w-full bg-gray-300 h-1px"></div>
       <div>
-        @for (contact of contacts;track contact){ @if(contact.name[0].toUpperCase() ===
-        initial) {
+        @for (contact of contacts;track contact){
+        @if(contact.name[0].toUpperCase() === initial) {
         <p-button
           class="flex items-center rounded-xl h-20 w-full gap-5 hover:bg-gray-200 mt-2 p-2 cursor-pointer"
           (click)="showContactDetails(contact)"
@@ -57,16 +59,27 @@
     </div>
 
     @if(selectedContact) {
-    <div>
+    <div class="mt-4 flex items-center">
       <div
         [style.background-color]="selectedContact.bg_color"
-        class="flex justify-center items-center h-10 w-10 rounded-full text-white text-base border-white border-2 border-solid"
+        class="flex justify-center items-center mx-8 h-28 w-28 rounded-full text-white text-5xl border-white border-2 border-solid"
       >
         {{ getInitialsForAvatar(selectedContact.name) }}
       </div>
-      <span>{{ selectedContact.name }}</span>
-      <p-button label="Edit" icon="pi pi-pencil" />
-      <p-button label="Delete" icon="pi pi-trash" />
+      <div class="flex flex-col gap-2">
+        <span class="text-3xl">{{ selectedContact.name }}</span>
+        <div class="flex gap-4">
+          <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Edit" icon="pi pi-pencil" />
+          <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Delete" icon="pi pi-trash" />
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-xl mt-8 mb-4">Contact Information</span>
+      <span class="my-4 font-bold">Email</span>
+      <a class="text-blue-primary hover:font-bold hover:underline" href="mailto:{{ selectedContact.email }}">{{ selectedContact.email }}</a>
+      <span class="my-4 font-bold">Phone</span>
+      <span>{{ selectedContact.phone }}</span>
     </div>
     }
   </div>
