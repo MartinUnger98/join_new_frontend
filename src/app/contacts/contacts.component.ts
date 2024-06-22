@@ -28,7 +28,6 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   async ngOnInit() {
     this.subscribeObservables();
     await this.backendService.loadContacts();
-    this.getContactsInitials();
   }
 
   ngAfterViewInit() {
@@ -38,11 +37,15 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   subscribeObservables() {
     this.backendService.contacts$.pipe(takeUntil(this.destroyed$)).subscribe(contacts => {
       this.contacts = contacts;
-    })
+      this.getContactsInitials();
+      this.cdRef.detectChanges();
+    });
   }
 
 
+
   getContactsInitials() {
+    this.contactsInitials = [];
     this.contacts.forEach((contact) => {
       const initial = contact.name[0].toUpperCase();
       if (!this.contactsInitials.includes(initial)) {
