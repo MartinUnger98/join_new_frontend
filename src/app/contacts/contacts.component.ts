@@ -1,14 +1,15 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Contact } from './contact.model';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { BackendServicesService } from '../services/backend-services.service';
+
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss'],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
 })
 export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   contacts: Contact[] = [];
@@ -21,7 +22,8 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private cdRef: ChangeDetectorRef,
     private messageService: MessageService,
-    private backendService: BackendServicesService
+    private backendService: BackendServicesService,
+    private confirmationService: ConfirmationService,
   ) {}
 
   async ngOnInit() {
@@ -59,8 +61,8 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     return initials.join('');
   }
 
-  deleteContact(id:number) {
-    this.backendService.deleteContact(id);
+  async deleteContact(id:number) {
+    await this.backendService.deleteContact(id);
   }
 
 
@@ -74,6 +76,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showDialog = false;
     if (success) {
       this.showSuccess(this.isEditMode ? 'Contact updated successfully!' : 'You have successfully added a contact!');
+      this.selectedContact = null;
     }
   }
 
@@ -87,6 +90,28 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showContactDetails(contact: Contact) {
     this.selectedContact = contact
+  }
+
+  openDeleteDialog(event: Event, contactId: number) {
+    this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'Are you sure to delete this contact?',
+        header: 'Delete Contact',
+        icon: 'pi pi-info-circle',
+        acceptButtonStyleClass:"p-button-danger p-button-text",
+        rejectButtonStyleClass:"p-button-text p-button-text",
+        acceptIcon:"none",
+        rejectIcon:"none",
+
+        accept: async() => {
+          await this.deleteContact(contactId);
+          this.selectedContact = null;
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contact successfully deleted' });
+        },
+        reject: () => {
+            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+        }
+    });
   }
 
 
