@@ -77,6 +77,8 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (success) {
       this.showSuccess(this.isEditMode ? 'Contact updated successfully!' : 'You have successfully added a contact!');
       this.selectedContact = null;
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
     }
   }
 
