@@ -68,7 +68,7 @@
       <div class="flex flex-col gap-2">
         <span class="text-3xl">{{ selectedContact.name }}</span>
         <div class="flex gap-4">
-          <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Edit" icon="pi pi-pencil" />
+          <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Edit" icon="pi pi-pencil" (click)="toggleDialog(true, selectedContact)" />
           <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Delete" icon="pi pi-trash" />
         </div>
       </div>
@@ -84,9 +84,11 @@
   </div>
 
   @if(showDialog) {
-  <app-dialog-create-contact
-    (close)="closeDialog($event)"
-  ></app-dialog-create-contact>
+    <app-dialog-contact
+      [contact]="selectedContact"
+      [isEditMode]="isEditMode"
+      (close)="closeDialog($event)"
+    ></app-dialog-contact>
   }
 </section>
 

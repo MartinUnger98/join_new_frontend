@@ -39,4 +39,29 @@ export class BackendServicesService {
       console.error('Failed to create contact', error);
     }
   }
+
+  public async editContact(name: string, email: string, phone: string, id:number) {
+    const url = environment.baseUrl + `/contacts/${id}/`;
+    const body = {
+      "name": name,
+      "email": email,
+      "phone": phone
+    };
+    try {
+      await lastValueFrom(this.http.put(url, body));
+      await this.loadContacts();
+    } catch (error) {
+      console.error('Failed to create contact', error);
+    }
+  }
+
+  public async deleteContact(id:number) {
+    const url = environment.baseUrl + `/contacts/${id}/`;
+    try {
+      await lastValueFrom(this.http.delete(url));
+      await this.loadContacts();
+    } catch (error) {
+      console.error('Failed to create contact', error);
+    }
+  }
 }

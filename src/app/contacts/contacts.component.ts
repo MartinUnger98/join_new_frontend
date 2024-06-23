@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, lastValueFrom, takeUntil } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Subject, takeUntil } from 'rxjs';
 import { Contact } from './contact.model';
 import { MessageService } from 'primeng/api';
 import { BackendServicesService } from '../services/backend-services.service';
@@ -16,6 +14,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
   showDialog: boolean = false;
+  isEditMode: boolean = false;
   selectedContact: Contact | null = null;
   private destroyed$ = new Subject<void>();
 
@@ -43,7 +42,6 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-
   getContactsInitials() {
     this.contactsInitials = [];
     this.contacts.forEach((contact) => {
@@ -55,36 +53,40 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-
   getInitialsForAvatar(contact: string) {
     let nameParts = contact.split(' ');
     let initials = nameParts.slice(0, 2).map((part) => part[0].toUpperCase());
     return initials.join('');
   }
 
-  toggleDialog() {
+  deleteContact(id:number) {
+    this.backendService.deleteContact(id);
+  }
+
+
+  toggleDialog(isEdit: boolean = false, contact: Contact | null = null) {
+    this.isEditMode = isEdit;
+    this.selectedContact = contact;
     this.showDialog = true;
   }
 
   closeDialog(success: boolean) {
     this.showDialog = false;
     if (success) {
-      this.showSuccess();
+      this.showSuccess(this.isEditMode ? 'Contact updated successfully!' : 'You have successfully added a contact!');
     }
   }
 
-  showSuccess() {
+  showSuccess(detail: string) {
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
-      detail: 'You have successfully added a contact!',
+      detail: detail,
     });
   }
 
   showContactDetails(contact: Contact) {
     this.selectedContact = contact
-    console.log(contact);
-
   }
 
 

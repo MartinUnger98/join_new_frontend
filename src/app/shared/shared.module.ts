@@ -4,6 +4,7 @@ import { MainHeaderComponent } from '../standalone-components/main-header/main-h
 import { SidebarComponent } from '../standalone-components/sidebar/sidebar.component';
 import { InputFieldComponent } from '../standalone-components/input-field/input-field.component';
 import { ButtonComponent } from '../standalone-components/button/button.component';
+import { DialogContactComponent } from '../standalone-components/dialog-contact/dialog-contact.component';
 
 
 @NgModule({
@@ -12,14 +13,16 @@ import { ButtonComponent } from '../standalone-components/button/button.componen
     MainHeaderComponent,
     SidebarComponent,
     InputFieldComponent,
-    ButtonComponent
+    ButtonComponent,
+    DialogContactComponent
   ],
   declarations: [],
   exports: [
     MainHeaderComponent,
     SidebarComponent,
     InputFieldComponent,
-    ButtonComponent
+    ButtonComponent,
+    DialogContactComponent
   ]
 })
 export class SharedModule { }

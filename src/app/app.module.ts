@@ -21,7 +21,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { DialogModule } from 'primeng/dialog';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { DialogCreateContactComponent } from './contacts/dialog-create-contact/dialog-create-contact.component';
 
 
 
@@ -31,8 +30,6 @@ import { DialogCreateContactComponent } from './contacts/dialog-create-contact/d
     LoginComponent,
     ContactsComponent,
     SignUpComponent,
-    DialogCreateContactComponent
-
   ],
   imports: [
     BrowserModule,
