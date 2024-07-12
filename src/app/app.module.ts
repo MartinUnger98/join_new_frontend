@@ -22,6 +22,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { DialogModule } from 'primeng/dialog';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 
 
@@ -31,6 +32,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     LoginComponent,
     ContactsComponent,
     SignUpComponent,
+    AddTaskComponent
   ],
   imports: [
     BrowserModule,

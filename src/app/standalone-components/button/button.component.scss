@@ -1,4 +1,7 @@
-::ng-deep .pi {
-  font-size: 1.5rem;
-  padding: 4px;
+p-button {
+  ::ng-deep .pi {
+    font-size: 1.5rem;
+    padding: 4px;
+  }
 }
+
