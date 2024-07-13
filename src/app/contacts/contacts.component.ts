@@ -55,8 +55,8 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  getInitialsForAvatar(contact: string) {
-    let nameParts = contact.split(' ');
+  getInitialsForAvatar(contactName: string) {
+    let nameParts = contactName.split(' ');
     let initials = nameParts.slice(0, 2).map((part) => part[0].toUpperCase());
     return initials.join('');
   }

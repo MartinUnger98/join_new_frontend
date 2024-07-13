@@ -2,17 +2,54 @@
 <app-sidebar></app-sidebar>
 
 <section class="flex mt 800:ml-60">
-  <app-input-field
+  <h1>Add Task</h1>
+  <form [formGroup]="addTaskForm">
+    <div class="min-w-96">
+      <app-input-field
+        title="Title"
+        formControlName="title"
+        name="title"
         type="text"
-        placeholder="Username"
-        iconClass="pi pi-user"
-  ></app-input-field>
+        placeholder="Enter a title"
+        [errorMessage]="
+          f['title'].touched && f['title'].invalid ? 'Title is required' : ''
+        "
+      ></app-input-field>
+      <div class="w-full">
+        <p class="420:text-xl">Description</p>
+        <textarea
+          title="Description"
+          pInputTextarea
+          class="border border-gray-input w-full h-28"
+          formControlName="description"
+          name="description"
+          placeholder="Enter a description"
+        ></textarea>
+      </div>
+      <div class="w-full">
+        <p class="420:text-xl">Assigned to</p>
+        <p-multiSelect
+          formControlName="assignedTo"
+          class=""
+          [options]="contacts"
+          optionLabel="name"
+          placeholder="Select contacts to assign"
+        />
+      </div>
+    </div>
+
+    <div class="min-w-96">
+      <app-input-field
+        title="Due Date"
+        formControlName="dueDate"
+        name="dueDate"
+        type="date"
+        [errorMessage]="
+          f['dueDate'].touched && f['dueDate'].invalid
+            ? 'Due Date is required'
+            : ''
+        "
+      ></app-input-field>
+    </div>
+  </form>
 </section>
-
-
-
-
-
-
-
-

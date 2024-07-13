@@ -22,6 +22,7 @@ import { CommonModule } from '@angular/common';
   ]
 })
 export class InputFieldComponent {
+  @Input() title: string = '';
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() name: string = '';

@@ -23,6 +23,8 @@ import { DialogModule } from 'primeng/dialog';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -52,7 +54,9 @@ import { AddTaskComponent } from './add-task/add-task.component';
     AvatarModule,
     AvatarGroupModule,
     DialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputTextareaModule,
+    MultiSelectModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
