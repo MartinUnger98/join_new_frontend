@@ -11,6 +11,7 @@
       pInputText
       [placeholder]="placeholder"
       [name]="name"
+      [attr.min]="type === 'date' ? today : null"
       required
     />
     @if (iconClass || iconDynamicClass) {
