@@ -32,12 +32,9 @@ export class BackendServicesService {
       "phone": phone,
       "bg_color": bg_color
     };
-    try {
-      await lastValueFrom(this.http.post(url, body));
-      await this.loadContacts();
-    } catch (error) {
-      console.error('Failed to create contact', error);
-    }
+
+    await lastValueFrom(this.http.post(url, body));
+    await this.loadContacts();
   }
 
   public async editContact(name: string, email: string, phone: string, id:number) {
@@ -47,21 +44,14 @@ export class BackendServicesService {
       "email": email,
       "phone": phone
     };
-    try {
-      await lastValueFrom(this.http.put(url, body));
-      await this.loadContacts();
-    } catch (error) {
-      console.error('Failed to create contact', error);
-    }
+
+    await lastValueFrom(this.http.put(url, body));
+    await this.loadContacts();
   }
 
   public async deleteContact(id:number) {
     const url = environment.baseUrl + `/contacts/${id}/`;
-    try {
-      await lastValueFrom(this.http.delete(url));
-      await this.loadContacts();
-    } catch (error) {
-      console.error('Failed to create contact', error);
-    }
+    await lastValueFrom(this.http.delete(url));
+    await this.loadContacts();
   }
 }

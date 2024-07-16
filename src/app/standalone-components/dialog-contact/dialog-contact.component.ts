@@ -106,31 +106,40 @@ export class DialogContactComponent implements OnInit {
 
   async createContact(createContactJson: Contact) {
     this.isLoading = true;
-    let randomBgColor =
-      this.bg_colors[Math.floor(Math.random() * this.bg_colors.length)];
-    await this.backendService.createContact(
-      createContactJson.name,
-      createContactJson.email,
-      createContactJson.phone,
-      randomBgColor
-    );
-    this.isLoading = false;
-    this.resetForm();
-    this.closeDialog(true);
+    let randomBgColor = this.bg_colors[Math.floor(Math.random() * this.bg_colors.length)];
+    try {
+      await this.backendService.createContact(
+        createContactJson.name,
+        createContactJson.email,
+        createContactJson.phone,
+        randomBgColor
+      );
+      this.isLoading = false;
+      this.resetForm();
+      this.closeDialog(true);
+    } catch (error) {
+      this.setToastErrorMessage(error);
+    }
+
   }
 
   async editContact(createContactJson: Contact) {
     if (this.contact) {
       this.isLoading = true;
-      await this.backendService.editContact(
-        createContactJson.name,
-        createContactJson.email,
-        createContactJson.phone,
-        this.contact.id
-      );
-      this.isLoading = false;
-      this.resetForm();
-      this.closeDialog(true);
+      try {
+        await this.backendService.editContact(
+          createContactJson.name,
+          createContactJson.email,
+          createContactJson.phone,
+          this.contact.id
+        );
+        this.isLoading = false;
+        this.resetForm();
+        this.closeDialog(true);
+      } catch (error) {
+        this.setToastErrorMessage(error);
+      }
+
     }
   }
 

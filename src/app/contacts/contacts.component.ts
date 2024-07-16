@@ -62,7 +62,11 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async deleteContact(id:number) {
-    await this.backendService.deleteContact(id);
+    try {
+      await this.backendService.deleteContact(id);
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while deleting!' });
+    }
   }
 
 
