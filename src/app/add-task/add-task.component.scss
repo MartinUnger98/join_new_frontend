@@ -1,6 +1,19 @@
 p-multiSelect {
-  ::ng-deep .p-multiselect {
+  ::ng-deep .p-multiselect,
+  ::ng-deep .p-checkbox-box,
+  ::ng-deep .p-multiselect-filter {
     border: 1px solid #CBD5E1;
+  }
+
+  ::ng-deep .p-multiselect {
     width: 100%;
+  }
+  ::ng-deep .p-multiselect-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+  }
+  ::ng-deep .p-multiselect-panel {
+    padding-bottom: 16px;
   }
 }

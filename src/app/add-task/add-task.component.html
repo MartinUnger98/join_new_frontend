@@ -20,7 +20,7 @@
         <textarea
           title="Description"
           pInputTextarea
-          class="border border-gray-input w-full h-28"
+          class="border border-gray-input w-full max-h-28 h-28 p-2 min-h-28"
           formControlName="description"
           name="description"
           placeholder="Enter a description"
@@ -34,7 +34,31 @@
           [options]="contacts"
           optionLabel="name"
           placeholder="Select contacts to assign"
-        />
+        >
+          <ng-template let-contact pTemplate="item">
+            <div
+              [style.background-color]="contact.bg_color"
+              class="flex justify-center items-center h-10 w-12 rounded-full text-white text-base border-white border-2 border-solid"
+            >
+              {{ getInitialsForAvatar(contact.name) }}
+            </div>
+            <div class="w-full flex justify-start ml-3">
+              <span class="text-ellipsis overflow-hidden whitespace-nowrap">{{
+                contact.name
+              }}</span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <app-button
+              text="Add new Contact"
+              icon="pi pi-user-plus"
+              iconPos="right"
+              btnStyle="primary"
+              btnSize="big"
+              (click)="toggleDialog()"
+            ></app-button>
+          </ng-template>
+        </p-multiSelect>
       </div>
     </div>
 
@@ -52,4 +76,14 @@
       ></app-input-field>
     </div>
   </form>
+
+
+  @if(showDialog) {
+    <app-dialog-contact
+      (close)="closeDialog($event)"
+    ></app-dialog-contact>
+  }
 </section>
+
+
+<p-toast />
