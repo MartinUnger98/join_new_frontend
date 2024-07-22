@@ -1,9 +1,12 @@
 <app-main-header></app-main-header>
 <app-sidebar></app-sidebar>
 
-<section class="flex mt 800:ml-60">
-  <h1>Add Task</h1>
-  <form [formGroup]="addTaskForm">
+<section class="flex flex-col mt 800:ml-72 mt-12">
+  <h1 class="text-6xl font-bold mb-12">Add Task</h1>
+  <form
+    [formGroup]="addTaskForm"
+    class="flex justify-center items-start gap-14"
+  >
     <div class="min-w-96">
       <app-input-field
         title="Title"
@@ -62,6 +65,8 @@
       </div>
     </div>
 
+    <div class="bg-stone-300 w-2px h-80"></div>
+
     <div class="min-w-96">
       <app-input-field
         title="Due Date"
@@ -74,16 +79,36 @@
             : ''
         "
       ></app-input-field>
+      <div>
+        <p class="420:text-xl">Prio</p>
+        <div>
+          <p-selectButton
+            [options]="prioOptions"
+            optionLabel="priority"
+            optionValue="value"
+          >
+          <ng-template #customTemplate let-item pTemplate>
+            <div class="flex justify-center items-center gap-2 w-full px-4 py-2" [class]="item.class">
+              <span>{{item.priority}}</span>
+              <i [class]="item.icon"></i>
+            </div>
+          </ng-template>
+          </p-selectButton>
+        </div>
+      </div>
+      <div>
+        <p class="420:text-xl ">Category</p>
+
+      </div>
+      <div>
+        <p class="420:text-xl">Subtasks</p>
+      </div>
     </div>
   </form>
 
-
   @if(showDialog) {
-    <app-dialog-contact
-      (close)="closeDialog($event)"
-    ></app-dialog-contact>
+  <app-dialog-contact (close)="closeDialog($event)"></app-dialog-contact>
   }
 </section>
-
 
 <p-toast />

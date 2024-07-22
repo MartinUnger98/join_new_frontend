@@ -17,3 +17,43 @@ p-multiSelect {
     padding-bottom: 16px;
   }
 }
+
+p-selectButton {
+  ::ng-deep .p-button,
+  ::ng-deep .p-button-icon {
+    font-size: 20px;
+  }
+  ::ng-deep .p-ripple {
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    width: 128px;
+  }
+
+  ::ng-deep .p-button[aria-checked="false"] {
+    i.prio-1 {
+      color: #FF3D00;
+    }
+    i.prio-2 {
+      color: #FFA800;
+    }
+    i.prio-3 {
+      color: #7AE229;
+    }
+  }
+
+
+  ::ng-deep .p-button[aria-checked="true"].p-highlight {
+    .prio-1 {
+      background: #FF3D00;
+    }
+    .prio-2 {
+      background: #FFA800;
+    }
+    .prio-3 {
+      background: #7AE229;
+    }
+  }
+
+
+}

@@ -25,6 +25,12 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   contactsInitials: string[] = [];
   showDialog: boolean = false;
   private destroyed$ = new Subject<void>();
+  prioOptions: any[] = [
+    { priority: 'Urgent', value: 'Urgent', icon: 'pi pi-angle-double-up text-xl prio-1', class: 'prio-1'},
+    { priority: 'Medium', value: 'Medium', icon: 'pi pi-equals text-xl prio-2', class: 'prio-2' },
+    { priority: 'Low', value: 'Low', icon: 'pi pi-angle-double-down text-xl prio-3', class: 'prio-3' },
+  ];
+  selectedOption: string = '';
 
 
   constructor(
@@ -36,6 +42,10 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   async ngOnInit() {
     this.subscribeObservables();
     await this.backendService.loadContacts();
+  }
+
+  onOptionSelect(event: any) {
+    this.selectedOption = event.value;
   }
 
   ngAfterViewInit() {

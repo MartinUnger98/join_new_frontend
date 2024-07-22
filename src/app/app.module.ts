@@ -25,6 +25,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 
@@ -56,7 +57,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DialogModule,
     ConfirmDialogModule,
     InputTextareaModule,
-    MultiSelectModule
+    MultiSelectModule,
+    SelectButtonModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
