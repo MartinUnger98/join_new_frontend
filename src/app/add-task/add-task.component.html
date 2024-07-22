@@ -86,19 +86,27 @@
             [options]="prioOptions"
             optionLabel="priority"
             optionValue="value"
+            class="flex justify-center items-center gap-4"
           >
-          <ng-template #customTemplate let-item pTemplate>
-            <div class="flex justify-center items-center gap-2 w-full px-4 py-2" [class]="item.class">
-              <span>{{item.priority}}</span>
-              <i [class]="item.icon"></i>
-            </div>
-          </ng-template>
+            <ng-template #customTemplate let-item pTemplate>
+              <div
+                class="flex justify-center items-center gap-2 w-full px-4 py-2"
+                [class]="item.class"
+              >
+                <span>{{ item.priority }}</span>
+                <i [class]="item.icon"></i>
+              </div>
+            </ng-template>
           </p-selectButton>
         </div>
       </div>
       <div>
-        <p class="420:text-xl ">Category</p>
-
+        <p class="420:text-xl">Category</p>
+        <p-dropdown
+          [options]="categories"
+          optionLabel="name"
+          placeholder="Select Task Category"
+        />
       </div>
       <div>
         <p class="420:text-xl">Subtasks</p>

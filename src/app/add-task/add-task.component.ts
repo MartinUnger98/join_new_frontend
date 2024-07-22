@@ -30,7 +30,11 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     { priority: 'Medium', value: 'Medium', icon: 'pi pi-equals text-xl prio-2', class: 'prio-2' },
     { priority: 'Low', value: 'Low', icon: 'pi pi-angle-double-down text-xl prio-3', class: 'prio-3' },
   ];
-  selectedOption: string = '';
+  categories: any[] = [
+    { name: 'Technical Task'},
+    { name: 'User Story'},
+    { name: 'Bug'},
+  ]
 
 
   constructor(
@@ -42,10 +46,6 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   async ngOnInit() {
     this.subscribeObservables();
     await this.backendService.loadContacts();
-  }
-
-  onOptionSelect(event: any) {
-    this.selectedOption = event.value;
   }
 
   ngAfterViewInit() {

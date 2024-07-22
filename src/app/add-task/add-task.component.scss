@@ -19,6 +19,11 @@ p-multiSelect {
 }
 
 p-selectButton {
+  ::ng-deep .p-selectbutton {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
   ::ng-deep .p-button,
   ::ng-deep .p-button-icon {
     font-size: 20px;
@@ -27,7 +32,7 @@ p-selectButton {
     padding: 0;
     border-radius: 8px;
     border: 1px solid #cbd5e1;
-    width: 128px;
+    width: 117px;
   }
 
   ::ng-deep .p-button[aria-checked="false"] {
@@ -42,7 +47,6 @@ p-selectButton {
     }
   }
 
-
   ::ng-deep .p-button[aria-checked="true"].p-highlight {
     .prio-1 {
       background: #FF3D00;
@@ -54,6 +58,11 @@ p-selectButton {
       background: #7AE229;
     }
   }
+}
 
-
+p-dropdown {
+  ::ng-deep .p-dropdown {
+    width: 100%;
+    border: 1px solid #CBD5E1;
+  }
 }
