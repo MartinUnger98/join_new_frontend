@@ -110,6 +110,50 @@
       </div>
       <div>
         <p class="420:text-xl">Subtasks</p>
+        <p-iconField iconPosition="right">
+          @if (!isFocused) {
+          <ng-container>
+            <p-inputIcon
+              styleClass="pi pi-plus"
+              (click)="focusSubtaskInput()"
+            />
+          </ng-container>
+          } @if (isFocused) {
+          <ng-container>
+            <p-inputIcon
+              styleClass="pi pi-times"
+              class="hover:bg-gray-input"
+              (click)="clearSubtaskInput()"
+            />
+            <p-inputIcon
+              styleClass="pi pi-check"
+              class="hover:bg-gray-input"
+              (click)="addSubtask()"
+            />
+          </ng-container>
+          }
+          <input
+            #inputFieldSubtask
+            type="text"
+            class="border border-gray-input min-h-10 w-full pr-20 pl-2"
+            placeholder="Add new subtask"
+            formControlName="subtasks"
+            name="subtasks"
+            pInputText
+            (focus)="onFocusSubtask()"
+            (blur)="onBlurSubtask()"
+          />
+        </p-iconField>
+        @if (subTasks) { @for (subTask of subTasks; track subTask) {
+          <div class="flex justify-between items-center px-6 py-1 hover:bg-gray-300 rounded-lg group">
+            <li class="group-hover:text-black">{{ subTask }}</li>
+            <div class="flex justify-center items-center gap-2 text-white group-hover:text-black">
+              <i class="pi pi-trash text-xl cursor-pointer"></i>
+              <p class="text-xl">|</p>
+              <i class="pi pi-pencil text-xl cursor-pointer"></i>
+            </div>
+          </div>
+        } }
       </div>
     </div>
   </form>

@@ -27,7 +27,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 
 @NgModule({
@@ -60,7 +61,9 @@ import { DropdownModule } from 'primeng/dropdown';
     InputTextareaModule,
     MultiSelectModule,
     SelectButtonModule,
-    DropdownModule
+    DropdownModule,
+    IconFieldModule,
+    InputIconModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

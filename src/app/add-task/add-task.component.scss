@@ -66,3 +66,24 @@ p-dropdown {
     border: 1px solid #CBD5E1;
   }
 }
+
+p-iconField {
+  ::ng-deep .p-input-icon {
+    padding: 4px;
+    margin-top: -10px;
+    border-radius: 100%;
+    cursor: pointer;
+    &:hover {
+      background-color: #CBD5E1;
+    }
+    &.pi-check {
+      margin-right: 36px;
+    }
+
+  }
+  ::ng-deep p-inputIcon {
+    &:hover {
+      background: #cbd5e1;
+    }
+  }
+}

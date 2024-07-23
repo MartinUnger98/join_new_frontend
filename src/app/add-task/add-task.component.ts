@@ -1,9 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { Contact } from '../contacts/contact.model';
 import { BackendServicesService } from '../services/backend-services.service';
 import { MessageService } from 'primeng/api';
+import { PrioOption, Category } from './addTask.model';
+
 
 @Component({
   selector: 'app-add-task',
@@ -12,6 +14,11 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService],
 })
 export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
+  contacts: Contact[] = [];
+  contactsInitials: string[] = [];
+  showDialog: boolean = false;
+  private destroyed$ = new Subject<void>();
+
   addTaskForm: FormGroup = new FormGroup({
     title: new FormControl(''),
     description: new FormControl(''),
@@ -19,22 +26,24 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     dueDate: new FormControl(''),
     priority: new FormControl(''),
     category: new FormControl(''),
+    subtasks: new FormControl(''),
   });
 
-  contacts: Contact[] = [];
-  contactsInitials: string[] = [];
-  showDialog: boolean = false;
-  private destroyed$ = new Subject<void>();
-  prioOptions: any[] = [
+  prioOptions: PrioOption[] = [
     { priority: 'Urgent', value: 'Urgent', icon: 'pi pi-angle-double-up text-xl prio-1', class: 'prio-1'},
     { priority: 'Medium', value: 'Medium', icon: 'pi pi-equals text-xl prio-2', class: 'prio-2' },
     { priority: 'Low', value: 'Low', icon: 'pi pi-angle-double-down text-xl prio-3', class: 'prio-3' },
   ];
-  categories: any[] = [
+
+  categories: Category[] = [
     { name: 'Technical Task'},
     { name: 'User Story'},
     { name: 'Bug'},
-  ]
+  ];
+
+  isFocused: boolean = false;
+  subTasks: (string | number)[]  = [];
+  @ViewChild('inputFieldSubtask') inputField!: ElementRef;
 
 
   constructor(
@@ -48,9 +57,15 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     await this.backendService.loadContacts();
   }
 
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
   ngAfterViewInit() {
     this.cdRef.detectChanges();
   }
+
 
   subscribeObservables() {
     this.backendService.contacts$.pipe(takeUntil(this.destroyed$)).subscribe(contacts => {
@@ -82,8 +97,28 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 
-  ngOnDestroy() {
-    this.destroyed$.next();
-    this.destroyed$.complete();
+  onFocusSubtask() {
+    this.isFocused = true;
+  }
+  onBlurSubtask() {
+    if (this.inputField.nativeElement.value.trim() === '') {
+      this.isFocused = false;
+    }
+  }
+
+  focusSubtaskInput() {
+    this.inputField.nativeElement.focus();
+  }
+
+  addSubtask() {
+    let value = this.inputField.nativeElement.value.trim()
+    if (value !== '') {
+      this.subTasks.push(value);
+    }
+  }
+
+  clearSubtaskInput() {
+    this.inputField.nativeElement.value = '';
+    this.isFocused = false;
   }
 }
