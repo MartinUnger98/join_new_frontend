@@ -144,35 +144,52 @@
             (blur)="onBlurSubtask()"
           />
         </p-iconField>
-        @if (subTasks) {
-          @for (subTask of subTasks; track subTask) {
-            @if (!subTask.edit) {
-              <div class="flex justify-between items-center pl-6 pr-2 py-1 hover:bg-gray-300 rounded-lg group">
-                <li class="group-hover:text-black">{{ subTask.value }}</li>
-                <div class="flex justify-center items-center gap-2 text-white group-hover:text-black">
-                  <i class="pi pi-trash text-xl cursor-pointer hover:font-bold" (click)="deleteSubtask(subTask)"></i>
-                  <p class="text-xl">|</p>
-                  <i class="pi pi-pencil text-xl cursor-pointer hover:font-bold" (click)="changeToEditSubtask(subTask)"></i>
+        <div class="h-36 max-h-36 overflow-y-scroll">
+          @if (subTasks) {
+            @for (subTask of subTasks; track subTask) {
+              @if (!subTask.edit) {
+                <div class="flex justify-between items-center pl-6 pr-2 py-1 hover:bg-gray-300 rounded-lg group">
+                  <li class="group-hover:text-black">{{ subTask.value }}</li>
+                  <div class="flex justify-center items-center gap-2 text-white group-hover:text-black">
+                    <i class="pi pi-trash text-xl cursor-pointer hover:font-bold" (click)="deleteSubtask(subTask)"></i>
+                    <p class="text-xl">|</p>
+                    <i class="pi pi-pencil text-xl cursor-pointer hover:font-bold" (click)="changeToEditSubtask(subTask)"></i>
+                  </div>
                 </div>
-              </div>
-            } @else {
-              <div class="w-full flex items-center justify-between gap-4 border-b-2 border-blue-primary px-2 py-4">
-                <input
-                  #inputFieldEditSubtask
-                  class="w-full focus:border-white px-2 py-1"
-                  pInputText type="text"
-                  placeholder="Add new subtask"
-                  value={{subTask.value}}
-                >
-                <div class="flex justify-center items-center gap-2 ">
-                  <i class="pi pi-trash text-xl cursor-pointer hover:font-bold" (click)="deleteSubtask(subTask)"></i>
-                  <p class="text-xl">|</p>
-                  <i class="pi pi-check text-xl cursor-pointer hover:font-bold" (click)="editSubtask(subTask)"></i>
+              } @else {
+                <div class="w-full flex items-center justify-between gap-4 border-b-2 border-blue-primary px-2 py-4">
+                  <input
+                    #inputFieldEditSubtask
+                    class="w-full focus:border-white px-2 py-1"
+                    pInputText type="text"
+                    placeholder="Add new subtask"
+                    value={{subTask.value}}
+                  >
+                  <div class="flex justify-center items-center gap-2 ">
+                    <i class="pi pi-trash text-xl cursor-pointer hover:font-bold" (click)="deleteSubtask(subTask)"></i>
+                    <p class="text-xl">|</p>
+                    <i class="pi pi-check text-xl cursor-pointer hover:font-bold" (click)="editSubtask(subTask)"></i>
+                  </div>
                 </div>
-              </div>
+              }
             }
           }
-        }
+        </div>
+      </div>
+      <div class="flex justify-end gap-6 mt-5">
+        <app-button
+          text="Clear"
+          icon="pi pi-times"
+          iconPos="right"
+          btnStyle="secondary"
+        ></app-button>
+        <app-button
+          type="submit"
+          text="Create Task"
+          icon="pi pi-check"
+          iconPos="right"
+          btnStyle="primary"
+        ></app-button>
       </div>
     </div>
 

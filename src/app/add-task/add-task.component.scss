@@ -71,13 +71,14 @@ p-iconField {
   ::ng-deep .p-input-icon {
     padding: 4px;
     margin-top: -10px;
+    margin-right: 10px;
     border-radius: 100%;
     cursor: pointer;
     &:hover {
       background-color: #CBD5E1;
     }
     &.pi-check {
-      margin-right: 39px;
+      margin-right: 50px;
     }
 
   }
