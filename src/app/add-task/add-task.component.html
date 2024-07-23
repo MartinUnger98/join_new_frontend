@@ -7,7 +7,7 @@
     [formGroup]="addTaskForm"
     class="flex justify-center items-start gap-14"
   >
-    <div class="min-w-96">
+    <div class="min-w-96 flex flex-col gap-5">
       <app-input-field
         title="Title"
         formControlName="title"
@@ -18,7 +18,7 @@
           f['title'].touched && f['title'].invalid ? 'Title is required' : ''
         "
       ></app-input-field>
-      <div class="w-full">
+      <div class="w-full flex flex-col gap-2">
         <p class="420:text-xl">Description</p>
         <textarea
           title="Description"
@@ -29,7 +29,7 @@
           placeholder="Enter a description"
         ></textarea>
       </div>
-      <div class="w-full">
+      <div class="w-full flex flex-col gap-2">
         <p class="420:text-xl">Assigned to</p>
         <p-multiSelect
           formControlName="assignedTo"
@@ -67,7 +67,7 @@
 
     <div class="bg-stone-300 w-2px h-80"></div>
 
-    <div class="min-w-96">
+    <div class="min-w-96 flex flex-col gap-5">
       <app-input-field
         title="Due Date"
         formControlName="dueDate"
@@ -79,7 +79,7 @@
             : ''
         "
       ></app-input-field>
-      <div>
+      <div class="flex flex-col gap-2">
         <p class="420:text-xl">Prio</p>
         <div>
           <p-selectButton
@@ -100,7 +100,7 @@
           </p-selectButton>
         </div>
       </div>
-      <div>
+      <div class="flex flex-col gap-2">
         <p class="420:text-xl">Category</p>
         <p-dropdown
           [options]="categories"
@@ -108,7 +108,7 @@
           placeholder="Select Task Category"
         />
       </div>
-      <div>
+      <div class="flex flex-col gap-2">
         <p class="420:text-xl">Subtasks</p>
         <p-iconField iconPosition="right">
           @if (!isFocused) {
@@ -144,18 +144,38 @@
             (blur)="onBlurSubtask()"
           />
         </p-iconField>
-        @if (subTasks) { @for (subTask of subTasks; track subTask) {
-          <div class="flex justify-between items-center px-6 py-1 hover:bg-gray-300 rounded-lg group">
-            <li class="group-hover:text-black">{{ subTask }}</li>
-            <div class="flex justify-center items-center gap-2 text-white group-hover:text-black">
-              <i class="pi pi-trash text-xl cursor-pointer"></i>
-              <p class="text-xl">|</p>
-              <i class="pi pi-pencil text-xl cursor-pointer"></i>
-            </div>
-          </div>
-        } }
+        @if (subTasks) {
+          @for (subTask of subTasks; track subTask) {
+            @if (!subTask.edit) {
+              <div class="flex justify-between items-center pl-6 pr-2 py-1 hover:bg-gray-300 rounded-lg group">
+                <li class="group-hover:text-black">{{ subTask.value }}</li>
+                <div class="flex justify-center items-center gap-2 text-white group-hover:text-black">
+                  <i class="pi pi-trash text-xl cursor-pointer hover:font-bold" (click)="deleteSubtask(subTask)"></i>
+                  <p class="text-xl">|</p>
+                  <i class="pi pi-pencil text-xl cursor-pointer hover:font-bold" (click)="changeToEditSubtask(subTask)"></i>
+                </div>
+              </div>
+            } @else {
+              <div class="w-full flex items-center justify-between gap-4 border-b-2 border-blue-primary px-2 py-4">
+                <input
+                  #inputFieldEditSubtask
+                  class="w-full focus:border-white px-2 py-1"
+                  pInputText type="text"
+                  placeholder="Add new subtask"
+                  value={{subTask.value}}
+                >
+                <div class="flex justify-center items-center gap-2 ">
+                  <i class="pi pi-trash text-xl cursor-pointer hover:font-bold" (click)="deleteSubtask(subTask)"></i>
+                  <p class="text-xl">|</p>
+                  <i class="pi pi-check text-xl cursor-pointer hover:font-bold" (click)="editSubtask(subTask)"></i>
+                </div>
+              </div>
+            }
+          }
+        }
       </div>
     </div>
+
   </form>
 
   @if(showDialog) {

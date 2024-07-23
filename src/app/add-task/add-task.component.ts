@@ -42,8 +42,9 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   ];
 
   isFocused: boolean = false;
-  subTasks: (string | number)[]  = [];
+  subTasks: any[]  = [];
   @ViewChild('inputFieldSubtask') inputField!: ElementRef;
+  @ViewChild('inputFieldEditSubtask') inputFieldEdit!: ElementRef;
 
 
   constructor(
@@ -113,12 +114,37 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   addSubtask() {
     let value = this.inputField.nativeElement.value.trim()
     if (value !== '') {
-      this.subTasks.push(value);
+      this.subTasks.push({
+        value: value,
+        edit: false
+      });
+      this.clearSubtaskInput();
+
     }
   }
 
   clearSubtaskInput() {
     this.inputField.nativeElement.value = '';
     this.isFocused = false;
+  }
+
+
+  deleteSubtask(subTask: string | number) {
+    let index = this.subTasks.indexOf(subTask);
+    this.subTasks.splice(index, 1);
+  }
+
+  changeToEditSubtask(subTask: string | number) {
+    let index = this.subTasks.indexOf(subTask);
+    this.subTasks[index].edit = true;
+  }
+
+  editSubtask(subTask: string | number) {
+    let index = this.subTasks.indexOf(subTask);
+    let editValue = this.inputFieldEdit.nativeElement.value;
+    if (editValue !== '') {
+      this.subTasks[index].value = editValue;
+    }
+    this.subTasks[index].edit = false;
   }
 }
