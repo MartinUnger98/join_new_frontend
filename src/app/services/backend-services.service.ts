@@ -3,6 +3,7 @@ import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Contact } from '../contacts/contact.model';
+import { Task, Subtask } from '../add-task/addTask.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,30 @@ export class BackendServicesService {
     const url = environment.baseUrl + `/contacts/${id}/`;
     await lastValueFrom(this.http.delete(url));
     await this.loadContacts();
+  }
+
+
+  public async createTask(
+    title: string,
+    description:string,
+    assignedTo: number[],
+    dueDate: string,
+    priority: string,
+    category: string,
+    subtasks?: Subtask[] ) {
+      const url = environment.baseUrl + '/tasks/';
+      const body: Task = {
+        "title": title,
+        "description": description,
+        "assignedTo": assignedTo,
+        "dueDate": dueDate,
+        "priority": priority,
+        "category": category,
+    };
+
+    if (subtasks && subtasks.length > 0) {
+      body.subtasks = subtasks;
+    }
+    await lastValueFrom(this.http.post(url, body));
   }
 }

@@ -4,7 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Contact } from '../contacts/contact.model';
 import { BackendServicesService } from '../services/backend-services.service';
 import { MessageService } from 'primeng/api';
-import { PrioOption, Category } from './addTask.model';
+import { PrioOption, Category, Task } from './addTask.model';
 
 
 @Component({
@@ -165,21 +165,42 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
       const task = {
         title: this.addTaskForm.value.title,
         description: this.addTaskForm.value.description,
-        assignedTo: this.addTaskForm.value.assignedTo,
+        assignedTo: this.addTaskForm.value.assignedTo.map((contact: Contact) => contact.id),
         dueDate: this.addTaskForm.value.dueDate,
         priority: this.addTaskForm.value.priority,
-        category: this.addTaskForm.value.category,
+        category: this.addTaskForm.value.category.name,
         subtasks: this.subTasks,
       };
-      console.log(task);
-    } else {
-      console.log('Form is invalid');
+      try {
+        this.createTask(task)
+      } catch (error) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'An unexpected error occurred!',
+        });
+      }
+
     }
+  }
+
+  async createTask(task: Task) {
+    await this.backendService.createTask(
+      task.title,
+      task.description,
+      task.assignedTo,
+      task.dueDate,
+      task.priority,
+      task.category,
+      task.subtasks
+    );
+    this.clearAllInputs();
+    this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully created a task!' });
   }
 
 
   clearAllInputs() {
     this.addTaskForm.reset();
-
+    this.subTasks = [];
   }
 }
