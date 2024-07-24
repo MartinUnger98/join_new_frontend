@@ -5,7 +5,8 @@
   <h1 class="text-6xl font-bold mb-12">Add Task</h1>
   <form
     [formGroup]="addTaskForm"
-    class="flex justify-center items-start gap-14"
+    class="flex justify-start items-start gap-14"
+    (ngSubmit)="onSubmit()"
   >
     <div class="min-w-96 flex flex-col gap-5">
       <app-input-field
@@ -15,7 +16,7 @@
         type="text"
         placeholder="Enter a title"
         [errorMessage]="
-          f['title'].touched && f['title'].invalid ? 'Title is required' : ''
+          f['title'].touched && f['title'].invalid ? 'Title is required!' : ''
         "
       ></app-input-field>
       <div class="w-full flex flex-col gap-2">
@@ -28,8 +29,13 @@
           name="description"
           placeholder="Enter a description"
         ></textarea>
+        @if (f['description'].touched && f['description'].invalid) {
+          <div class="text-red-600">
+            Description is required!
+          </div>
+        }
       </div>
-      <div class="w-full flex flex-col gap-2">
+      <div class="w-full flex flex-col gap-2 max-w-full">
         <p class="420:text-xl">Assigned to</p>
         <p-multiSelect
           formControlName="assignedTo"
@@ -62,6 +68,11 @@
             ></app-button>
           </ng-template>
         </p-multiSelect>
+        @if (f['assignedTo'].touched && f['assignedTo'].invalid) {
+          <div class="text-red-600">
+            Please select a contact!
+          </div>
+        }
       </div>
     </div>
 
@@ -84,6 +95,7 @@
         <div>
           <p-selectButton
             [options]="prioOptions"
+            formControlName="priority"
             optionLabel="priority"
             optionValue="value"
             class="flex justify-center items-center gap-4"
@@ -99,6 +111,11 @@
             </ng-template>
           </p-selectButton>
         </div>
+        @if (f['priority'].touched && f['priority'].invalid) {
+          <div class="text-red-600">
+            Please select a priority!
+          </div>
+        }
       </div>
       <div class="flex flex-col gap-2">
         <p class="420:text-xl">Category</p>
@@ -106,7 +123,13 @@
           [options]="categories"
           optionLabel="name"
           placeholder="Select Task Category"
+          formControlName="category"
         />
+        @if (f['category'].touched && f['category'].invalid) {
+          <div class="text-red-600">
+            Please select a category!
+          </div>
+        }
       </div>
       <div class="flex flex-col gap-2">
         <p class="420:text-xl">Subtasks</p>
@@ -182,6 +205,7 @@
           icon="pi pi-times"
           iconPos="right"
           btnStyle="secondary"
+          (click)="clearAllInputs()"
         ></app-button>
         <app-button
           type="submit"
@@ -189,6 +213,7 @@
           icon="pi pi-check"
           iconPos="right"
           btnStyle="primary"
+          [disabled]="addTaskForm.invalid"
         ></app-button>
       </div>
     </div>

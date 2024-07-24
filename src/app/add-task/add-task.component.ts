@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { Contact } from '../contacts/contact.model';
 import { BackendServicesService } from '../services/backend-services.service';
@@ -51,11 +51,23 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     private cdRef: ChangeDetectorRef,
     private backendService: BackendServicesService,
     private messageService: MessageService,
+    private formBuilder: FormBuilder
   ) {}
 
   async ngOnInit() {
     this.subscribeObservables();
     await this.backendService.loadContacts();
+    this.addTaskForm = this.formBuilder.group(
+      {
+        title: ['', Validators.required],
+        description: ['', Validators.required],
+        assignedTo: ['', Validators.required],
+        dueDate: ['', Validators.required],
+        priority: ['', Validators.required],
+        category: ['', Validators.required],
+        subtasks: ['',],
+      }
+    )
   }
 
   ngOnDestroy() {
@@ -146,5 +158,28 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
       this.subTasks[index].value = editValue;
     }
     this.subTasks[index].edit = false;
+  }
+
+  onSubmit() {
+    if (this.addTaskForm.valid) {
+      const task = {
+        title: this.addTaskForm.value.title,
+        description: this.addTaskForm.value.description,
+        assignedTo: this.addTaskForm.value.assignedTo,
+        dueDate: this.addTaskForm.value.dueDate,
+        priority: this.addTaskForm.value.priority,
+        category: this.addTaskForm.value.category,
+        subtasks: this.subTasks,
+      };
+      console.log(task);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
+
+  clearAllInputs() {
+    this.addTaskForm.reset();
+
   }
 }
