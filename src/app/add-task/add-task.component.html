@@ -1,11 +1,11 @@
 <app-main-header></app-main-header>
-<app-sidebar></app-sidebar>
 
-<section class="flex flex-col mt 800:ml-72 mt-12">
+<div class="pt-20">
+<section class="flex flex-col mt 800:ml-72 mt-36 mb-14 items-center 1200:items-start">
   <h1 class="text-6xl font-bold mb-12">Add Task</h1>
   <form
     [formGroup]="addTaskForm"
-    class="flex justify-start items-start gap-14"
+    class="flex justify-start items-start gap-14 flex-col 1200:flex-row"
     (ngSubmit)="onSubmit()"
   >
     <div class="min-w-96 flex flex-col gap-5">
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="bg-stone-300 w-2px h-80"></div>
+    <div class="bg-stone-300 w-2px h-80 hidden 1200:block"></div>
 
     <div class="min-w-96 flex flex-col gap-5">
       <app-input-field
@@ -224,5 +224,7 @@
   <app-dialog-contact (close)="closeDialog($event)"></app-dialog-contact>
   }
 </section>
-
+</div>
 <p-toast />
+
+<app-sidebar></app-sidebar>
