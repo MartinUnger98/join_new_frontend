@@ -1,7 +1,4 @@
-<app-main-header></app-main-header>
-
-<div class="pt-20">
-<section class="flex flex-col mt 800:ml-72 mt-36 mb-14 items-center 1200:items-start">
+<section class="flex flex-col 800:ml-72 mt-36 mb-14 items-center 1200:items-start">
   <h1 class="text-6xl font-bold mb-12">Add Task</h1>
   <form
     [formGroup]="addTaskForm"
@@ -224,7 +221,6 @@
   <app-dialog-contact (close)="closeDialog($event)"></app-dialog-contact>
   }
 </section>
-</div>
 <p-toast />
 
-<app-sidebar></app-sidebar>
+

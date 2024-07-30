@@ -1,1 +1,31 @@
-<p>board works!</p>
+<section class="flex flex-col 800:ml-72 mt-36 mb-14 items-center 1200:items-start mr-5">
+  <header class="flex items-center justify-between w-full">
+    <h1 class="text-6xl font-bold">Board</h1>
+    <div class="flex items center gap-6">
+      <p-iconField iconPosition="right">
+        <ng-container>
+          <p-inputIcon
+            styleClass="pi pi-search"
+            class="cursor-pointer hover:bg-gray-input"
+          />
+        </ng-container>
+        <input
+          #inputFieldSubtask
+          type="text"
+          class="border border-gray-input min-h-10 pr-12 pl-2"
+          placeholder="Find Task"
+          name="subtasks"
+          pInputText
+
+        />
+      </p-iconField>
+      <app-button
+          text="AddTask"
+          icon="pi pi-plus"
+          iconPos="right"
+          btnStyle="primary"
+        ></app-button>
+    </div>
+  </header>
+
+</section>

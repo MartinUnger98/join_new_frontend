@@ -29,6 +29,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { BoardComponent } from './board/board.component';
+import { SummaryComponent } from './summary/summary.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { InputIconModule } from 'primeng/inputicon';
     LoginComponent,
     ContactsComponent,
     SignUpComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    BoardComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,

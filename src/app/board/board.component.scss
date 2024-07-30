@@ -1,0 +1,20 @@
+p-iconField {
+  ::ng-deep .p-input-icon {
+    padding: 4px;
+    margin-top: -10px;
+    border-radius: 100%;
+    cursor: pointer;
+    &:hover {
+      background-color: #CBD5E1;
+    }
+    &.pi-check {
+      margin-right: 50px;
+    }
+
+  }
+  ::ng-deep p-inputIcon {
+    &:hover {
+      background: #cbd5e1;
+    }
+  }
+}
