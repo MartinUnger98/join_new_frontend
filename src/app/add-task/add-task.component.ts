@@ -55,8 +55,8 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   ) {}
 
   async ngOnInit() {
-    this.subscribeObservables();
     await this.backendService.loadContacts();
+    this.subscribeObservables();
     this.addTaskForm = this.formBuilder.group(
       {
         title: ['', Validators.required],
@@ -170,6 +170,7 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
         priority: this.addTaskForm.value.priority,
         category: this.addTaskForm.value.category.name,
         subtasks: this.subTasks,
+        status: "To do"
       };
       try {
         this.createTask(task)

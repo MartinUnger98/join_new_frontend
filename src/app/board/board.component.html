@@ -1,4 +1,6 @@
-<section class="flex flex-col 800:ml-72 mt-36 mb-14 items-center 1200:items-start mr-5">
+<section
+  class="flex flex-col 800:ml-72 mt-36 mb-14 items-center 1200:items-start mr-5"
+>
   <header class="flex items-center justify-between w-full">
     <h1 class="text-6xl font-bold">Board</h1>
     <div class="flex items center gap-6">
@@ -16,16 +18,30 @@
           placeholder="Find Task"
           name="subtasks"
           pInputText
-
         />
       </p-iconField>
       <app-button
-          text="AddTask"
-          icon="pi pi-plus"
-          iconPos="right"
-          btnStyle="primary"
-        ></app-button>
+        text="AddTask"
+        icon="pi pi-plus"
+        iconPos="right"
+        btnStyle="primary"
+      ></app-button>
     </div>
   </header>
-
+  <main class="flex w-full justify-between mt-14">
+    @for (taskStatus of taskStatuses; track taskStatus) {
+    <div>
+      <h1 class="text-xl text-blue-dark font-bold">{{ taskStatus }}</h1>
+      <div>
+        @if (tasks) {
+          @for (task of tasks; track task.id) {
+            @if (task.status === taskStatus) {
+              <h1>{{ task.title }}</h1>
+            }
+          }
+        }
+      </div>
+    </div>
+    }
+  </main>
 </section>

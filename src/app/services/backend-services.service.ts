@@ -13,6 +13,9 @@ export class BackendServicesService {
   public contactSubject = new BehaviorSubject<Contact[]>([]);
   public contacts$ = this.contactSubject.asObservable();
 
+  public tasksSubject = new BehaviorSubject<Task[]>([]);
+  public tasks$ = this.tasksSubject.asObservable();
+
   constructor(private http: HttpClient ) { }
 
   public async loadContacts(): Promise<void> {
@@ -73,11 +76,18 @@ export class BackendServicesService {
         "dueDate": dueDate,
         "priority": priority,
         "category": category,
+        "status": "To do"
     };
 
     if (subtasks && subtasks.length > 0) {
       body.subtasks = subtasks;
     }
     await lastValueFrom(this.http.post(url, body));
+  }
+
+  public async loadTasks() {
+    const url = environment.baseUrl + '/tasks/';
+    const tasks = await lastValueFrom(this.http.get<Task[]>(url));
+    this.tasksSubject.next(tasks);
   }
 }

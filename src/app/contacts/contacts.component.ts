@@ -27,8 +27,8 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    this.subscribeObservables();
     await this.backendService.loadContacts();
+    this.subscribeObservables();
   }
 
   ngAfterViewInit() {

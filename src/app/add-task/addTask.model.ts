@@ -11,6 +11,7 @@ export interface Category {
 
 
 export interface Task {
+  id?: number;
   title: string;
   description: string;
   assignedTo: number[];
@@ -18,6 +19,7 @@ export interface Task {
   priority: string;
   category: string;
   subtasks?: any[];
+  status: string;
 }
 
 export interface Subtask {
