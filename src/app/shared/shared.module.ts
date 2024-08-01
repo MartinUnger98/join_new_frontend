@@ -5,6 +5,8 @@ import { SidebarComponent } from '../standalone-components/sidebar/sidebar.compo
 import { InputFieldComponent } from '../standalone-components/input-field/input-field.component';
 import { ButtonComponent } from '../standalone-components/button/button.component';
 import { DialogContactComponent } from '../standalone-components/dialog-contact/dialog-contact.component';
+import { CardTaskComponent } from '../standalone-components/card-task/card-task.component';
+
 
 
 @NgModule({
@@ -14,7 +16,8 @@ import { DialogContactComponent } from '../standalone-components/dialog-contact/
     SidebarComponent,
     InputFieldComponent,
     ButtonComponent,
-    DialogContactComponent
+    DialogContactComponent,
+    CardTaskComponent
   ],
   declarations: [],
   exports: [
@@ -22,7 +25,8 @@ import { DialogContactComponent } from '../standalone-components/dialog-contact/
     SidebarComponent,
     InputFieldComponent,
     ButtonComponent,
-    DialogContactComponent
+    DialogContactComponent,
+    CardTaskComponent
   ]
 })
 export class SharedModule { }

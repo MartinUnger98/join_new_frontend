@@ -67,6 +67,7 @@ export class BackendServicesService {
     dueDate: string,
     priority: string,
     category: string,
+    status: string,
     subtasks?: Subtask[] ) {
       const url = environment.baseUrl + '/tasks/';
       const body: Task = {
@@ -76,7 +77,7 @@ export class BackendServicesService {
         "dueDate": dueDate,
         "priority": priority,
         "category": category,
-        "status": "To do"
+        "status": status
     };
 
     if (subtasks && subtasks.length > 0) {

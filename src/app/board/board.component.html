@@ -36,7 +36,9 @@
         @if (tasks) {
           @for (task of tasks; track task.id) {
             @if (task.status === taskStatus) {
-              <h1>{{ task.title }}</h1>
+              <app-card-task
+                [task]="task"
+              ></app-card-task>
             }
           }
         }

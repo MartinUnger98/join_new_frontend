@@ -170,7 +170,7 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
         priority: this.addTaskForm.value.priority,
         category: this.addTaskForm.value.category.name,
         subtasks: this.subTasks,
-        status: "To do"
+        status: 'To do'
       };
       try {
         this.createTask(task)
@@ -193,6 +193,7 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
       task.dueDate,
       task.priority,
       task.category,
+      task.status,
       task.subtasks
     );
     this.clearAllInputs();
