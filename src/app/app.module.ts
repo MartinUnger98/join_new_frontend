@@ -31,7 +31,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { BoardComponent } from './board/board.component';
 import { SummaryComponent } from './summary/summary.component';
-
+import { DragDropModule } from 'primeng/dragdrop';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,8 @@ import { SummaryComponent } from './summary/summary.component';
     SelectButtonModule,
     DropdownModule,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    DragDropModule
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

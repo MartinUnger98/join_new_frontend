@@ -14,7 +14,8 @@ export class BoardComponent {
   private destroyed$ = new Subject<void>();
   tasks: Task[] = [];
   taskStatuses: string[] = ['To do', 'In Progress', 'Await feedback', 'Done'];
-
+  showEmptyTask: boolean = false;
+  draggedTaskId: number | null = null;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -44,5 +45,19 @@ export class BoardComponent {
       this.tasks = tasks;
       this.cdRef.detectChanges();
     });
+  }
+
+  tasksExistAtStatus(status: string): boolean {
+    return this.tasks && this.tasks.some(task => task.status === status);
+  }
+
+  dragStart(taskId: number) {
+    this.draggedTaskId = taskId;
+    this.showEmptyTask = true;
+  }
+
+  dragEnd() {
+    this.draggedTaskId = null;
+    this.showEmptyTask = false;
   }
 }
