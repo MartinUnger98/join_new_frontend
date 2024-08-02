@@ -19,13 +19,17 @@ module.exports = {
         'blue-dark': '#2a3647',
         'blue-dark-hover': '#304b72',
         'gray-input': '#cbd5e1',
+        'section': '#F6F7F8',
         'prio-1': '#FF3D00',
         'prio-2': '#FFA800',
         'prio-3': '#7AE229',
-
+        'category-1': '#1FD7C1',
+        'category-2': '#0038FF',
+        'category-3': '#FF4646',
       },
       boxShadow: {
         'custom': '0px 0px 17px 5px rgba(0, 0, 0, 0.08)',
+        'card-task': '0px 0px 10px 3px #00000014'
       },
     },
     screens: {

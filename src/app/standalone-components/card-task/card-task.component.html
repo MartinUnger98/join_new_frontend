@@ -1,18 +1,34 @@
 @if (task) {
-  <div>
-    <div>
-      <p>{{task.category}}</p>
+  <div class="flex flex-col gap-4 p-4 shadow-card-task rounded-3xl w-56">
+    <div class="flex justify-between items-center">
+      <p class="text-white px-4 py-1 rounded-lg text-lg" [class]="getCategoryBg(task.category)">{{task.category}}</p>
     </div>
-    <h1>{{task.title}}</h1>
-    <p>{{task.description}}</p>
-    <div>
-      @for (contactId of task.assignedTo; track contactId) {
-        <p>{{ getContactNameById(contactId) }}</p>
-      }
+    <div class="flex flex-col gap-1">
+      <h1 class="font-bold text-blue-dark">{{task.title}}</h1>
+      <p class="text-gray-400 font-medium">{{task.description}}</p>
     </div>
-    <div>
+    @if (task.subtasks) {
+      <div class="flex items-center gap-3">
+        <p-progressBar class="bg-progress-bar h-2 w-28" showValue="false" [value]="getProgressbarValue(task.subtasks, true)" />
+        <p class="text-xs">{{getProgressbarValue(task.subtasks)}}/{{task.subtasks.length}} Subtasks</p>
+      </div>
+    }
+    <div class="flex justify-between items-center">
+      <div class="flex">
+        @for (contact of task.assignedTo; track contact; let index = $index;) {
+          @if (index < 4) {
+            <div class="min-w-10 min-h-10 flex justify-center items-center rounded-full border-white border-solid border-2 -ml-3" [style.background-color]="getContactBgColor(contact)">
+              <p class="text-white">{{ getContactNameById(contact) }}</p>
+            </div>
+          }
+        }
+        @if (task.assignedTo.length > 4) {
+          <div class="min-w-10 min-h-10 flex justify-center items-center rounded-full bg-gray-300 border-white border-solid border-2 -ml-3">
+            <p class="text-white">+{{ task.assignedTo.length - 4 }}</p>
+          </div>
+        }
+      </div>
       <i class="pi text-xl" [class]="getPrioIcon(task.priority)"></i>
     </div>
   </div>
 }
-

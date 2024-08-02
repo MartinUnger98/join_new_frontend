@@ -1,3 +1,14 @@
+p-progressBar {
+  ::ng-deep .p-progressbar-value {
+    background-color: #0D6EFD;
+  }
+  ::ng-deep .p-progressbar-value,
+  ::ng-deep .p-progressbar {
+    height: 8px;
+  }
+
+}
+
 i.prio-1 {
   color: #FF3D00;
 }

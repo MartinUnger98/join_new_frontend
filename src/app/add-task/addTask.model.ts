@@ -25,5 +25,6 @@ export interface Task {
 export interface Subtask {
   value: string;
   edit: boolean;
+  done: boolean;
 }
 
