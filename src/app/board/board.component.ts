@@ -13,9 +13,9 @@ import { Task } from '../add-task/addTask.model';
 export class BoardComponent {
   private destroyed$ = new Subject<void>();
   tasks: Task[] = [];
-  taskStatuses: string[] = ['To do', 'In Progress', 'Await feedback', 'Done'];
+  taskStatuses: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
   showEmptyTask: boolean = false;
-  draggedTaskId: number | null = null;
+  draggedTask: Task | null = null;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -51,13 +51,22 @@ export class BoardComponent {
     return this.tasks && this.tasks.some(task => task.status === status);
   }
 
-  dragStart(taskId: number) {
-    this.draggedTaskId = taskId;
+  dragStart(task: Task) {
+    this.draggedTask = task;
     this.showEmptyTask = true;
   }
 
   dragEnd() {
-    this.draggedTaskId = null;
+    this.draggedTask = null;
     this.showEmptyTask = false;
+  }
+
+  async drop(status: string) {
+    if (this.draggedTask) {
+      const task = this.draggedTask;
+      this.dragEnd();
+      task.status = status;
+      await this.backendService.editTask(task);
+    }
   }
 }

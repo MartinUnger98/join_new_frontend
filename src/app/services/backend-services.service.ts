@@ -59,6 +59,11 @@ export class BackendServicesService {
     await this.loadContacts();
   }
 
+  public async loadTasks() {
+    const url = environment.baseUrl + '/tasks/';
+    const tasks = await lastValueFrom(this.http.get<Task[]>(url));
+    this.tasksSubject.next(tasks);
+  }
 
   public async createTask(
     title: string,
@@ -86,9 +91,22 @@ export class BackendServicesService {
     await lastValueFrom(this.http.post(url, body));
   }
 
-  public async loadTasks() {
-    const url = environment.baseUrl + '/tasks/';
-    const tasks = await lastValueFrom(this.http.get<Task[]>(url));
-    this.tasksSubject.next(tasks);
+  public async editTask(task:Task) {
+    const url = environment.baseUrl + `/tasks/${task.id}/`;
+    const body:Task = {
+      "title": task.title,
+      "description": task.description,
+      "assignedTo": task.assignedTo,
+      "dueDate": task.dueDate,
+      "priority": task.priority,
+      "category": task.category,
+      "status": task.status
+    };
+
+    if (task.subtasks && task.subtasks.length > 0) {
+      body.subtasks = task.subtasks;
+    }
+    await lastValueFrom(this.http.put(url, body));
+
   }
 }
