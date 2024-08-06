@@ -4,6 +4,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+body {
+  min-height: 100vh;
+  background-color: #f6f7f8;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
