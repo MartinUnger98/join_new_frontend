@@ -3,7 +3,7 @@
 >
   <header class="flex items-center justify-between w-full">
     <h1 class="text-6xl font-bold">Board</h1>
-    <div class="flex items center gap-6">
+    <div class="flex items center gap-6 ">
       <p-iconField iconPosition="right">
         <ng-container>
           <p-inputIcon
@@ -21,10 +21,11 @@
         />
       </p-iconField>
       <app-button
-        text="AddTask"
+        text="Add Task"
         icon="pi pi-plus"
         iconPos="right"
         btnStyle="primary"
+        (click)="toggleDialog()"
       ></app-button>
     </div>
   </header>
@@ -58,3 +59,7 @@
     }
   </main>
 </section>
+
+@if(showDialog) {
+  <app-dialog-add-task (close)="closeDialog()"></app-dialog-add-task>
+}

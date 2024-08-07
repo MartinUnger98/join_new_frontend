@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { Contact } from '../contacts/contact.model';
@@ -14,6 +14,8 @@ import { PrioOption, Category, Task } from './addTask.model';
   providers: [MessageService],
 })
 export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
+  @Input() isInDialog: boolean = false;
+
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
   showDialog: boolean = false;

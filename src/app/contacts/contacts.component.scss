@@ -1,5 +1,9 @@
-.calcHeight {
-  height: calc(100vh - 168px);
+.calcHeightContacts {
+  height: calc(100vh - 96px);
+}
+
+.calcHeightContactsInfo {
+  height: calc(100vh - 196px);
 }
 
 ::ng-deep .p-button-text {

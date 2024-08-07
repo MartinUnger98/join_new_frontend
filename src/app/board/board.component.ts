@@ -16,6 +16,7 @@ export class BoardComponent {
   taskStatuses: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
   showEmptyTask: boolean = false;
   draggedTask: Task | null = null;
+  showDialog: boolean = false;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -68,5 +69,13 @@ export class BoardComponent {
       task.status = status;
       await this.backendService.editTask(task);
     }
+  }
+
+  toggleDialog() {
+    this.showDialog = true;
+  }
+
+  closeDialog() {
+    this.showDialog = false;
   }
 }

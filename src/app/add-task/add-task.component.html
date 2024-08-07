@@ -1,4 +1,4 @@
-<section class="flex flex-col 800:pl-72 pt-36 pb-14 items-center 1200:items-start">
+<section class="flex flex-col items-center 1200:items-start" [ngClass]="{'800:pl-72 pt-36 pb-14': !isInDialog}">
   <h1 class="text-6xl font-bold mb-12">Add Task</h1>
   <form
     [formGroup]="addTaskForm"
@@ -164,7 +164,7 @@
             (blur)="onBlurSubtask()"
           />
         </p-iconField>
-        <div class="h-36 max-h-36 overflow-y-scroll">
+        <div class="h-36 max-h-36 overflow-y-auto">
           @if (subTasks) {
             @for (subTask of subTasks; track subTask) {
               @if (!subTask.edit) {

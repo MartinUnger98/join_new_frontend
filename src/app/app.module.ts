@@ -32,6 +32,7 @@ import { InputIconModule } from 'primeng/inputicon';
 import { BoardComponent } from './board/board.component';
 import { SummaryComponent } from './summary/summary.component';
 import { DragDropModule } from 'primeng/dragdrop';
+import { DialogAddTaskComponent } from './dialog-add-task/dialog-add-task.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DragDropModule } from 'primeng/dragdrop';
     SignUpComponent,
     AddTaskComponent,
     BoardComponent,
-    SummaryComponent
+    SummaryComponent,
+    DialogAddTaskComponent
   ],
   imports: [
     BrowserModule,

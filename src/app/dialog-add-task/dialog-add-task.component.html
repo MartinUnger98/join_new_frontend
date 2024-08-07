@@ -1,0 +1,9 @@
+<p-dialog
+  class="rounded-3xl"
+  [modal]="true"
+  draggable="false"
+  [(visible)]="visible"
+  (onHide)="closeDialog()"
+>
+  <app-add-task [isInDialog]="true"></app-add-task>
+</p-dialog>
