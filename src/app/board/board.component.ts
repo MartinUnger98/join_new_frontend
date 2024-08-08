@@ -17,6 +17,8 @@ export class BoardComponent {
   showEmptyTask: boolean = false;
   draggedTask: Task | null = null;
   showDialog: boolean = false;
+  openDialog: string = '';
+  selectedTaskId:number | null = null;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -71,11 +73,19 @@ export class BoardComponent {
     }
   }
 
-  toggleDialog() {
+  toggleDialog(dialog: string) {
     this.showDialog = true;
+    this.openDialog = dialog;
   }
 
   closeDialog() {
     this.showDialog = false;
+    this.openDialog = '';
+    this.selectedTaskId = null;
+  }
+
+  setSelectedTaskId(id: number) {
+    this.selectedTaskId = id;
+    this.toggleDialog('task');
   }
 }

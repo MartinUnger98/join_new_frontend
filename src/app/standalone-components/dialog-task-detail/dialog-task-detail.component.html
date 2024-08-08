@@ -1,0 +1,46 @@
+@if (task) {
+  <p-dialog
+    class="hidden-scrollbar"
+    [modal]="true"
+    draggable="false"
+    [(visible)]="visible"
+    (onHide)="closeDialog()"
+  >
+    <ng-template pTemplate="header">
+      <div class="flex justify-between items-center">
+        <p class="text-white px-4 py-1 rounded-lg text-lg" [class]="getCategoryBg(task.category)">{{task.category}}</p>
+      </div>
+    </ng-template>
+    <main class="flex flex-col gap-4 w-128">
+      <div class="flex flex-col gap-4">
+        <h1 class="font-bold text-blue-dark text-5xl">{{task.title}}</h1>
+        <p class="text-gray-400 font-medium text-xl">{{task.description}}</p>
+      </div>
+      <div class="flex gap-4 text-xl">
+        <p>Due Date:</p>
+        <p>{{task.dueDate | date: 'dd/MM/yyyy'}}</p>
+      </div>
+      <div class="flex gap-4 text-xl">
+        <p>Priority:</p>
+        <p>{{task.priority}}<i class="pi text-xl" [class]="getPrioIcon(task.priority)"></i></p>
+      </div>
+      <div class="flex justify-between items-center">
+        <div class="flex flex-col">
+          <p class="text-xl pb-4">Assigned to:</p>
+          @for (contact of task.assignedTo; track contact;) {
+            <div class="flex items-center gap-4">
+              <div class="min-w-10 min-h-10 flex justify-center items-center rounded-full border-white border-solid border-2" [style.background-color]="getContactBgColor(contact)">
+                <p class="text-white">{{ getContactNameById(contact) }}</p>
+              </div>
+              <p class="text-xl">{{getContactNameById(contact, false)}}</p>
+            </div>
+          }
+        </div>
+      </div>
+      @if (task.subtasks && task.subtasks.length > 0 ) {
+        <p>Subtasks:</p>
+      }
+    </main>
+
+  </p-dialog>
+}

@@ -1,10 +1,12 @@
 p-dialog {
-  ::ng-deep .p-dialog-header {
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+  ::ng-deep .p-dialog-header,
+  ::ng-deep .p-dialog {
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
   }
-  ::ng-deep .p-dialog-content {
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+  ::ng-deep .p-dialog-content,
+  ::ng-deep .p-dialog {
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
   }
 }

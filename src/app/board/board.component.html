@@ -25,7 +25,7 @@
         icon="pi pi-plus"
         iconPos="right"
         btnStyle="primary"
-        (click)="toggleDialog()"
+        (click)="toggleDialog('addTask')"
       ></app-button>
     </div>
   </header>
@@ -36,13 +36,15 @@
       <div class="flex flex-col gap-6 min-h-full" pDroppable (onDrop)="drop(taskStatus)" >
         @if (tasksExistAtStatus(taskStatus)) {
           @for (task of tasks; track task.id) {
-            @if (task.status === taskStatus) {
+            @if (task.status === taskStatus && task.id) {
               <app-card-task
-                [taskId]="task.id ?? null"
+                [taskId]="task.id"
                 pDraggable
                 (onDragStart)="task !== undefined && dragStart(task)"
                 (onDragEnd)="dragEnd()"
-                [class.rotate-3]="draggedTask === task">
+                [class.rotate-3]="draggedTask === task"
+                (click)="setSelectedTaskId(task.id)"
+              >
               ></app-card-task>
             }
           }
@@ -60,6 +62,13 @@
   </main>
 </section>
 
-@if(showDialog) {
+@if(showDialog && openDialog === 'addTask') {
   <app-dialog-add-task (close)="closeDialog()"></app-dialog-add-task>
+}
+
+@if(showDialog && openDialog === 'task' && selectedTaskId) {
+  <app-dialog-task-detail
+    (close)="closeDialog()"
+    [taskId]="selectedTaskId"
+  ></app-dialog-task-detail>
 }

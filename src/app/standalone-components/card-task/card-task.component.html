@@ -7,7 +7,7 @@
       <h1 class="font-bold text-blue-dark">{{task.title}}</h1>
       <p class="text-gray-400 font-medium">{{task.description}}</p>
     </div>
-    @if (task.subtasks) {
+    @if (task.subtasks && task.subtasks.length > 0) {
       <div class="flex items-center gap-3">
         <p-progressBar class="bg-progress-bar h-2 w-28" showValue="false" [value]="getProgressbarValue(task.subtasks, true)" />
         <p class="text-xs">{{getProgressbarValue(task.subtasks)}}/{{task.subtasks.length}} Subtasks</p>
