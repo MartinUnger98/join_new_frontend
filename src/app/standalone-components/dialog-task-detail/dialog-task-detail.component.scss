@@ -32,4 +32,23 @@ p-dialog {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  p-checkbox {
+    pointer-events: none;
+    &[ng-reflect-model="false"] {
+      ::ng-deep .p-checkbox,
+      ::ng-deep .p-checkbox-box {
+        border-radius: 4px;
+        box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(18, 18, 23, 0.05);
+        border: 1px solid #cbd5e1;
+        &:not(:focus) {
+          border-radius: 4px;
+          box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgba(18, 18, 23, 0.05);
+          border: 1px solid #cbd5e1;
+        }
+      }
+    }
+  }
+
+
 }

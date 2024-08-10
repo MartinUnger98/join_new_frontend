@@ -5,13 +5,19 @@ import { Contact } from 'src/app/contacts/contact.model';
 import { BackendServicesService } from 'src/app/services/backend-services.service';
 import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog-task-detail',
   standalone: true,
   imports: [
     DialogModule,
-    CommonModule
+    CommonModule,
+    CheckboxModule,
+    ButtonModule,
+    FormsModule
   ],
   templateUrl: './dialog-task-detail.component.html',
   styleUrl: './dialog-task-detail.component.scss'
@@ -20,6 +26,7 @@ export class DialogTaskDetailComponent {
   @Input() taskId: number | null = null;
   @Output() close = new EventEmitter<boolean>();
   task: Task | null = null;
+  checked: boolean = false;
 
   contacts: Contact[] = [];
   visible: boolean = true;

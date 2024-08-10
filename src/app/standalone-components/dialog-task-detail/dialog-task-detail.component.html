@@ -38,7 +38,16 @@
         </div>
       </div>
       @if (task.subtasks && task.subtasks.length > 0 ) {
-        <p>Subtasks:</p>
+        <p class="text-xl">Subtasks:</p>
+        @for (subtask of task.subtasks; track subtask.id) {
+
+            <p-checkbox
+              [(ngModel)]="subtask.done"
+              [binary]="true"
+              inputId="binary" />
+            <p>{{subtask.value}}</p>
+
+        }
       }
     </main>
 
