@@ -9,7 +9,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-dialog-task-detail',
@@ -20,11 +21,12 @@ import { ConfirmationService } from 'primeng/api';
     CheckboxModule,
     ButtonModule,
     FormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ToastModule
   ],
   templateUrl: './dialog-task-detail.component.html',
   styleUrl: './dialog-task-detail.component.scss',
-  providers: [ConfirmationService],
+  providers: [MessageService, ConfirmationService],
 })
 export class DialogTaskDetailComponent implements OnInit, OnDestroy{
   @Input() taskId: number | null = null;
@@ -40,6 +42,7 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
     private cdRef: ChangeDetectorRef,
     private backendService: BackendServicesService,
     private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   async ngOnInit() {
@@ -156,7 +159,7 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
           this.deleteTask();
         },
         reject: () => {
-          this.closeDialog()
+          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
         }
     });
   }
