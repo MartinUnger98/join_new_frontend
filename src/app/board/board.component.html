@@ -63,12 +63,15 @@
 </section>
 
 @if(showDialog && openDialog === 'addTask') {
-  <app-dialog-add-task (close)="closeDialog()"></app-dialog-add-task>
+  <app-dialog-add-task (close)="closeAddTaskDialog($event)"></app-dialog-add-task>
 }
 
 @if(showDialog && openDialog === 'task' && selectedTaskId) {
   <app-dialog-task-detail
-    (close)="closeDialog(selectedTaskId)"
+    (close)="closeEditTaskDialog(selectedTaskId, $event, false)"
     [taskId]="selectedTaskId"
   ></app-dialog-task-detail>
 }
+
+
+<p-toast />

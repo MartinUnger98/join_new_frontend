@@ -89,6 +89,7 @@ export class BackendServicesService {
       body.subtasks = subtasks;
     }
     await lastValueFrom(this.http.post(url, body));
+    await this.loadTasks();
   }
 
   public async editTask(task:Task) {
@@ -109,4 +110,11 @@ export class BackendServicesService {
     await lastValueFrom(this.http.put(url, body));
 
   }
+
+  public async deleteTask(id: number): Promise<void> {
+    const url = environment.baseUrl + `/tasks/${id}/`;
+    await lastValueFrom(this.http.delete(url));
+    await this.loadTasks();
+}
+
 }

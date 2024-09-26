@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Subtask, Task } from 'src/app/add-task/addTask.model';
 import { Contact } from 'src/app/contacts/contact.model';
@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-dialog-task-detail',
@@ -17,12 +19,14 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     CheckboxModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    ConfirmDialogModule
   ],
   templateUrl: './dialog-task-detail.component.html',
-  styleUrl: './dialog-task-detail.component.scss'
+  styleUrl: './dialog-task-detail.component.scss',
+  providers: [ConfirmationService],
 })
-export class DialogTaskDetailComponent {
+export class DialogTaskDetailComponent implements OnInit, OnDestroy{
   @Input() taskId: number | null = null;
   @Output() close = new EventEmitter<boolean>();
   task: Task | null = null;
@@ -35,6 +39,7 @@ export class DialogTaskDetailComponent {
   constructor(
     private cdRef: ChangeDetectorRef,
     private backendService: BackendServicesService,
+    private confirmationService: ConfirmationService,
   ) {}
 
   async ngOnInit() {
@@ -126,4 +131,39 @@ export class DialogTaskDetailComponent {
     this.close.emit(success);
   }
 
+
+  deleteTask() {
+    if (this.taskId) {
+        this.backendService.deleteTask(this.taskId).then(() => {
+            this.closeDialog(true);
+        });
+    }
+  }
+
+
+  openDeleteDialog(event: Event) {
+    this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'Are you sure to delete this task?',
+        header: 'Delete Task',
+        icon: 'pi pi-info-circle',
+        acceptButtonStyleClass:"p-button-danger p-button-text",
+        rejectButtonStyleClass:"p-button-text p-button-text",
+        acceptIcon:"none",
+        rejectIcon:"none",
+
+        accept: async() => {
+          this.deleteTask();
+        },
+        reject: () => {
+          this.closeDialog()
+        }
+    });
+  }
+
+
+  ngOnDestroy(): void {
+      this.destroyed$.next();
+      this.destroyed$.complete();
+  }
 }

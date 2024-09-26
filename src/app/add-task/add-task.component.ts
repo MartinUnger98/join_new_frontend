@@ -99,22 +99,10 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     return initials.join('');
   }
 
-  toggleDialog() {
-    this.showDialog = true;
-  }
-
-  closeDialog(success: boolean) {
-    this.showDialog = false;
-    if (success) {
-      this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully added a contact!' });
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-    }
-  }
-
   onFocusSubtask() {
     this.isFocused = true;
   }
+
   onBlurSubtask() {
     if (this.inputField.nativeElement.value.trim() === '') {
       this.isFocused = false;
@@ -175,7 +163,7 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
         status: 'To do'
       };
       try {
-        this.createTask(task)
+        this.createTask(task);
       } catch (error) {
         this.messageService.add({
           severity: 'error',
@@ -183,7 +171,6 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
           detail: 'An unexpected error occurred!',
         });
       }
-
     }
   }
 
@@ -199,7 +186,25 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
       task.subtasks
     );
     this.clearAllInputs();
-    this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully created a task!' });
+    if (this.isInDialog) {
+      this.closeDialog(true)
+    } else {
+      this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully created a task!' });
+    }
+
+  }
+
+  toggleDialog() {
+    this.showDialog = true;
+  }
+
+  closeDialog(success: boolean) {
+    this.showDialog = false;
+    if (success) {
+      this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully added a contact!' });
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+    }
   }
 
 

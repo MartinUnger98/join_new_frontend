@@ -78,19 +78,36 @@ export class BoardComponent {
     this.openDialog = dialog;
   }
 
-  async closeDialog(taskid?: number) {
+
+  closeAddTaskDialog(success: boolean = false) {
     this.showDialog = false;
     this.openDialog = '';
     this.selectedTaskId = null;
-    if (taskid) {
+    if (success) {
+      this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully added a task!' });
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+    }
+  }
+
+  async closeEditTaskDialog(taskid: number, success: boolean = false, deleteTask: boolean = false) {
+    this.showDialog = false;
+    this.openDialog = '';
+    this.selectedTaskId = null;
+    if (!deleteTask) {
         let editTask = this.tasks.find(task => task.id === taskid);
         if (editTask) {
             await this.backendService.editTask(editTask);
-        } else {
-            console.error('Task not found');
         }
     }
+    if (success) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have successfully deleted a task!' });
+    } else {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+    }
 }
+
+
 
 
   setSelectedTaskId(id: number) {

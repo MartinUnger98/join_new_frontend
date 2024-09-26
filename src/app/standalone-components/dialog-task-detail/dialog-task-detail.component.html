@@ -53,7 +53,12 @@
         }
       }
       <div class="flex items-center justify-end">
-        <p-button class="text-xl hover:text-blue-primary" label="Delete" icon="pi pi-trash text-xl"></p-button>
+        <p-button
+          class="text-xl hover:text-blue-primary"
+          label="Delete"
+          icon="pi pi-trash text-xl"
+          (click)="openDeleteDialog($event)"
+        ></p-button>
         <p class="text-xl">|</p>
         <p-button class="text-xl hover:text-blue-primary" label="Edit" icon="pi pi-pencil text-xl"></p-button>
       </div>
@@ -61,3 +66,4 @@
 
   </p-dialog>
 }
+<p-confirmDialog />
