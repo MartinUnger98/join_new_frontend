@@ -202,8 +202,6 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     this.showDialog = false;
     if (success) {
       this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully added a contact!' });
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
     }
   }
 

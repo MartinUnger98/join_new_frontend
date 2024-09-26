@@ -85,8 +85,6 @@ export class BoardComponent {
     this.selectedTaskId = null;
     if (success) {
       this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully added a task!' });
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
     }
   }
 
@@ -102,8 +100,6 @@ export class BoardComponent {
     }
     if (success) {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have successfully deleted a task!' });
-    } else {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
     }
 }
 
