@@ -78,11 +78,20 @@ export class BoardComponent {
     this.openDialog = dialog;
   }
 
-  closeDialog() {
+  async closeDialog(taskid?: number) {
     this.showDialog = false;
     this.openDialog = '';
     this.selectedTaskId = null;
-  }
+    if (taskid) {
+        let editTask = this.tasks.find(task => task.id === taskid);
+        if (editTask) {
+            await this.backendService.editTask(editTask);
+        } else {
+            console.error('Task not found');
+        }
+    }
+}
+
 
   setSelectedTaskId(id: number) {
     this.selectedTaskId = id;

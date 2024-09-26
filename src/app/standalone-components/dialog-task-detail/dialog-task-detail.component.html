@@ -40,15 +40,23 @@
       @if (task.subtasks && task.subtasks.length > 0 ) {
         <p class="text-xl">Subtasks:</p>
         @for (subtask of task.subtasks; track subtask.id) {
-
+          <p-button class="flex hover:bg-gray-200 rounded-lg w-fit ">
             <p-checkbox
               [(ngModel)]="subtask.done"
               [binary]="true"
-              inputId="binary" />
+              inputId="binary"
+              class="mr-3"
+               />
             <p>{{subtask.value}}</p>
+          </p-button>
 
         }
       }
+      <div class="flex items-center justify-end">
+        <p-button class="text-xl hover:text-blue-primary" label="Delete" icon="pi pi-trash text-xl"></p-button>
+        <p class="text-xl">|</p>
+        <p-button class="text-xl hover:text-blue-primary" label="Edit" icon="pi pi-pencil text-xl"></p-button>
+      </div>
     </main>
 
   </p-dialog>

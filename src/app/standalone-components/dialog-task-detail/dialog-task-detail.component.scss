@@ -34,7 +34,6 @@ p-dialog {
   }
 
   p-checkbox {
-    pointer-events: none;
     &[ng-reflect-model="false"] {
       ::ng-deep .p-checkbox,
       ::ng-deep .p-checkbox-box {
@@ -47,6 +46,12 @@ p-dialog {
           border: 1px solid #cbd5e1;
         }
       }
+    }
+  }
+
+  p-button {
+    ::ng-deep .p-button {
+      padding: 8px 16px;
     }
   }
 
