@@ -3,27 +3,10 @@ import { Subject, takeUntil } from 'rxjs';
 import { Subtask, Task } from 'src/app/add-task/addTask.model';
 import { Contact } from 'src/app/contacts/contact.model';
 import { BackendServicesService } from 'src/app/services/backend-services.service';
-import { DialogModule } from 'primeng/dialog';
-import { CommonModule } from '@angular/common';
-import { CheckboxModule } from 'primeng/checkbox';
-import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-dialog-task-detail',
-  standalone: true,
-  imports: [
-    DialogModule,
-    CommonModule,
-    CheckboxModule,
-    ButtonModule,
-    FormsModule,
-    ConfirmDialogModule,
-    ToastModule
-  ],
   templateUrl: './dialog-task-detail.component.html',
   styleUrl: './dialog-task-detail.component.scss',
   providers: [MessageService, ConfirmationService],
@@ -33,6 +16,7 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
   @Output() close = new EventEmitter<boolean>();
   task: Task | null = null;
   checked: boolean = false;
+  editMode: boolean = false;
 
   contacts: Contact[] = [];
   visible: boolean = true;
@@ -162,6 +146,10 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
           this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
         }
     });
+  }
+
+  startEditMode() {
+    this.editMode = true;
   }
 
 

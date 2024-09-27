@@ -6,7 +6,6 @@ import { InputFieldComponent } from '../standalone-components/input-field/input-
 import { ButtonComponent } from '../standalone-components/button/button.component';
 import { DialogContactComponent } from '../standalone-components/dialog-contact/dialog-contact.component';
 import { CardTaskComponent } from '../standalone-components/card-task/card-task.component';
-import { DialogTaskDetailComponent } from '../standalone-components/dialog-task-detail/dialog-task-detail.component';
 
 
 
@@ -18,8 +17,7 @@ import { DialogTaskDetailComponent } from '../standalone-components/dialog-task-
     InputFieldComponent,
     ButtonComponent,
     DialogContactComponent,
-    CardTaskComponent,
-    DialogTaskDetailComponent
+    CardTaskComponent
   ],
   declarations: [],
   exports: [
@@ -28,8 +26,7 @@ import { DialogTaskDetailComponent } from '../standalone-components/dialog-task-
     InputFieldComponent,
     ButtonComponent,
     DialogContactComponent,
-    CardTaskComponent,
-    DialogTaskDetailComponent
+    CardTaskComponent
   ]
 })
 export class SharedModule { }
