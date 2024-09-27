@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { Contact } from '../contacts/contact.model';
@@ -15,6 +15,8 @@ import { PrioOption, Category, Task } from './addTask.model';
 })
 export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() isInDialog: boolean = false;
+  @Input() editingTask: Task | null = null;
+  @Output() close = new EventEmitter<boolean>();
 
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
@@ -70,6 +72,27 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
         subtasks: ['',],
       }
     )
+    if (this.editingTask) {
+      this.fillFormWithExistingTask(this.editingTask);
+    }
+  }
+
+  fillFormWithExistingTask(task: Task) {
+    this.addTaskForm.patchValue({
+      title: task.title,
+      description: task.description,
+      assignedTo: task.assignedTo.map((id) => this.contacts.find((c) => c.id === id)),
+      dueDate: task.dueDate,
+      priority: task.priority,
+      category: this.categories.find((c) => c.name === task.category),
+      subtasks: '',
+    });
+    if(task.subtasks){
+      this.subTasks = task.subtasks.map(subtask => ({
+        value: subtask.value,
+        edit: false,
+      }));
+    }
   }
 
   ngOnDestroy() {
@@ -163,34 +186,32 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
         status: 'To do'
       };
       try {
-        this.createTask(task);
+        if (!this.editingTask) {
+          this.createTask(task);
+        } else {
+          this.updateTask(task);
+        }
+        this.close.emit(true);
       } catch (error) {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'An unexpected error occurred!',
+          detail: this.backendService.toastMessages.errorUnexpected,
         });
       }
     }
   }
 
   async createTask(task: Task) {
-    await this.backendService.createTask(
-      task.title,
-      task.description,
-      task.assignedTo,
-      task.dueDate,
-      task.priority,
-      task.category,
-      task.status,
-      task.subtasks
-    );
+    await this.backendService.createTask(task);
     this.clearAllInputs();
-    if (this.isInDialog) {
-      this.closeDialog(true)
-    } else {
-      this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully created a task!' });
+    if (!this.isInDialog) {
+      this.messageService.add({ severity:'success', summary: 'Success', detail: this.backendService.toastMessages.successCreatedTask });
     }
+  }
+
+  async updateTask(task: Task) {
+    await this.backendService.editTask(task);
 
   }
 
@@ -198,10 +219,10 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     this.showDialog = true;
   }
 
-  closeDialog(success: boolean) {
+  closeContactDialog(success: boolean) {
     this.showDialog = false;
     if (success) {
-      this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully added a contact!' });
+      this.messageService.add({ severity:'success', summary: 'Success', detail: this.backendService.toastMessages.successCreatedContact });
     }
   }
 

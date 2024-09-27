@@ -84,7 +84,7 @@ export class BoardComponent {
     this.openDialog = '';
     this.selectedTaskId = null;
     if (success) {
-      this.messageService.add({ severity:'success', summary: 'Success', detail: 'You have successfully added a task!' });
+      this.messageService.add({ severity:'success', summary: 'Success', detail: this.backendService.toastMessages.successCreatedTask });
     }
   }
 
@@ -99,11 +99,9 @@ export class BoardComponent {
         }
     }
     if (success) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have successfully deleted a task!' });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.backendService.toastMessages.successDeletedTask });
     }
-}
-
-
+  }
 
 
   setSelectedTaskId(id: number) {

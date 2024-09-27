@@ -153,8 +153,8 @@ export class DialogContactComponent implements OnInit {
       this.messageService.add({
         severity: 'error',
         summary: this.isEditMode
-          ? 'Edit contact failed!'
-          : 'Creating contact failed!',
+          ? this.backendService.toastMessages.errorUpdatingContact
+          : this.backendService.toastMessages.errorCreatingContact,
         detail: error.error.email[0],
       });
     } else {
@@ -167,7 +167,7 @@ export class DialogContactComponent implements OnInit {
     this.messageService.add({
       severity: 'error',
       summary: 'Error',
-      detail: 'An unexpected error occurred!',
+      detail: this.backendService.toastMessages.errorUnexpected,
     });
   }
 

@@ -16,4 +16,8 @@ export class DialogAddTaskComponent {
     this.visible = false;
     this.close.emit(success);
   }
+
+  onCloseAddTask(success: boolean) {
+    this.closeDialog(success);
+  }
 }

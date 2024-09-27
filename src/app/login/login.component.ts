@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { BackendServicesService } from '../services/backend-services.service';
 
 
 @Component({
@@ -18,7 +19,12 @@ export class LoginComponent {
   showPassword: boolean = false;
   rememberMe: boolean = false;
 
-  constructor(public authService: AuthService, private router: Router, private messageService: MessageService) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private messageService: MessageService,
+    private backendService: BackendServicesService
+  ) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -40,11 +46,11 @@ export class LoginComponent {
   }
 
   showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have successfully logged in!' });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: this.backendService.toastMessages.successLogin });
   }
 
   showError() {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid username or password' });
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: this.backendService.toastMessages.errorLogin });
   }
 
 }

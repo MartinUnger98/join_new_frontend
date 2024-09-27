@@ -1,5 +1,7 @@
 <section class="flex flex-col items-center 1200:items-start" [ngClass]="{'800:pl-72 pt-36 pb-14': !isInDialog}">
-  <h1 class="text-6xl font-bold mb-12">Add Task</h1>
+  @if(!editingTask) {
+    <h1 class="text-6xl font-bold mb-12">Add Task</h1>
+  }
   <form
     [formGroup]="addTaskForm"
     class="flex justify-start items-start gap-14 flex-col 1200:flex-row"
@@ -73,8 +75,9 @@
       </div>
     </div>
 
-    <div class="bg-stone-300 w-2px h-80 hidden 1200:block"></div>
-
+    @if(!editingTask) {
+      <div class="bg-stone-300 w-2px h-80 hidden 1200:block"></div>
+    }
     <div class="min-w-96 flex flex-col gap-5">
       <app-input-field
         title="Due Date"
@@ -196,29 +199,40 @@
           }
         </div>
       </div>
-      <div class="flex justify-end gap-6 mt-5">
-        <app-button
-          text="Clear"
-          icon="pi pi-times"
-          iconPos="right"
-          btnStyle="secondary"
-          (click)="clearAllInputs()"
-        ></app-button>
+      @if(!editingTask) {
+        <div class="flex justify-end gap-6 mt-5">
+          <app-button
+            text="Clear"
+            icon="pi pi-times"
+            iconPos="right"
+            btnStyle="secondary"
+            (click)="clearAllInputs()"
+          ></app-button>
+          <app-button
+            type="submit"
+            text="Create Task"
+            icon="pi pi-check"
+            iconPos="right"
+            btnStyle="primary"
+            [disabled]="addTaskForm.invalid"
+          ></app-button>
+        </div>
+      } @else {
         <app-button
           type="submit"
-          text="Create Task"
+          text="OK"
           icon="pi pi-check"
           iconPos="right"
           btnStyle="primary"
           [disabled]="addTaskForm.invalid"
         ></app-button>
-      </div>
+      }
     </div>
 
   </form>
 
   @if(showDialog) {
-  <app-dialog-contact (close)="closeDialog($event)"></app-dialog-contact>
+  <app-dialog-contact (close)="closeContactDialog($event)"></app-dialog-contact>
   }
 </section>
 <p-toast />

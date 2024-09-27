@@ -5,5 +5,5 @@
   [(visible)]="visible"
   (onHide)="closeDialog()"
 >
-  <app-add-task [isInDialog]="true"></app-add-task>
+  <app-add-task [isInDialog]="true" (close)="onCloseAddTask($event)"></app-add-task>
 </p-dialog>

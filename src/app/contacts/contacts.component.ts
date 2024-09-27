@@ -65,7 +65,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     try {
       await this.backendService.deleteContact(id);
     } catch (error) {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while deleting!' });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: this.backendService.toastMessages.errorDeleteContact });
     }
   }
 
@@ -79,7 +79,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   closeDialog(success: boolean) {
     this.showDialog = false;
     if (success) {
-      this.showSuccess(this.isEditMode ? 'Contact updated successfully!' : 'You have successfully added a contact!');
+      this.showSuccess(this.isEditMode ? this.backendService.toastMessages.successUpdatedContact : this.backendService.toastMessages.successCreatedContact);
       this.selectedContact = null;
     }
   }
@@ -110,10 +110,10 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
         accept: async() => {
           await this.deleteContact(contactId);
           this.selectedContact = null;
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Contact successfully deleted' });
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: this.backendService.toastMessages.successDeletedContact });
         },
         reject: () => {
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: this.backendService.toastMessages.rejected });
         }
     });
   }

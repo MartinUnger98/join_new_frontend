@@ -143,7 +143,7 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
           this.deleteTask();
         },
         reject: () => {
-          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: this.backendService.toastMessages.rejected });
         }
     });
   }
@@ -151,6 +151,8 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
   startEditMode() {
     this.editMode = true;
   }
+
+
 
 
   ngOnDestroy(): void {

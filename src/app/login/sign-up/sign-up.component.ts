@@ -4,6 +4,7 @@ import Validation from './password-match.validator';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { BackendServicesService } from 'src/app/services/backend-services.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -24,7 +25,13 @@ export class SignUpComponent implements OnInit {
     acceptTerms: new FormControl(false),
   })
 
-  constructor(private formBuilder: FormBuilder, public authService: AuthService, private messageService: MessageService, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    public authService: AuthService,
+    private messageService: MessageService,
+    private router: Router,
+    private backendService: BackendServicesService
+  ) {}
 
 
   ngOnInit(): void {
@@ -78,11 +85,11 @@ export class SignUpComponent implements OnInit {
   }
 
   showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Your account has been created successfully!' });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: this.backendService.toastMessages.successCreatedAccount });
   }
 
   showError() {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An unexpected error occurred!' });
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: this.backendService.toastMessages.errorUnexpected });
   }
 
   resetForm(): void {

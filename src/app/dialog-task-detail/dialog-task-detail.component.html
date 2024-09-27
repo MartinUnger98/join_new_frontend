@@ -75,9 +75,10 @@
       </main>
     } @else {
       <main>
-        <div>
-
-        </div>
+        <app-add-task
+          [isInDialog]="true"
+          [editingTask]="task"
+        ></app-add-task>
       </main>
     }
 

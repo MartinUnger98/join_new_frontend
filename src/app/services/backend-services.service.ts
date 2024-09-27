@@ -16,6 +16,23 @@ export class BackendServicesService {
   public tasksSubject = new BehaviorSubject<Task[]>([]);
   public tasks$ = this.tasksSubject.asObservable();
 
+  public toastMessages = {
+    successCreatedTask: "You have successfully created a task!",
+    successUpdatedTask: "You have successfully updated a task!",
+    successDeletedTask: "You have successfully deleted a task!",
+    successCreatedContact: "You have successfully added a contact!",
+    successUpdatedContact: "You have successfully updated a contact!",
+    successDeletedContact: "You have successfully deleted a contact!",
+    successLogin: "You have successfully logged in!",
+    errorLogin: "Invalid username or password!",
+    errorDeleteContact: "An error occurred while deleting!",
+    rejected: "You have rejected!",
+    successCreatedAccount: "Your account has been created successfully!",
+    errorUnexpected: "An unexpected error occurred!",
+    errorUpdatingContact: "Updating your contact has failed!",
+    errorCreatingContact: "Creating your contact has failed!"
+  }
+
   constructor(private http: HttpClient ) { }
 
   public async loadContacts(): Promise<void> {
@@ -65,28 +82,20 @@ export class BackendServicesService {
     this.tasksSubject.next(tasks);
   }
 
-  public async createTask(
-    title: string,
-    description:string,
-    assignedTo: number[],
-    dueDate: string,
-    priority: string,
-    category: string,
-    status: string,
-    subtasks?: Subtask[] ) {
+  public async createTask(task: Task) {
       const url = environment.baseUrl + '/tasks/';
       const body: Task = {
-        "title": title,
-        "description": description,
-        "assignedTo": assignedTo,
-        "dueDate": dueDate,
-        "priority": priority,
-        "category": category,
-        "status": status
+        "title": task.title,
+        "description": task.description,
+        "assignedTo": task.assignedTo,
+        "dueDate": task.dueDate,
+        "priority": task.priority,
+        "category": task.category,
+        "status": task.status
     };
 
-    if (subtasks && subtasks.length > 0) {
-      body.subtasks = subtasks;
+    if (task.subtasks && task.subtasks.length > 0) {
+      body.subtasks = task.subtasks;
     }
     await lastValueFrom(this.http.post(url, body));
     await this.loadTasks();
@@ -108,7 +117,7 @@ export class BackendServicesService {
       body.subtasks = task.subtasks;
     }
     await lastValueFrom(this.http.put(url, body));
-
+    await this.loadTasks();
   }
 
   public async deleteTask(id: number): Promise<void> {
