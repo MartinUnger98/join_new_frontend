@@ -13,7 +13,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 })
 export class DialogTaskDetailComponent implements OnInit, OnDestroy{
   @Input() taskId: number | null = null;
-  @Output() close = new EventEmitter<boolean>();
+  @Output() close = new EventEmitter<{ success: boolean; deleteTask: boolean }>();
   task: Task | null = null;
   checked: boolean = false;
   editMode: boolean = false;
@@ -114,15 +114,22 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
     return count;
   }
 
-  closeDialog(success: boolean = false) {
-    this.close.emit(success);
+  closeDialog(result: { success: boolean, deleteTask: boolean } = { success: false, deleteTask: false }) {
+    this.visible = false;
+    this.close.emit(result);
   }
 
 
   deleteTask() {
     if (this.taskId) {
         this.backendService.deleteTask(this.taskId).then(() => {
-            this.closeDialog(true);
+          this.closeDialog({ success: true, deleteTask: true });
+        }).catch(()=> {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: this.backendService.toastMessages.errorUnexpected,
+          });
         });
     }
   }
@@ -152,6 +159,18 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
     this.editMode = true;
   }
 
+  onCloseEditTaskDetail(result: boolean | { success: boolean; deleteTask: boolean }) {
+    let success: boolean;
+    let deleteTask: boolean = false;
+
+    if (typeof result === 'boolean') {
+      success = result;
+    } else {
+      success = result.success;
+      deleteTask = result.deleteTask;
+    }
+    this.closeDialog({ success, deleteTask });
+  }
 
 
 

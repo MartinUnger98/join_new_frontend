@@ -68,7 +68,7 @@
 
 @if(showDialog && openDialog === 'task' && selectedTaskId) {
   <app-dialog-task-detail
-    (close)="closeEditTaskDialog(selectedTaskId, $event, false)"
+    (close)="closeEditTaskDialog(selectedTaskId, $event)"
     [taskId]="selectedTaskId"
   ></app-dialog-task-detail>
 }

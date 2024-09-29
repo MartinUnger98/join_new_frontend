@@ -17,7 +17,15 @@ export class DialogAddTaskComponent {
     this.close.emit(success);
   }
 
-  onCloseAddTask(success: boolean) {
+  onCloseAddTask(result: boolean | { success: boolean; deleteTask: boolean }) {
+    let success: boolean;
+
+    if (typeof result === 'boolean') {
+      success = result;
+    } else {
+      success = result.success;
+    }
+
     this.closeDialog(success);
   }
 }

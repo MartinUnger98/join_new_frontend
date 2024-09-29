@@ -16,7 +16,8 @@ import { PrioOption, Category, Task } from './addTask.model';
 export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() isInDialog: boolean = false;
   @Input() editingTask: Task | null = null;
-  @Output() close = new EventEmitter<boolean>();
+  @Output() close = new EventEmitter<{ success: boolean; deleteTask: boolean } | boolean>();
+
 
   contacts: Contact[] = [];
   contactsInitials: string[] = [];
@@ -59,6 +60,7 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   ) {}
 
   async ngOnInit() {
+    console.log(this.editingTask)
     await this.backendService.loadContacts();
     this.subscribeObservables();
     this.addTaskForm = this.formBuilder.group(
@@ -173,9 +175,9 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     this.subTasks[index].edit = false;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.addTaskForm.valid) {
-      const task = {
+      const task: Task = {
         title: this.addTaskForm.value.title,
         description: this.addTaskForm.value.description,
         assignedTo: this.addTaskForm.value.assignedTo.map((contact: Contact) => contact.id),
@@ -183,15 +185,18 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
         priority: this.addTaskForm.value.priority,
         category: this.addTaskForm.value.category.name,
         subtasks: this.subTasks,
-        status: 'To do'
+        status: this.editingTask ? this.editingTask.status : 'To do'
       };
       try {
         if (!this.editingTask) {
-          this.createTask(task);
+          await this.createTask(task);
+          this.close.emit(true);
         } else {
-          this.updateTask(task);
+          task.id = this.editingTask.id
+          await this.updateTask(task);
+          this.close.emit({ success: true, deleteTask: false });
         }
-        this.close.emit(true);
+
       } catch (error) {
         this.messageService.add({
           severity: 'error',
@@ -205,14 +210,11 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   async createTask(task: Task) {
     await this.backendService.createTask(task);
     this.clearAllInputs();
-    if (!this.isInDialog) {
-      this.messageService.add({ severity:'success', summary: 'Success', detail: this.backendService.toastMessages.successCreatedTask });
-    }
   }
 
   async updateTask(task: Task) {
+    console.log(task)
     await this.backendService.editTask(task);
-
   }
 
   toggleDialog() {

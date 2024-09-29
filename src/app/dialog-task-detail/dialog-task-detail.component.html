@@ -78,6 +78,7 @@
         <app-add-task
           [isInDialog]="true"
           [editingTask]="task"
+          (close)="onCloseEditTaskDetail($event)"
         ></app-add-task>
       </main>
     }

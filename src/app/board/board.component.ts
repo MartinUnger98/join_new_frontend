@@ -69,6 +69,7 @@ export class BoardComponent {
       const task = this.draggedTask;
       this.dragEnd();
       task.status = status;
+      console.log(task)
       await this.backendService.editTask(task);
     }
   }
@@ -88,20 +89,38 @@ export class BoardComponent {
     }
   }
 
-  async closeEditTaskDialog(taskid: number, success: boolean = false, deleteTask: boolean = false) {
+  async closeEditTaskDialog(taskid: number, result: { success: boolean, deleteTask?: boolean }) {
+    const { success, deleteTask = false } = result;
+
     this.showDialog = false;
     this.openDialog = '';
     this.selectedTaskId = null;
-    if (!deleteTask) {
-        let editTask = this.tasks.find(task => task.id === taskid);
-        if (editTask) {
-            await this.backendService.editTask(editTask);
-        }
+
+    if (!success && !deleteTask) {
+      let editTask = this.tasks.find(task => task.id === taskid);
+      if (editTask) {
+        await this.backendService.editTask(editTask);
+      }
     }
-    if (success) {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.backendService.toastMessages.successDeletedTask });
+
+    if (success && deleteTask) {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: this.backendService.toastMessages.successDeletedTask
+      });
+    }
+
+    if (success && !deleteTask) {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: this.backendService.toastMessages.successUpdatedTask
+      });
     }
   }
+
+
 
 
   setSelectedTaskId(id: number) {
