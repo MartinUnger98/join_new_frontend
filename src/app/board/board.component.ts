@@ -13,12 +13,14 @@ import { Task } from '../add-task/addTask.model';
 export class BoardComponent {
   private destroyed$ = new Subject<void>();
   tasks: Task[] = [];
+  filteredTasks: Task[] = [];
   taskStatuses: string[] = ['To do', 'In progress', 'Await feedback', 'Done'];
   showEmptyTask: boolean = false;
   draggedTask: Task | null = null;
   showDialog: boolean = false;
   openDialog: string = '';
   selectedTaskId:number | null = null;
+  searchTerm: string = '';
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -29,8 +31,7 @@ export class BoardComponent {
   async ngOnInit() {
     await this.backendService.loadTasks();
     this.subscribeObservables();
-
-
+    this.filterTasks();
   }
 
   ngOnDestroy() {
@@ -46,12 +47,31 @@ export class BoardComponent {
   subscribeObservables() {
     this.backendService.tasks$.pipe(takeUntil(this.destroyed$)).subscribe(tasks => {
       this.tasks = tasks;
+      this.filterTasks();
       this.cdRef.detectChanges();
     });
   }
 
+
+  filterTasks() {
+    const term = this.searchTerm.toLowerCase();
+    if (term) {
+      this.filteredTasks = this.tasks.filter(task =>
+        task.title.toLowerCase().includes(term) ||
+        task.description.toLowerCase().includes(term)
+      );
+    } else {
+      this.filteredTasks = [...this.tasks]; // Zeigt alle Aufgaben, wenn nichts eingegeben wird
+    }
+  }
+
+  onSearchTermChange() {
+    this.filterTasks(); // Filter wird bei jeder Eingabe angewendet
+  }
+
+
   tasksExistAtStatus(status: string): boolean {
-    return this.tasks && this.tasks.some(task => task.status === status);
+    return this.filteredTasks && this.filteredTasks.some(task => task.status === status);
   }
 
   dragStart(task: Task) {
