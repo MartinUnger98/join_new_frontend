@@ -50,12 +50,20 @@
       <a class="text-blue-primary hover:underline" href="">I forgot my password</a>
     </div>
 
-    <div class="flex justify-between w-3/4">
+    <div class="flex justify-between w-3/4 h-9">
       <app-button
         type="submit"
         text="Login"
         btnStyle="primary"
       ></app-button>
+      @if(isLoading) {
+        <p-progressSpinner
+          styleClass="custom-spinner"
+          strokeWidth="3"
+          fill="var(--surface-ground)"
+          animationDuration="1s"
+        />
+        }
       <app-button
         text="Guest-Login"
         btnStyle="secondary"

@@ -44,7 +44,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
     this.awaitingFeedbackCount = this.getTaskCount('Await feedback');
     this.totalTaskCount = this.getTaskCount();
 
-    // Set the earliest upcoming deadline for urgent tasks
     const urgentTasks = this.tasks
       .filter((task) => task.priority === 'Urgent' && task.dueDate)
       .sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());

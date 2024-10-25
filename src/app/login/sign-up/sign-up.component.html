@@ -27,7 +27,10 @@
         iconClass="pi pi-user"
         [errorMessage]="
           f['username'].touched && f['username'].invalid
+            ? (f['username'].errors?.['required']
             ? 'Username is required'
+            : 'Username must be at least 6 characters'
+            )
             : ''
         "
       ></app-input-field>
@@ -39,7 +42,13 @@
         name="email"
         autocomplete="email"
         iconClass="pi pi-envelope"
-        [errorMessage]="f['email'].touched && f['email'].invalid ? (f['email'].errors?.['required'] ? 'Email is required' : 'Invalid email') : ''"
+        [errorMessage]="
+          f['email'].touched && f['email'].invalid
+          ? (f['email'].errors?.['required']
+          ? 'Email is required'
+          : 'Invalid email')
+          : ''
+        "
       ></app-input-field>
 
       <app-input-field
@@ -52,7 +61,13 @@
           'pi-lock-open': showPassword
         }"
         (iconClick)="toggleVisibility('password')"
-        [errorMessage]="f['password'].touched && f['password'].invalid ? (f['password'].errors?.['required'] ? 'Password is required' : 'Password must be at least 6 characters') : ''"
+        [errorMessage]="
+          f['password'].touched && f['password'].invalid
+          ? (f['password'].errors?.['required']
+          ? 'Password is required'
+          : 'Password must be at least 8 characters')
+          : ''
+        "
       ></app-input-field>
 
       <app-input-field
@@ -65,7 +80,13 @@
           'pi-lock-open': showConfirmPassword
         }"
         (iconClick)="toggleVisibility('confirm_password')"
-        [errorMessage]="f['confirmPassword'].touched && f['confirmPassword'].invalid ? (f['confirmPassword'].errors?.['required'] ? 'Confirm Password is required' : 'Passwords must match') : ''"
+        [errorMessage]="
+          f['confirmPassword'].touched && f['confirmPassword'].invalid
+          ? (f['confirmPassword'].errors?.['required']
+          ? 'Confirm Password is required'
+          : 'Passwords must match')
+          : ''
+        "
       ></app-input-field>
     </div>
 

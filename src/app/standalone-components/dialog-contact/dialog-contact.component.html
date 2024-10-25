@@ -86,13 +86,14 @@
           icon="pi pi-check"
           iconPos="right"
         ></app-button>
-        <p-progressSpinner
-          *ngIf="isLoading"
-          styleClass="custom-spinner"
-          strokeWidth="3"
-          fill="var(--surface-ground)"
-          animationDuration="1s"
-        />
+        @if (isLoading) {
+          <p-progressSpinner
+            styleClass="custom-spinner"
+            strokeWidth="3"
+            fill="var(--surface-ground)"
+            animationDuration="1s"
+          />
+        }
       </div>
     </form>
   </div>

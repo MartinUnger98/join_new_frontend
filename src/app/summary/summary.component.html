@@ -1,16 +1,15 @@
 <section class="flex flex-col 800:pl-72 pt-36 pb-14 items-center 1200:items-start pr-5">
 
-  <header class="flex items-center justify-center gap-6">
+  <header class="flex items-center justify-center gap-6 mb-12">
     <h1 class="text-6xl font-bold">Summary</h1>
     <div class="h-14 w-1 bg-blue-primary rounded-md"></div>
     <p class="text-blue-dark text-3xl">Key Metrics at a Glance</p>
   </header>
 
-  <main>
+  <main class="flex items-center gap-16">
     <div>
       <div class="flex flex-col gap-8">
 
-        <!-- Task Counters with Icons -->
         <div class="flex gap-8">
           <app-summary-card
             [iconClass]="'pi pi-pencil'"
@@ -27,8 +26,7 @@
           </app-summary-card>
         </div>
 
-        <!-- Urgent Task with Deadline -->
-        <a class="flex gap-5 items-center justify-center w-full h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
+        <a [routerLink]="'/board'" class="flex gap-5 items-center justify-center w-full h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
           <i class="pi pi-angle-double-up prio-1 p-5 text-3xl rounded-full text-white"></i>
           <div class="flex flex-col">
             <span class="font-semibold text-black text-6xl group-hover:text-white">{{ urgentTaskCount }}</span>
@@ -37,11 +35,12 @@
           <div class="h-24 bg-gray-400 w-0.5 mx-8"></div>
           <div class="flex flex-col">
             <span class="font-bold text-blue-dark text-xl group-hover:text-white">{{ upcomingDeadline | date:'longDate' }}</span>
-            <span class="text-blue-dark group-hover:text-white">Upcoming Deadline</span>
+            <span class="text-blue-dark group-hover:text-white">
+              {{ upcomingDeadline ? '' : 'No ' }}Upcoming Deadline
+            </span>
           </div>
         </a>
 
-        <!-- General Task Overview without Icons -->
         <div class="flex gap-8">
           <app-summary-card
             [count]="totalTaskCount"
@@ -61,10 +60,11 @@
       </div>
     </div>
 
-    <!-- Greeting Section -->
     <div>
       <h2 class="text-blue-dark font-medium text-5xl">Good morning!</h2>
-      <h3 class="text-blue-primary font-bold text-6xl">{{ userName }}</h3>
+      @if (userName){
+        <h3 class="text-blue-primary font-bold text-6xl">{{ userName }}</h3>
+      }
     </div>
   </main>
 </section>

@@ -18,6 +18,7 @@ export class LoginComponent {
   password: string = '';
   showPassword: boolean = false;
   rememberMe: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -32,15 +33,17 @@ export class LoginComponent {
 
   async login() {
     try {
+      this.isLoading = true;
       let response: any = await this.authService.loginWithUsernameAndPassword(this.username, this.password);
-      localStorage.setItem('token', response['token'])
+      localStorage.setItem('token', response['token']);
+      localStorage.setItem('loggedInUser', response['name']);
       this.showSuccess();
       setTimeout(() => {
+        this.isLoading = false;
         this.router.navigate(['/contacts'])
       }, 3000);
-
-
     } catch(e) {
+      this.isLoading = false;
       this.showError();
     }
   }
