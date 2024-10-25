@@ -23,8 +23,15 @@ export class SummaryCardComponent {
 
   get iconBgClass() {
     const color = this.hoverColor.replace("bg-", "");
-    return `text-white bg-blue-dark group-hover:text-${color} group-hover:bg-white`;
+    return {
+      'text-white': true,
+      'bg-blue-dark': true,
+      'group-hover:bg-white': true,
+      [`text-${color}`]: true,
+      [`group-hover:text-${color}`]: true
+    };
   }
+
 
   getWidthClass() {
     return this.iconClass ? 'w-64' : 'w-40';

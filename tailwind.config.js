@@ -3,6 +3,10 @@ module.exports = {
   content: [
     "./src/**/*.{html,ts}", // Passe den Pfad an deine Projektstruktur an
   ],
+  safelist: [
+    'text-blue-dark',
+    'group-hover:text-blue-dark',
+  ],
   theme: {
     extend: {
       spacing: {
