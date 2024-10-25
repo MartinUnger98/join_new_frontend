@@ -1,77 +1,70 @@
-<section
-  class="flex flex-col 800:pl-72 pt-36 pb-14 items-center 1200:items-start pr-5"
->
+<section class="flex flex-col 800:pl-72 pt-36 pb-14 items-center 1200:items-start pr-5">
 
-<header class="flex items-center justify-center gap-6">
-  <h1 class="text-6xl font-bold">Summary</h1>
-  <div class="h-14 w-1 bg-blue-primary rounded-md"></div>
-  <p class="text-blue-dark text-3xl">Key Metrics at a Glance</p>
-</header>
+  <header class="flex items-center justify-center gap-6">
+    <h1 class="text-6xl font-bold">Summary</h1>
+    <div class="h-14 w-1 bg-blue-primary rounded-md"></div>
+    <p class="text-blue-dark text-3xl">Key Metrics at a Glance</p>
+  </header>
 
-<main>
-  <div>
-    <div class="flex flex-col gap-8">
-      <div class="flex gap-8">
-        <a class="flex gap-5 items-center justify-center w-64 h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
-          <i class="pi pi-pencil p-5 text-3xl rounded-full text-white bg-blue-dark group-hover:text-blue-dark group-hover:bg-white"></i>
+  <main>
+    <div>
+      <div class="flex flex-col gap-8">
+
+        <!-- Task Counters with Icons -->
+        <div class="flex gap-8">
+          <app-summary-card
+            [iconClass]="'pi pi-pencil'"
+            [count]="todoCount"
+            [title]="'To-do'"
+            [hoverColor]="'bg-blue-dark'">
+          </app-summary-card>
+
+          <app-summary-card
+            [iconClass]="'pi pi-check'"
+            [count]="doneCount"
+            [title]="'Done'"
+            [hoverColor]="'bg-blue-dark'">
+          </app-summary-card>
+        </div>
+
+        <!-- Urgent Task with Deadline -->
+        <a class="flex gap-5 items-center justify-center w-full h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
+          <i class="pi pi-angle-double-up prio-1 p-5 text-3xl rounded-full text-white"></i>
           <div class="flex flex-col">
-            <span class="font-semibold text-black text-6xl group-hover:text-white">1</span>
-            <span class="text-blue-dark text-xl group-hover:text-white">To-do</span>
+            <span class="font-semibold text-black text-6xl group-hover:text-white">{{ urgentTaskCount }}</span>
+            <span class="text-blue-dark text-xl group-hover:text-white">Urgent</span>
+          </div>
+          <div class="h-24 bg-gray-400 w-0.5 mx-8"></div>
+          <div class="flex flex-col">
+            <span class="font-bold text-blue-dark text-xl group-hover:text-white">{{ upcomingDeadline | date:'longDate' }}</span>
+            <span class="text-blue-dark group-hover:text-white">Upcoming Deadline</span>
           </div>
         </a>
-        <a class="flex gap-5 items-center justify-center w-64 h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
-          <i class="pi pi-check p-5 text-3xl rounded-full text-white bg-blue-dark group-hover:text-blue-dark group-hover:bg-white"></i>
-          <div class="flex flex-col">
-            <span class="font-semibold text-black text-6xl group-hover:text-white">1</span>
-            <span class="text-blue-dark text-xl group-hover:text-white">Done</span>
-          </div>
-        </a>
-      </div>
 
+        <!-- General Task Overview without Icons -->
+        <div class="flex gap-8">
+          <app-summary-card
+            [count]="totalTaskCount"
+            [title]="'Tasks in board'">
+          </app-summary-card>
 
+          <app-summary-card
+            [count]="inProgressCount"
+            [title]="'Tasks in progress'">
+          </app-summary-card>
 
-      <a class="flex gap-5 items-center justify-center w-full h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
-        <i class="pi pi-angle-double-up prio-1 p-5 text-3xl rounded-full text-white"></i>
-        <div class="flex flex-col">
-          <span class="font-semibold text-black text-6xl group-hover:text-white">1</span>
-          <span class="text-blue-dark text-xl group-hover:text-white">Urgent</span>
+          <app-summary-card
+            [count]="awaitingFeedbackCount"
+            [title]="'Awaiting Feedback'">
+          </app-summary-card>
         </div>
-        <div class="h-24 bg-gray-400 w-0.5 mx-8"></div>
-        <div class="flex flex-col">
-          <span class="font-bold text-blue-dark text-xl group-hover:text-white">October 16, 2022</span>
-          <span class="text-blue-dark group-hover:text-white">Upcoming Deadline</span>
-        </div>
-      </a>
-
-      <div class="flex gap-8">
-        <a class="flex flex-col items-center justify-center w-40 h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
-          <span class="font-semibold text-black text-6xl group-hover:text-white">1</span>
-          <span class="text-blue-dark text-xl group-hover:text-white">Done</span>
-        </a>
-        <a class="flex flex-col items-center justify-center w-40 h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
-          <span class="font-semibold text-black text-6xl group-hover:text-white">1</span>
-          <span class="text-blue-dark text-xl group-hover:text-white">Done</span>
-        </a>
-        <a class="flex flex-col items-center justify-center w-40 h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer">
-          <span class="font-semibold text-black text-6xl group-hover:text-white">1</span>
-          <span class="text-blue-dark text-xl group-hover:text-white">Done</span>
-        </a>
       </div>
-
-
-      <div></div>
     </div>
-    <div></div>
-    <div></div>
-  </div>
-  <div>
-    <h2 class="text-blue-dark font-medium text-5xl">Good morning!</h2>
-    <h3 class="text-blue-primary font-bold text-6xl">Sofia Müller</h3>
-  </div>
-</main>
 
-
+    <!-- Greeting Section -->
+    <div>
+      <h2 class="text-blue-dark font-medium text-5xl">Good morning!</h2>
+      <h3 class="text-blue-primary font-bold text-6xl">{{ userName }}</h3>
+    </div>
+  </main>
 </section>
-
-
-

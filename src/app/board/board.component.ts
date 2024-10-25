@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { BackendServicesService } from '../services/backend-services.service';
 import { MessageService } from 'primeng/api';
@@ -10,7 +10,7 @@ import { Task } from '../add-task/addTask.model';
   styleUrl: './board.component.scss',
   providers: [MessageService],
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit, OnDestroy{
   private destroyed$ = new Subject<void>();
   tasks: Task[] = [];
   filteredTasks: Task[] = [];
@@ -61,12 +61,12 @@ export class BoardComponent {
         task.description.toLowerCase().includes(term)
       );
     } else {
-      this.filteredTasks = [...this.tasks]; // Zeigt alle Aufgaben, wenn nichts eingegeben wird
+      this.filteredTasks = [...this.tasks];
     }
   }
 
   onSearchTermChange() {
-    this.filterTasks(); // Filter wird bei jeder Eingabe angewendet
+    this.filterTasks();
   }
 
 
@@ -139,9 +139,6 @@ export class BoardComponent {
       });
     }
   }
-
-
-
 
   setSelectedTaskId(id: number) {
     this.selectedTaskId = id;

@@ -1,0 +1,15 @@
+<a class="flex items-center justify-center w-40 h-40 md:w-64 md:h-40 bg-white rounded-3xl boxshadow hover:bg-blue-dark group cursor-pointer"
+  [ngClass]="hoverColorClass"
+  [class]="getWidthClass()"
+>
+
+  <ng-container *ngIf="iconClass">
+    <i [class]="'p-5 text-3xl rounded-full ' + iconClass"
+       [ngClass]="iconBgClass"></i>
+  </ng-container>
+
+  <div class="flex flex-col items-center md:items-start gap-2">
+    <span class="font-semibold text-black text-6xl group-hover:text-white">{{ count }}</span>
+    <span class="text-blue-dark text-xl group-hover:text-white text-center px-8">{{ title }}</span>
+  </div>
+</a>
