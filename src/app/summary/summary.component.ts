@@ -17,12 +17,16 @@ export class SummaryComponent implements OnInit, OnDestroy {
   inProgressCount: number = 0;
   awaitingFeedbackCount: number = 0;
   totalTaskCount: number = 0;
-  userName: string = 'Sofia Müller';
   upcomingDeadline: string | null = null;
+  loggedInUser: string = '';
 
   constructor(private backendService: BackendServicesService) {}
 
   async ngOnInit() {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (loggedInUser) {
+      this.loggedInUser = loggedInUser;
+    }
     await this.backendService.loadTasks();
     this.subscribeObservables();
   }
