@@ -19,6 +19,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   totalTaskCount: number = 0;
   upcomingDeadline: string | null = null;
   loggedInUser: string = '';
+  greet: string = '';
 
   constructor(private backendService: BackendServicesService) {}
 
@@ -27,6 +28,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     if (loggedInUser) {
       this.loggedInUser = loggedInUser;
     }
+    this.setGreetMessage();
     await this.backendService.loadTasks();
     this.subscribeObservables();
   }
@@ -39,6 +41,12 @@ export class SummaryComponent implements OnInit, OnDestroy {
         this.calculateTaskMetrics();
       });
   }
+
+  setGreetMessage() {
+    const hour = new Date().getHours();
+    this.greet = hour < 12 ? 'Good morning,' : hour < 18 ? 'Good afternoon,' : 'Good evening,';
+  }
+
 
   calculateTaskMetrics() {
     this.todoCount = this.getTaskCount('To do');
