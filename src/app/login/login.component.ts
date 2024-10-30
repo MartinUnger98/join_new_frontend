@@ -19,6 +19,8 @@ export class LoginComponent {
   showPassword: boolean = false;
   rememberMe: boolean = false;
   isLoading: boolean = false;
+  guestname: string = '';
+  guestpassword: string = '';
 
   constructor(
     public authService: AuthService,
@@ -42,7 +44,25 @@ export class LoginComponent {
         this.isLoading = false;
         this.router.navigate(['/contacts'])
       }, 3000);
-    } catch(e) {
+    } catch(error) {
+      this.isLoading = false;
+      this.showError();
+    }
+  }
+
+  async guestLogin(event: Event) {
+    event.preventDefault();
+    try {
+      this.isLoading = true;
+      let response: any = await this.authService.guestLogin();  // Gast-Login aufrufen
+      localStorage.setItem('token', response['token']);
+      localStorage.setItem('loggedInUser', response['name']);
+      this.showSuccess();
+      setTimeout(() => {
+        this.isLoading = false;
+        this.router.navigate(['/contacts']);
+      }, 3000);
+    } catch (error) {
       this.isLoading = false;
       this.showError();
     }

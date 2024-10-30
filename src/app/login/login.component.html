@@ -47,7 +47,6 @@
         ></p-checkbox>
         <span>Remember Me</span>
       </div>
-      <a class="text-blue-primary hover:underline" href="">I forgot my password</a>
     </div>
 
     <div class="flex justify-between w-3/4 h-9">
@@ -67,6 +66,7 @@
       <app-button
         text="Guest-Login"
         btnStyle="secondary"
+        (click)="guestLogin($event)"
       ></app-button>
     </div>
   </form>

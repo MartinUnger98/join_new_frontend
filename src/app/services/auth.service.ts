@@ -28,4 +28,9 @@ export class AuthService {
     }
     return lastValueFrom(this.http.post(url, body));
   }
+
+  public guestLogin() {
+    const url = environment.baseUrl + '/guest_login/';
+    return lastValueFrom(this.http.post(url, {}));
+  }
 }
