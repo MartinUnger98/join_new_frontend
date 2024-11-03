@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
     this.showSuccess();
     setTimeout(() => {
       this.isLoading = false;
-      this.router.navigate(['/contacts'])
+      this.router.navigate(['/summary'])
     }, 3000);
   }
 

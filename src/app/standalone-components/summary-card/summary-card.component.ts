@@ -9,7 +9,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule
   ],
-  templateUrl: './summary-card.component.html'
+  templateUrl: './summary-card.component.html',
+  styleUrl: './summary-card.component.scss'
 })
 export class SummaryCardComponent {
   @Input() count: number = 0;
