@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false;
   guestname: string = '';
   guestpassword: string = '';
+  showContent: boolean = false;
+  showLogo: boolean = true
 
   constructor(
     public authService: AuthService,
@@ -36,6 +38,10 @@ export class LoginComponent implements OnInit {
       this.username = CryptoJS.AES.decrypt(encryptedUsername, 'your-secret-key').toString(CryptoJS.enc.Utf8);
       this.rememberMe = true;
     }
+    setTimeout(() => {
+      this.showContent = true;
+      this.showLogo = false;
+    }, 3000);
   }
 
   togglePasswordVisibility() {

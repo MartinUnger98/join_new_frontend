@@ -1,4 +1,10 @@
-<header class="flex justify-between items-center mt-7 ml-7">
+@if (showLogo) {
+  <header class="w-full h-full absolute top-0 left-0 flex justify-center items-center z-10">
+    <img src="assets/img/join_logo.svg" alt="join-logo.svg" class=" h-80 w-64 animate-fadeouttopleft">
+  </header>
+}
+
+<header class="flex justify-between items-center mt-7 ml-7 fade-in" [class.show]="showContent">
   <img class="h-32 w-24" src="assets/img/join_logo.svg" alt="join-logo.svg" />
   <div class="mr-9 flex">
     <span class="font-normal text-xl mr-9">Not a Join user?</span>
@@ -10,7 +16,7 @@
   </div>
 </header>
 
-<main class="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2">
+<main class="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 fade-in" [class.show]="showContent">
   <form (ngSubmit)="login(false, $event)" class="w-110 shadow-custom rounded-3xl flex items-center flex-col px-6 py-6">
     <h1 class="text-6xl mb-8">Login</h1>
     <div class="rounded-sm bg-blue-primary h-1 w-24 mb-8"></div>
@@ -33,7 +39,6 @@
           'pi-lock-open': showPassword
         }"
         (iconClick)="togglePasswordVisibility()"
-
       ></app-input-field>
     </div>
 
@@ -71,6 +76,3 @@
     </div>
   </form>
 </main>
-
-<p-toast />
-
