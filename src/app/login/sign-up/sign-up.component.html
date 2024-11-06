@@ -1,18 +1,21 @@
-<header class="flex justify-start items-center mt-7 ml-7">
-  <img class="h-32 w-24" src="assets/img/join_logo.svg" alt="join-logo.svg" />
+<header class="flex justify-start items-center p-7">
+  <img class="h-20 w-12 min-h-950:h-32 min-h-950:w-24" src="assets/img/join_logo.svg" alt="join-logo.svg" />
 </header>
 
 <main
-  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+class="
+  flex justify-center items-center
+  min-h-1100:absolute min-h-1100:top-1/2 min-h-1100:left-1/2 min-h-1100:-translate-x-1/2 min-h-1100:-translate-y-1/2
+"
 >
   <form
     [formGroup]="signUpForm"
     (ngSubmit)="onSubmit()"
-    class="w-110 shadow-custom rounded-3xl flex flex-col items-center px-6 py-6 relative"
+    class="w-dvw 500:w-110 shadow-custom 500:rounded-3xl flex flex-col items-center px-6 py-6 relative bg-white"
   >
     <i
       routerLink="/login"
-      class="pi pi-arrow-left absolute top-10 left-10 text-blue-primary text-2xl hover:scale-125 transition duration-200 cursor-pointer"
+      class="pi pi-arrow-left absolute top-10 left-4 420:left-10 text-blue-primary text-2xl hover:scale-125 transition duration-200 cursor-pointer"
     ></i>
     <h1 class="text-6xl mb-8">Sign Up</h1>
     <div class="rounded-sm bg-blue-primary h-1 w-24 mb-8"></div>
@@ -128,5 +131,15 @@
     </div>
   </form>
 </main>
+
+<footer
+  class="
+    min-h-1000:absolute min-h-1000:bottom-8 min-h-1000:left-1/2 min-h-1000:-translate-x-1/2 min-h-1000:py-0
+    flex gap-8 w-full justify-center py-8
+    "
+>
+  <a href="" class="text-gray-400 hover:text-blue-primary">Privacy Policy</a>
+  <a href="" class="text-gray-400 hover:text-blue-primary">Legal Notice</a>
+</footer>
 
 <p-toast />

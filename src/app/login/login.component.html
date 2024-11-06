@@ -4,9 +4,9 @@
   </header>
 }
 
-<header class="flex justify-between items-center mt-7 ml-7 fade-in" [class.show]="showContent">
-  <img class="h-32 w-24" src="assets/img/join_logo.svg" alt="join-logo.svg" />
-  <div class="mr-9 flex">
+<header class="flex justify-between items-center p-7 fade-in" [class.show]="showContent">
+  <img class="h-20 w-12 min-h-950:h-32 min-h-950:w-24" src="assets/img/join_logo.svg" alt="join-logo.svg" />
+  <div class="hidden 800:flex">
     <span class="font-normal text-xl mr-9">Not a Join user?</span>
     <app-button
       text="Sign Up"
@@ -16,8 +16,14 @@
   </div>
 </header>
 
-<main class="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 fade-in" [class.show]="showContent">
-  <form (ngSubmit)="login(false, $event)" class="w-110 shadow-custom rounded-3xl flex items-center flex-col px-6 py-6">
+<main
+  class="
+    fade-in flex justify-center items-center flex-col gap-8
+    min-h-950:absolute min-h-950:top-1/2 min-h-950:left-1/2 min-h-950:-translate-x-1/2 min-h-950:-translate-y-1/2 min-h-950:gap-20
+    "
+  [class.show]="showContent"
+>
+  <form (ngSubmit)="login(false, $event)" class="w-dvw 500:w-110 shadow-custom 500:rounded-3xl flex items-center flex-col px-6 py-6 bg-white">
     <h1 class="text-6xl mb-8">Login</h1>
     <div class="rounded-sm bg-blue-primary h-1 w-24 mb-8"></div>
     <div class="w-3/4 flex flex-col gap-8">
@@ -54,25 +60,48 @@
       </div>
     </div>
 
-    <div class="flex justify-between w-3/4 h-9">
+    <div class="flex justify-between w-3/4 420:h-9 flex-col 420:flex-row h-full gap-14 items-center">
       <app-button
         type="submit"
         text="Login"
         btnStyle="primary"
+        class="420:w-fit w-44"
       ></app-button>
-      @if(isLoading) {
-        <p-progressSpinner
-          styleClass="custom-spinner"
-          strokeWidth="3"
-          fill="var(--surface-ground)"
-          animationDuration="1s"
-        />
-        }
       <app-button
         text="Guest-Login"
         btnStyle="secondary"
         (click)="login(true, $event)"
+        class="420:w-fit w-44"
       ></app-button>
     </div>
+    <p-progressSpinner
+      styleClass="custom-spinner"
+      strokeWidth="3"
+      fill="var(--surface-ground)"
+      animationDuration="1s"
+      class="mt-8"
+      [ngClass]="{ 'opacity-100': isLoading, 'opacity-0': !isLoading }"
+    />
   </form>
+
+  <div class="flex 800:hidden justify-center">
+    <span class="font-normal text-xl mr-9">Not a Join user?</span>
+    <app-button
+      text="Sign Up"
+      btnStyle="primary"
+      routerLink="/signUp"
+    ></app-button>
+  </div>
 </main>
+
+<footer
+  class="
+    min-h-780:absolute min-h-780:bottom-8 min-h-780:left-1/2 min-h-780:-translate-x-1/2 min-h-780:py-0
+    fade-in flex gap-8 w-full justify-center py-8
+    "
+  [class.show]="showContent">
+  <a href="" class="text-gray-400 hover:text-blue-primary">Privacy Policy</a>
+  <a href="" class="text-gray-400 hover:text-blue-primary">Legal Notice</a>
+</footer>
+
+<p-toast />

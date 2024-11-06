@@ -3,5 +3,10 @@ p-button {
     font-size: 1.5rem;
     padding: 4px;
   }
+  ::ng-deep button {
+    @media (max-width: 420px) {
+      width: calc(100% - 2.5rem);
+    }
+  }
 }
 

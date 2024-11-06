@@ -89,7 +89,12 @@ module.exports = {
     screens: {
       '800': '800px',
       '420': '420px',
-      '1200': '1200px'
+      '1200': '1200px',
+      '500': '500px',
+      'min-h-950': { 'raw': '(min-height: 950px)' },
+      'min-h-780': { 'raw': '(min-height: 780px)' },
+      'min-h-1100': { 'raw': '(min-height: 1100px)' },
+      'min-h-1000': { 'raw': '(min-height: 1000px)' },
 
     }
   },
