@@ -1,14 +1,12 @@
 import { Component, ElementRef, Renderer2, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
-
-
 
 @Component({
   selector: 'app-main-header',
   standalone: true,
-  imports: [AvatarModule, AvatarGroupModule, ],
+  imports: [AvatarModule, AvatarGroupModule, RouterModule],
   templateUrl: './main-header.component.html',
   styleUrl: './main-header.component.scss'
 })

@@ -2,7 +2,10 @@
   <img src="assets/img/join_logo.svg" alt="join-logo-responsive" class="block 800:hidden">
   <span class="hidden 800:flex font-normal text-xl absolute left-80">Kanban Project Management Tool</span>
   <div>
-    <i class="pi pi-question-circle mr-6 text-3xl text-gray-400 hover:scale-125 ease-in-out duration-200 cursor-pointer"></i>
+    <a
+      class="pi pi-question-circle mr-6 text-3xl text-gray-400 hover:scale-125 ease-in-out duration-200 cursor-pointer"
+      routerLink="/help"
+    ></a>
     <p-avatar (click)="toggleLinks()" [label]="loggedInUser" styleClass="mr-2" class="text-blue-primary cursor-pointer"  size="xlarge" shape="circle"></p-avatar>
   </div>
   @if(showLinks){

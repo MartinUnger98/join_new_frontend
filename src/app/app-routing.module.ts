@@ -6,6 +6,7 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { SummaryComponent } from './summary/summary.component';
+import { HelpviewComponent } from './helpview/helpview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'addTask', component: AddTaskComponent },
   { path: 'board', component: BoardComponent },
   { path: 'summary', component: SummaryComponent },
+  { path: 'help' , component: HelpviewComponent },
 ];
 
 @NgModule({

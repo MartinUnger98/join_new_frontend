@@ -34,6 +34,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DialogAddTaskComponent } from './dialog-add-task/dialog-add-task.component';
 import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
+import { HelpviewComponent } from './helpview/helpview.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-deta
     BoardComponent,
     SummaryComponent,
     DialogAddTaskComponent,
-    DialogTaskDetailComponent
+    DialogTaskDetailComponent,
+    HelpviewComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,7 @@ import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-deta
     DropdownModule,
     IconFieldModule,
     InputIconModule,
-    DragDropModule
+    DragDropModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
