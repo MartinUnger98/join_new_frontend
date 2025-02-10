@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  readonly token: string | null = localStorage.getItem('token');
+
   icons = [
     {
       text: "Summary",

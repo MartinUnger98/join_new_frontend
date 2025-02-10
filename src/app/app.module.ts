@@ -35,6 +35,8 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { DialogAddTaskComponent } from './dialog-add-task/dialog-add-task.component';
 import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-detail.component';
 import { HelpviewComponent } from './helpview/helpview.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { HelpviewComponent } from './helpview/helpview.component';
     SummaryComponent,
     DialogAddTaskComponent,
     DialogTaskDetailComponent,
-    HelpviewComponent
+    HelpviewComponent,
+    PrivacyPolicyComponent,
+    LegalNoticeComponent
   ],
   imports: [
     BrowserModule,

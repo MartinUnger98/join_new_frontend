@@ -13,6 +13,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 export class MainHeaderComponent implements OnInit {
   showLinks: boolean = false;
   loggedInUser: string = '';
+  readonly token: string | null = localStorage.getItem('token');
 
   constructor(private eRef: ElementRef, private renderer: Renderer2, private router: Router) {}
 

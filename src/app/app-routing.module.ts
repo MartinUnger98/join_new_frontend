@@ -7,6 +7,8 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { SummaryComponent } from './summary/summary.component';
 import { HelpviewComponent } from './helpview/helpview.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'board', component: BoardComponent },
   { path: 'summary', component: SummaryComponent },
   { path: 'help' , component: HelpviewComponent },
+  { path: 'privacy-policy' , component: PrivacyPolicyComponent },
+  { path: 'legal-notice' , component: LegalNoticeComponent },
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@
       class="text-blue-primary hover:bg-slate-200 rounded-full h-full text-3xl"
       icon="pi pi-arrow-left"
       size="large"
-      routerLink="/summary"
+      [routerLink]="token ? '/summary' : '/login'"
     ></p-button>
   </div>
   <p>Welcome to the help page for  <span class="colorBlue font-bold">Join</span>, your guide to using our kanban project management tool. Here, we'll provide an overview of what  <span class="colorBlue font-bold">Join</span> is, how it can benefit you, and how to use it.</p>
