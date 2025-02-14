@@ -1,14 +1,25 @@
 p-dialog {
-  ::ng-deep .p-dialog-header,
-  ::ng-deep .p-dialog {
-    border-top-left-radius: 32px;
-    border-top-right-radius: 32px;
+  @media (max-width: 600px) {
+    ::ng-deep .p-dialog-header,
+    ::ng-deep .p-dialog {
+      min-width: 100%;
+    }
   }
-  ::ng-deep .p-dialog-content,
-  ::ng-deep .p-dialog {
-    border-bottom-left-radius: 32px;
-    border-bottom-right-radius: 32px;
+  @media (min-width: 600px) {
+    ::ng-deep .p-dialog-header,
+    ::ng-deep .p-dialog {
+      border-top-left-radius: 32px;
+      border-top-right-radius: 32px;
+    }
+    ::ng-deep .p-dialog-content,
+    ::ng-deep .p-dialog {
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+    }
   }
+
+
+
 
   i.prio-1 {
     color: #ff3d00;

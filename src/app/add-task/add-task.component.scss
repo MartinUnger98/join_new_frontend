@@ -23,6 +23,9 @@ p-selectButton {
     display: flex;
     justify-content: center;
     gap: 16px;
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
   }
   ::ng-deep .p-button,
   ::ng-deep .p-button-icon {

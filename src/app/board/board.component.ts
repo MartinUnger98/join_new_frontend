@@ -89,7 +89,6 @@ export class BoardComponent implements OnInit, OnDestroy{
       const task = this.draggedTask;
       this.dragEnd();
       task.status = status;
-      console.log(task)
       await this.backendService.editTask(task);
     }
   }

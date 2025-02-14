@@ -1,13 +1,16 @@
-<section class="flex flex-col items-center 1200:items-start" [ngClass]="{'800:pl-72 pt-36 pb-14': !isInDialog}">
+<section
+  class="flex flex-col items-center 1200:items-start"
+  [ngClass]="{'800:pl-72 pt-36 pb-14': !isInDialog}">
   @if(!editingTask) {
     <h1 class="text-6xl font-bold mb-12">Add Task</h1>
   }
   <form
     [formGroup]="addTaskForm"
-    class="flex justify-start items-start gap-14 flex-col 1200:flex-row"
+    class="flex justify-start items-start gap-14 flex-col"
+    [ngClass]="{ '900:flex-row': isInDialog, '1200:flex-row': !isInDialog }"
     (ngSubmit)="onSubmit()"
   >
-    <div class="min-w-96 flex flex-col gap-5">
+    <div class="600:min-w-96 min-w-full flex flex-col gap-5">
       <app-input-field
         title="Title"
         formControlName="title"
@@ -78,7 +81,7 @@
     @if(!editingTask) {
       <div class="bg-stone-300 w-2px h-80 hidden 1200:block"></div>
     }
-    <div class="min-w-96 flex flex-col gap-5">
+    <div class="600:min-w-96 min-w-full flex flex-col gap-5">
       <app-input-field
         title="Due Date"
         formControlName="dueDate"
@@ -98,7 +101,7 @@
             formControlName="priority"
             optionLabel="priority"
             optionValue="value"
-            class="flex justify-center items-center gap-4"
+            class="flex 600:justify-center items-center gap-4 "
           >
             <ng-template #customTemplate let-item pTemplate>
               <div
@@ -219,6 +222,7 @@
         </div>
       } @else {
         <app-button
+          class="pt-14"
           type="submit"
           text="OK"
           icon="pi pi-check"
