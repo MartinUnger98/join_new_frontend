@@ -4,7 +4,7 @@ p-button {
     padding: 4px;
   }
   ::ng-deep button {
-    @media (max-width: 420px) {
+    @media (max-width: 500px) {
       width: calc(100% - 2.5rem);
     }
   }

@@ -2,11 +2,11 @@
   class="flex flex-col items-center 1200:items-start"
   [ngClass]="{'800:pl-72 pt-36 pb-14': !isInDialog}">
   @if(!editingTask) {
-    <h1 class="text-6xl font-bold mb-12">Add Task</h1>
+    <h1 class="500:text-6xl text-4xl font-bold mb-4 500:mb-12">Add Task</h1>
   }
   <form
     [formGroup]="addTaskForm"
-    class="flex justify-start items-start gap-14 flex-col"
+    class="flex justify-start items-start gap-14 flex-col 500:w-auto w-full px-10 500:px-0"
     [ngClass]="{ '900:flex-row': isInDialog, '1200:flex-row': !isInDialog }"
     (ngSubmit)="onSubmit()"
   >
@@ -176,7 +176,7 @@
               @if (!subTask.edit) {
                 <div class="flex justify-between items-center pl-6 pr-2 py-1 hover:bg-gray-300 rounded-lg group">
                   <li class="group-hover:text-black">{{ subTask.value }}</li>
-                  <div class="flex justify-center items-center gap-2 text-white group-hover:text-black">
+                  <div class="flex justify-center items-center gap-2 text-transparent group-hover:text-black">
                     <i class="pi pi-trash text-xl cursor-pointer hover:font-bold" (click)="deleteSubtask(subTask)"></i>
                     <p class="text-xl">|</p>
                     <i class="pi pi-pencil text-xl cursor-pointer hover:font-bold" (click)="changeToEditSubtask(subTask)"></i>
@@ -203,7 +203,7 @@
         </div>
       </div>
       @if(!editingTask) {
-        <div class="flex justify-end gap-6 mt-5">
+        <div class="flex justify-end gap-10 500:gap-6 mt-5 500:flex-row flex-col">
           <app-button
             text="Clear"
             icon="pi pi-times"
