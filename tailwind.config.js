@@ -77,22 +77,34 @@ module.exports = {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 },
         },
+        "summary-fadeIn": {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        },
+        "summary-fadeOut": {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' }
+        }
       },
       animation: {
         fadeouttopleft: 'fade-out-top-left 1s ease-in-out 2s 1',
         fadeoutup: 'fade-out-up 1s ease-in-out 0.25s 1',
         fadeinright: 'fade-in-right 1s ease-in-out 0.25s 1',
         fadeoutright: 'fade-out-right 1s ease-in-out 0.25s 1',
-        fadeIn: 'fadeIn 0.5s ease forwards 2s'
+        fadeIn: 'fadeIn 0.5s ease forwards 2s',
+        summaryFadeIn: 'fadeIn 2s ease-in forwards',
+        summaryFadeOut: 'fadeOut 2s ease-out forwards'
       }
     },
     screens: {
+      '1200': '1200px',
+      '1000': '1000px',
       '900': '900px',
       '800': '800px',
-      '420': '420px',
-      '1200': '1200px',
-      '500': '500px',
       '600': '600px',
+      '500': '500px',
+      '420': '420px',
+      '320': '320px',
       'min-h-950': { 'raw': '(min-height: 950px)' },
       'min-h-780': { 'raw': '(min-height: 780px)' },
       'min-h-1100': { 'raw': '(min-height: 1100px)' },

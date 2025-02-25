@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Task } from '../add-task/addTask.model';
 import { Subject, takeUntil } from 'rxjs';
 import { BackendServicesService } from '../services/backend-services.service';
@@ -20,6 +20,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
   upcomingDeadline: string | null = null;
   loggedInUser: string = '';
   greet: string = '';
+  showUserInfo: boolean = false;
+  fadeOutUserInfo: boolean = false;
+  showMainPart: boolean = false;
 
   constructor(private backendService: BackendServicesService) {}
 
@@ -31,6 +34,12 @@ export class SummaryComponent implements OnInit, OnDestroy {
     this.setGreetMessage();
     await this.backendService.loadTasks();
     this.subscribeObservables();
+    this.checkScreenSize();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.checkScreenSize();
   }
 
   subscribeObservables() {
@@ -79,6 +88,28 @@ export class SummaryComponent implements OnInit, OnDestroy {
     }
 
     return filteredTasks.length;
+  }
+
+  checkScreenSize() {
+    const isSmallScreen = window.innerWidth <= 1200;
+
+    if (isSmallScreen) {
+      this.showUserInfo = true;
+      this.fadeOutUserInfo = false;
+      this.showMainPart = false;
+
+      setTimeout(() => {
+        this.fadeOutUserInfo = true;
+      }, 2000);
+
+      setTimeout(() => {
+        this.showUserInfo = false;
+        this.showMainPart = true;
+      }, 3000);
+    } else {
+      this.showUserInfo = true;
+      this.showMainPart = true;
+    }
   }
 
   ngOnDestroy() {

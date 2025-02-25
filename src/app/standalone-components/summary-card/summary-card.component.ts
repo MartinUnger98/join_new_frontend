@@ -35,6 +35,9 @@ export class SummaryCardComponent {
 
 
   getWidthClass() {
-    return this.iconClass ? 'w-64' : 'w-40';
+    return this.iconClass
+      ? '900:w-64 800:w-52 600:w-64 420:w-40 w-32'
+      : '900:w-40 800:w-32 600:w-40 420:w-24 w-20 ';
   }
+
 }

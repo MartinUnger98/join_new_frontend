@@ -33,3 +33,7 @@ body {
   opacity: 1;
   visibility: visible;
 }
+
+section {
+  min-height: calc(100vh - 80px);
+}
