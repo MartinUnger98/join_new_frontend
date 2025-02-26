@@ -12,7 +12,7 @@ import { ButtonModule } from 'primeng/button';
 export class ButtonComponent {
   btnStylePrimary: string ='bg-blue-dark text-white font-bold rounded-xl hover:bg-blue-primary'
   btnSizeStandard:string = 'text-xl py-3.5 px-5';
-  btnSizeBig:string = 'text-2xl py-3.5 px-14';
+  btnSizeBig:string = 'text-2xl py-3.5 px-7 500:px-14';
   btnStyleSecondary:string = 'text-blue-dark font-bold text-xl py-3.5 px-5 rounded-xl hover:text-blue-primary border-2 border-blue-dark hover:border-blue-primary';
 
   @Input() text: string = '';

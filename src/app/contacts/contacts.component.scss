@@ -1,9 +1,8 @@
 .calcHeightContacts {
-  height: calc(100vh - 96px);
-}
-
-.calcHeightContactsInfo {
-  height: calc(100vh - 196px);
+  height: calc(100vh - 15rem);
+  @media (max-width: 800px) {
+    height: calc(100vh - 17rem);
+  }
 }
 
 ::ng-deep .p-button-text {
@@ -27,4 +26,12 @@
   &:hover {
     background: rgba(239, 68, 68, 0.2);
   }
+}
+
+::ng-deep .show-contact-details-button button {
+  width: 100%;
+}
+
+.calcWidthBox {
+  width: calc(100% - 4rem);
 }

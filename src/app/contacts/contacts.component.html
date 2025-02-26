@@ -1,84 +1,98 @@
-<section class="flex 800:pl-60 pt-36 pb-14">
-  <div
-    class="mt-16 w-128 flex flex-col items-center overflow-y-auto calcHeightContacts min-w-128"
-  >
-    <app-button
-      text="Add new Contact"
-      icon="pi pi-user-plus"
-      iconPos="right"
-      btnStyle="primary"
-      btnSize="big"
-      class="fixed z-10"
-      (click)="toggleDialog()"
-    ></app-button>
-    <div class="mt-16 w-80">
-      @for (initial of contactsInitials;track initial) {
-      <h1 class="py-8 pl-11 text-2xl font-normal">{{ initial }}</h1>
-      <div class="w-full bg-gray-300 h-1px"></div>
-      <div>
-        @for (contact of contacts;track contact){
-        @if(contact.name[0].toUpperCase() === initial) {
-        <p-button
-          class="flex items-center rounded-xl h-20 w-full gap-5 hover:bg-gray-200 mt-2 p-2 cursor-pointer"
-          (click)="showContactDetails(contact)"
-        >
-          <div
-            [style.background-color]="contact.bg_color"
-            class="flex justify-center items-center h-10 w-10 rounded-full text-white text-base border-white border-2 border-solid"
+<section class="flex 800:pl-60 pt-36">
+  @if (showArticleContacts) {
+    <article
+      class="mt-8 px-4 1320:px-0 800:mt-16 w-full flex flex-col items-center overflow-y-auto calcHeightContacts"
+    >
+      <app-button
+        text="Add new Contact"
+        icon="pi pi-user-plus"
+        iconPos="right"
+        btnStyle="primary"
+        btnSize="big"
+        class="fixed z-10"
+        (click)="toggleDialog()"
+      ></app-button>
+      <div class="mt-16 w-full 1320:w-80 max-h-full">
+        @for (initial of contactsInitials;track initial) {
+        <h1 class="py-8 pl-11 text-2xl font-normal">{{ initial }}</h1>
+        <div class="w-full bg-gray-300 h-1px"></div>
+        <div>
+          @for (contact of contacts;track contact){
+          @if(contact.name[0].toUpperCase() === initial) {
+          <p-button
+            class="show-contact-details-button flex items-center rounded-xl h-20 w-full gap-5 hover:bg-gray-200 mt-2 p-2 cursor-pointer"
+            (click)="showContactDetails(contact)"
           >
-            {{ getInitialsForAvatar(contact.name) }}
-          </div>
-          <div class="flex flex-col items-start w-56 ml-3">
-            <div class="w-full flex justify-start">
-              <span class="text-ellipsis overflow-hidden whitespace-nowrap">{{
-                contact.name
-              }}</span>
+            <div
+              [style.background-color]="contact.bg_color"
+              class="flex justify-center items-center h-10 w-10 rounded-full text-white text-base border-white border-2 border-solid"
+            >
+              {{ getInitialsForAvatar(contact.name) }}
             </div>
-            <div class="w-full flex justify-start">
-              <span
-                class="text-blue-primary text-ellipsis overflow-hidden whitespace-nowrap"
-                >{{ contact.email }}</span
-              >
+            <div class="flex flex-col items-start calcWidthBox ml-3">
+              <div class="w-full flex justify-start">
+                <span class="text-ellipsis overflow-hidden whitespace-nowrap">{{
+                  contact.name
+                }}</span>
+              </div>
+              <div class="w-full flex justify-start">
+                <span
+                  class="text-blue-primary text-ellipsis overflow-hidden whitespace-nowrap"
+                  >{{ contact.email }}</span
+                >
+              </div>
             </div>
-          </div>
-        </p-button>
-        } }
+          </p-button>
+          } }
+        </div>
+        }
       </div>
-      }
-    </div>
-  </div>
-  <div class="pt-12 pl-8 calcHeightContactsInfo">
-    <div class="flex items-center justify-start">
-      <h1 class="text-6xl font-bold mb-3">Contacts</h1>
-      <span class="h-12 w-1 bg-blue-primary mx-4"></span>
-      <h2 class="text-2xl">Better with a team</h2>
-    </div>
+    </article>
+  }
 
-    @if(selectedContact) {
-    <div class="mt-4 flex items-center">
-      <div
-        [style.background-color]="selectedContact.bg_color"
-        class="flex justify-center items-center mx-8 h-28 w-28 rounded-full text-white text-5xl border-white border-2 border-solid"
-      >
-        {{ getInitialsForAvatar(selectedContact.name) }}
+  @if (showArticleDetails) {
+    <article class="pt-12 pl-8 flex flex-col w-full">
+      <div class="flex items-center justify-between w-full pr-6">
+        <div class="flex items-center justify-start flex-col 600:flex-row">
+          <h1 class="500:text-6xl text-4xl font-bold mb-3">Contacts</h1>
+          <span class="h-12 w-1 bg-blue-primary mx-4 hidden 600:block"></span>
+          <h2 class="text-2xl">Better with a team</h2>
+        </div>
+        <p-button
+          class="text-blue-primary hover:bg-slate-200 rounded-full text-3xl ml-4"
+          icon="pi pi-arrow-left"
+          size="large"
+          (click)="toggleView(1)"
+        ></p-button>
       </div>
-      <div class="flex flex-col gap-2">
-        <span class="text-3xl">{{ selectedContact.name }}</span>
-        <div class="flex gap-4">
-          <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Edit" icon="pi pi-pencil" (click)="toggleDialog(true, selectedContact)" />
-          <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Delete" icon="pi pi-trash" (click)="openDeleteDialog($event, selectedContact.id)"/>
+
+      @if(selectedContact) {
+      <div class="mt-4 flex items-center">
+        <div
+          [style.background-color]="selectedContact.bg_color"
+          class="flex justify-center items-center mx-8 h-28 w-28 rounded-full text-white text-5xl border-white border-2 border-solid"
+        >
+          {{ getInitialsForAvatar(selectedContact.name) }}
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="text-3xl">{{ selectedContact.name }}</span>
+          <div class="flex gap-4">
+            <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Edit" icon="pi pi-pencil" (click)="toggleDialog(true, selectedContact)" />
+            <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Delete" icon="pi pi-trash" (click)="openDeleteDialog($event, selectedContact.id)"/>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="flex flex-col">
-      <span class="text-xl mt-8 mb-4">Contact Information</span>
-      <span class="my-4 font-bold">Email</span>
-      <a class="text-blue-primary hover:font-bold hover:underline" href="mailto:{{ selectedContact.email }}">{{ selectedContact.email }}</a>
-      <span class="my-4 font-bold">Phone</span>
-      <span>{{ selectedContact.phone }}</span>
-    </div>
-    }
-  </div>
+      <div class="flex flex-col">
+        <span class="text-xl mt-8 mb-4">Contact Information</span>
+        <span class="my-4 font-bold">Email</span>
+        <a class="text-blue-primary hover:font-bold hover:underline" href="mailto:{{ selectedContact.email }}">{{ selectedContact.email }}</a>
+        <span class="my-4 font-bold">Phone</span>
+        <span>{{ selectedContact.phone }}</span>
+      </div>
+      }
+    </article>
+  }
+
 
   @if(showDialog) {
     <app-dialog-contact

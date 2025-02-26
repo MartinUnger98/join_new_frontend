@@ -17,7 +17,10 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   showDialog: boolean = false;
   isEditMode: boolean = false;
   selectedContact: Contact | null = null;
+  showArticleContacts: boolean = true;
+  showArticleDetails: boolean = false;
   private destroyed$ = new Subject<void>();
+  private resizeListener!: () => void;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -29,6 +32,25 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   async ngOnInit() {
     await this.backendService.loadContacts();
     this.subscribeObservables();
+    this.updateView();
+    this.resizeListener = () => this.updateView();
+    window.addEventListener('resize', this.resizeListener);
+  }
+
+  updateView() {
+    if (window.innerWidth > 1320) {
+      this.showArticleContacts = true;
+      this.showArticleDetails = true;
+    } else {
+      this.showArticleDetails = false;
+    }
+  }
+
+  toggleView(view: number) {
+    if (window.innerWidth < 1320) {
+      this.showArticleContacts = view === 1;
+      this.showArticleDetails = view === 0;
+    }
   }
 
   ngAfterViewInit() {
@@ -93,6 +115,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showContactDetails(contact: Contact) {
+    this.toggleView(0);
     this.selectedContact = contact
   }
 
