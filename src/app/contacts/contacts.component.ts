@@ -21,6 +21,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   showArticleDetails: boolean = false;
   private destroyed$ = new Subject<void>();
   private resizeListener!: () => void;
+  isMobileView: boolean = false;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -33,7 +34,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     await this.backendService.loadContacts();
     this.subscribeObservables();
     this.updateView();
-    this.resizeListener = () => this.updateView();
+    this.resizeListener = () => this.handleResize();
     window.addEventListener('resize', this.resizeListener);
   }
 
@@ -42,12 +43,27 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.showArticleContacts = true;
       this.showArticleDetails = true;
     } else {
+      this.showArticleContacts = true;
       this.showArticleDetails = false;
     }
   }
 
+  handleResize() {
+    const isNowMobile = window.innerWidth < 1320;
+
+    if (!this.isMobileView && isNowMobile) {
+      this.showArticleContacts = true;
+      this.showArticleDetails = false;
+    } else if (this.isMobileView && !isNowMobile) {
+      this.showArticleContacts = true;
+      this.showArticleDetails = true;
+    }
+
+    this.isMobileView = isNowMobile;
+  }
+
   toggleView(view: number) {
-    if (window.innerWidth < 1320) {
+    if (this.isMobileView) {
       this.showArticleContacts = view === 1;
       this.showArticleDetails = view === 0;
     }

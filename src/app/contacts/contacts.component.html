@@ -1,7 +1,7 @@
 <section class="flex 800:pl-60 pt-36">
   @if (showArticleContacts) {
     <article
-      class="mt-8 px-4 1320:px-0 800:mt-16 w-full flex flex-col items-center overflow-y-auto calcHeightContacts"
+      class="mt-8 px-4 1320:px-0 w-full 1320:w-160 flex flex-col items-center overflow-y-auto calcHeightContacts"
     >
       <app-button
         text="Add new Contact"
@@ -51,15 +51,16 @@
   }
 
   @if (showArticleDetails) {
-    <article class="pt-12 pl-8 flex flex-col w-full">
+    <article class="pt-4 px-4 600:pl-8 flex flex-col w-full">
       <div class="flex items-center justify-between w-full pr-6">
-        <div class="flex items-center justify-start flex-col 600:flex-row">
+        <div class="flex 600:items-center justify-start flex-col 600:flex-row">
           <h1 class="500:text-6xl text-4xl font-bold mb-3">Contacts</h1>
           <span class="h-12 w-1 bg-blue-primary mx-4 hidden 600:block"></span>
           <h2 class="text-2xl">Better with a team</h2>
+          <span class="h-1 w-36 bg-blue-primary mt-4 600:hidden"></span>
         </div>
         <p-button
-          class="text-blue-primary hover:bg-slate-200 rounded-full text-3xl ml-4"
+          class="text-blue-primary hover:bg-slate-200 rounded-full text-3xl ml-4 1320:hidden"
           icon="pi pi-arrow-left"
           size="large"
           (click)="toggleView(1)"
@@ -67,27 +68,27 @@
       </div>
 
       @if(selectedContact) {
-      <div class="mt-4 flex items-center">
+      <div class="mt-4 flex 600:items-center flex-col 600:flex-row">
         <div
           [style.background-color]="selectedContact.bg_color"
-          class="flex justify-center items-center mx-8 h-28 w-28 rounded-full text-white text-5xl border-white border-2 border-solid"
+          class="flex justify-center items-center 600:mx-8 h-20 w-20 600:h-28 600:w-28 rounded-full text-white text-5xl border-white border-2 border-solid"
         >
           {{ getInitialsForAvatar(selectedContact.name) }}
         </div>
-        <div class="flex flex-col gap-2">
-          <span class="text-3xl">{{ selectedContact.name }}</span>
+        <div class="flex flex-col gap-2 600:calcMaxWidth">
+          <span class="text-3xl overflow-hidden text-ellipsis whitespace-nowrap leading-10">{{ selectedContact.name }}</span>
           <div class="flex gap-4">
             <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Edit" icon="pi pi-pencil" (click)="toggleDialog(true, selectedContact)" />
             <p-button class="text-xl hover:text-blue-primary hover:font-bold w-20" label="Delete" icon="pi pi-trash" (click)="openDeleteDialog($event, selectedContact.id)"/>
           </div>
         </div>
       </div>
-      <div class="flex flex-col">
-        <span class="text-xl mt-8 mb-4">Contact Information</span>
-        <span class="my-4 font-bold">Email</span>
-        <a class="text-blue-primary hover:font-bold hover:underline" href="mailto:{{ selectedContact.email }}">{{ selectedContact.email }}</a>
-        <span class="my-4 font-bold">Phone</span>
-        <span>{{ selectedContact.phone }}</span>
+      <div class="flex flex-col w-full p-y">
+        <span class="text-xl mt-8">Contact Information</span>
+        <span class="my-3 font-bold">Email</span>
+        <a class="text-blue-primary hover:underline overflow-hidden text-ellipsis whitespace-nowrap" href="mailto:{{ selectedContact.email }}">{{ selectedContact.email }}</a>
+        <span class="my-3 font-bold">Phone</span>
+        <span class="overflow-hidden text-ellipsis whitespace-nowrap">{{ selectedContact.phone }}</span>
       </div>
       }
     </article>

@@ -37,3 +37,7 @@ body {
 section {
   min-height: calc(100vh - 5rem);
 }
+
+.p-toast {
+  max-width: calc(100vw - 40px);
+}
