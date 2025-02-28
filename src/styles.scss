@@ -4,6 +4,16 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@layer utilities {
+  .scrollbar-x-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-x-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 body {
   min-height: 100vh;
   background-color: #f6f7f8;

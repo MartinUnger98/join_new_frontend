@@ -1,5 +1,5 @@
 <section
-  class="flex flex-col 800:pl-72 pt-36 pb-14 items-center 1200:items-start pr-5"
+  class="flex flex-col px-6 800:pl-72 pt-36 pb-14 800:pr-5 items-center 1200:items-start  max-w-screen-1320"
 >
   <header class="flex items-center justify-between w-full">
     <h1 class="text-6xl font-bold">Board</h1>
@@ -31,20 +31,26 @@
       ></app-button>
     </div>
   </header>
-  <main class="flex w-full justify-between mt-14">
+  <main class="flex w-full justify-between mt-14 flex-col 1320:flex-row max-w-screen-1200">
     @for (taskStatus of taskStatuses; track taskStatus) {
     <div class="flex flex-col gap-6">
       <h1 class="text-xl text-blue-dark font-bold">{{ taskStatus }}</h1>
-      <div class="flex flex-col gap-6 min-h-full" pDroppable (onDrop)="drop(taskStatus)" >
+      <div class="flex flex-row gap-6 min-h-full 1320:flex-col overflow-x-auto scrollbar-x-hide py-2 px-4" pDroppable (onDrop)="drop(taskStatus)" >
         @if (tasksExistAtStatus(taskStatus)) {
           @for (task of filteredTasks; track task.id) {
-            @if (task.status === taskStatus && task.id) {
+            @if (task.status === taskStatus && task.id && isDraggable) {
               <app-card-task
                 [taskId]="task.id"
                 pDraggable
                 (onDragStart)="task !== undefined && dragStart(task)"
                 (onDragEnd)="dragEnd()"
                 [class.rotate-3]="draggedTask === task"
+                (click)="setSelectedTaskId(task.id)"
+              >
+              ></app-card-task>
+            } @else if(task.status === taskStatus && task.id){
+              <app-card-task
+                [taskId]="task.id"
                 (click)="setSelectedTaskId(task.id)"
               >
               ></app-card-task>

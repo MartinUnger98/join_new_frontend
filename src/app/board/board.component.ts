@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { BackendServicesService } from '../services/backend-services.service';
 import { MessageService } from 'primeng/api';
@@ -21,6 +21,7 @@ export class BoardComponent implements OnInit, OnDestroy{
   openDialog: string = '';
   selectedTaskId:number | null = null;
   searchTerm: string = '';
+  isDraggable: boolean = window.innerWidth > 800;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -28,13 +29,24 @@ export class BoardComponent implements OnInit, OnDestroy{
     private messageService: MessageService,
   ) { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isDraggable = event.target.innerWidth > 800;
+  }
+
   async ngOnInit() {
     await this.backendService.loadTasks();
     this.subscribeObservables();
     this.filterTasks();
+    window.addEventListener('resize', this.checkScreenSize.bind(this));
+  }
+
+  checkScreenSize() {
+    this.isDraggable = window.innerWidth > 800;
   }
 
   ngOnDestroy() {
+    window.removeEventListener('resize', this.checkScreenSize.bind(this));
     this.destroyed$.next();
     this.destroyed$.complete();
   }
