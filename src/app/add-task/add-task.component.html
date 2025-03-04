@@ -53,7 +53,7 @@
             >
               {{ getInitialsForAvatar(contact.name) }}
             </div>
-            <div class="w-full flex justify-start ml-3">
+            <div class="calcTextWidth flex justify-start ml-3">
               <span class="text-ellipsis overflow-hidden whitespace-nowrap">{{
                 contact.name
               }}</span>
@@ -61,7 +61,16 @@
           </ng-template>
           <ng-template pTemplate="footer">
             <app-button
+              class="hidden 420:flex"
               text="Add new Contact"
+              icon="pi pi-user-plus"
+              iconPos="right"
+              btnStyle="primary"
+              btnSize="big"
+              (click)="toggleDialog()"
+            ></app-button>
+            <app-button
+              class="420:hidden"
               icon="pi pi-user-plus"
               iconPos="right"
               btnStyle="primary"

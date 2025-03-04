@@ -208,6 +208,7 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
 
   async createTask(task: Task) {
     await this.backendService.createTask(task);
+    this.messageService.add({ severity:'success', summary: 'Success', detail: this.backendService.toastMessages.successCreatedTask });
     this.clearAllInputs();
   }
 

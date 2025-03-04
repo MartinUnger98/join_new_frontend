@@ -96,3 +96,7 @@ p-iconField {
     }
   }
 }
+
+.calcTextWidth {
+  width: calc(100% - 3.25rem);
+}
