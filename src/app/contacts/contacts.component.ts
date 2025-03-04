@@ -18,10 +18,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   isEditMode: boolean = false;
   selectedContact: Contact | null = null;
   showArticleContacts: boolean = true;
-  showArticleDetails: boolean = false;
   private destroyed$ = new Subject<void>();
-  private resizeListener!: () => void;
-  isMobileView: boolean = false;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -33,40 +30,10 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   async ngOnInit() {
     await this.backendService.loadContacts();
     this.subscribeObservables();
-    this.updateView();
-    this.resizeListener = () => this.handleResize();
-    window.addEventListener('resize', this.resizeListener);
   }
 
-  updateView() {
-    if (window.innerWidth > 1320) {
-      this.showArticleContacts = true;
-      this.showArticleDetails = true;
-    } else {
-      this.showArticleContacts = true;
-      this.showArticleDetails = false;
-    }
-  }
-
-  handleResize() {
-    const isNowMobile = window.innerWidth < 1320;
-
-    if (!this.isMobileView && isNowMobile) {
-      this.showArticleContacts = true;
-      this.showArticleDetails = false;
-    } else if (this.isMobileView && !isNowMobile) {
-      this.showArticleContacts = true;
-      this.showArticleDetails = true;
-    }
-
-    this.isMobileView = isNowMobile;
-  }
-
-  toggleView(view: number) {
-    if (this.isMobileView) {
-      this.showArticleContacts = view === 1;
-      this.showArticleDetails = view === 0;
-    }
+  toggleView(view: boolean) {
+    this.showArticleContacts = view;
   }
 
   ngAfterViewInit() {
@@ -131,7 +98,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showContactDetails(contact: Contact) {
-    this.toggleView(0);
+    this.toggleView(!this.showArticleContacts);
     this.selectedContact = contact
   }
 
