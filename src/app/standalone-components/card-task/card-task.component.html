@@ -1,7 +1,28 @@
 @if (task) {
-  <div class="flex flex-col gap-4 p-4 shadow-card-task rounded-3xl w-56 min-h-48 cursor-pointer">
-    <div class="flex justify-between items-center">
-      <p class="text-white px-4 py-1 rounded-lg text-lg" [class]="getCategoryBg(task.category)">{{task.category}}</p>
+  <article class="flex flex-col gap-4 p-4 shadow-card-task rounded-3xl w-64 800:w-56 min-h-48 cursor-pointer bg-white">
+    <div class="flex w-full justify-between">
+      <div class="flex justify-between items-center">
+        <p class="text-white px-4 py-1 rounded-lg text-lg" [class]="getCategoryBg(task.category)">{{task.category}}</p>
+      </div>
+      <div class="flex">
+        @if (task.status != 'To do') {
+          <p-button
+            class="text-blue-primary hover:bg-slate-200 rounded-full text-3xl 800:hidden"
+            icon="pi pi-arrow-up"
+            size="large"
+            (click)="moveUp()"
+          ></p-button>
+        }
+        @if (task.status != 'Done') {
+          <p-button
+            class="text-blue-primary hover:bg-slate-200 rounded-full text-3xl 800:hidden"
+            icon="pi pi-arrow-down"
+            size="large"
+            (click)="moveDown()"
+          ></p-button>
+        }
+      </div>
+
     </div>
     <div class="flex flex-col gap-1">
       <h1 class="font-bold text-blue-dark">{{task.title}}</h1>
@@ -30,5 +51,5 @@
       </div>
       <i class="pi text-xl" [class]="getPrioIcon(task.priority)"></i>
     </div>
-  </div>
+  </article>
 }

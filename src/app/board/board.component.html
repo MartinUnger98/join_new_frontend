@@ -1,41 +1,74 @@
 <section
-  class="flex flex-col px-6 800:pl-72 pt-36 pb-14 800:pr-5 items-center 1200:items-start  max-w-screen-1320"
+  class="flex flex-col px-3 420:px-6 800:pl-72 pt-36 pb-14 800:pr-5 items-center 1200:items-start  max-w-screen-1320"
 >
-  <header class="flex items-center justify-between w-full">
-    <h1 class="text-6xl font-bold">Board</h1>
-    <div class="flex items center gap-6 ">
-      <p-iconField iconPosition="right">
-        <ng-container>
-          <p-inputIcon
-            styleClass="pi pi-search"
-            class="cursor-pointer hover:bg-gray-input"
+  <header class="flex flex-col items-end w-full">
+    <div class="flex items-center justify-between w-full">
+      <h1 class="500:text-6xl text-4xl font-bold">Board</h1>
+      <div class="flex items center gap-6 pt-2">
+        <p-iconField iconPosition="right" class="hidden 1000:flex">
+          <ng-container>
+            <p-inputIcon
+              styleClass="pi pi-search"
+              class="cursor-pointer hover:bg-gray-input"
+            />
+          </ng-container>
+          <input
+            #inputFieldSubtask
+            type="text"
+            class="border border-gray-input min-h-10 pr-12 pl-2"
+            placeholder="Find Task"
+            name="subtasks"
+            pInputText
+            [(ngModel)]="searchTerm"
+            (input)="onSearchTermChange()"
           />
-        </ng-container>
-        <input
-          #inputFieldSubtask
-          type="text"
-          class="border border-gray-input min-h-10 pr-12 pl-2"
-          placeholder="Find Task"
-          name="subtasks"
-          pInputText
-          [(ngModel)]="searchTerm"
-          (input)="onSearchTermChange()"
-        />
-      </p-iconField>
-      <app-button
-        text="Add Task"
-        icon="pi pi-plus"
-        iconPos="right"
-        btnStyle="primary"
-        (click)="toggleDialog('addTask')"
-      ></app-button>
+        </p-iconField>
+        <app-button
+          text="Add Task"
+          icon="pi pi-plus"
+          iconPos="right"
+          btnStyle="primary"
+          class="hidden 800:flex"
+          (click)="toggleDialog('addTask')"
+        ></app-button>
+        <app-button
+          icon="pi pi-plus"
+          iconPos="right"
+          btnStyle="primary"
+          class="flex 800:hidden"
+          (click)="toggleDialog('addTask')"
+        ></app-button>
+      </div>
     </div>
+    <p-iconField iconPosition="right" class="1000:hidden pt-8 w-full 800:w-auto">
+      <ng-container>
+        <p-inputIcon
+          styleClass="pi pi-search"
+          class="cursor-pointer hover:bg-gray-input"
+        />
+      </ng-container>
+      <input
+        #inputFieldSubtask
+        type="text"
+        class="border border-gray-input min-h-10 pr-12 pl-2 w-full 800:w-auto"
+        placeholder="Find Task"
+        name="subtasks"
+        pInputText
+        [(ngModel)]="searchTerm"
+        (input)="onSearchTermChange()"
+      />
+    </p-iconField>
   </header>
   <main class="flex w-full justify-between mt-14 flex-col 1320:flex-row max-w-screen-1200">
     @for (taskStatus of taskStatuses; track taskStatus) {
     <div class="flex flex-col gap-6">
       <h1 class="text-xl text-blue-dark font-bold">{{ taskStatus }}</h1>
-      <div class="flex flex-row gap-6 min-h-full 1320:flex-col overflow-x-auto scrollbar-x-hide py-2 px-4" pDroppable (onDrop)="drop(taskStatus)" >
+      <div
+        class="flex flex-row gap-12 min-h-full 1320:flex-col overflow-x-auto scrollbar-x-hide py-2 px-4 hover:bg-gray-200 no-select"
+        pDroppable
+        (onDrop)="drop(taskStatus)"
+        appHorizontalScroll
+      >
         @if (tasksExistAtStatus(taskStatus)) {
           @for (task of filteredTasks; track task.id) {
             @if (task.status === taskStatus && task.id && isDraggable) {
@@ -46,12 +79,17 @@
                 (onDragEnd)="dragEnd()"
                 [class.rotate-3]="draggedTask === task"
                 (click)="setSelectedTaskId(task.id)"
+                class="z-10"
+                >
               >
               ></app-card-task>
             } @else if(task.status === taskStatus && task.id){
               <app-card-task
                 [taskId]="task.id"
                 (click)="setSelectedTaskId(task.id)"
+                [movedTask]="task"
+                (moveTaskUp)="moveTask($event, true)"
+                (moveTaskDown)="moveTask($event, false)"
               >
               ></app-card-task>
             }

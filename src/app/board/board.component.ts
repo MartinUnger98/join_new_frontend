@@ -105,6 +105,20 @@ export class BoardComponent implements OnInit, OnDestroy{
     }
   }
 
+  async moveTask(task: Task, directionUp: boolean) {
+    if (task) {
+      let currentIndex = this.taskStatuses.indexOf(task.status);
+      if (currentIndex !== -1) {
+        let newIndex = directionUp ? currentIndex - 1 : currentIndex + 1;
+        if (newIndex >= 0 && newIndex < this.taskStatuses.length) {
+          task.status = this.taskStatuses[newIndex];
+          await this.backendService.editTask(task);
+        }
+      }
+    }
+  }
+
+
   toggleDialog(dialog: string) {
     this.showDialog = true;
     this.openDialog = dialog;

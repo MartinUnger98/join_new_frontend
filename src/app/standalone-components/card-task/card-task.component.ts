@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
@@ -7,6 +7,8 @@ import { Subtask, Task } from 'src/app/add-task/addTask.model';
 import { Contact } from 'src/app/contacts/contact.model';
 import { BackendServicesService } from 'src/app/services/backend-services.service';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ButtonModule } from 'primeng/button';
+
 
 @Component({
   selector: 'app-card-task',
@@ -14,7 +16,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
   imports: [
     CommonModule,
     FormsModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ButtonModule
   ],
   templateUrl: './card-task.component.html',
   styleUrl: './card-task.component.scss',
@@ -22,6 +25,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
 })
 export class CardTaskComponent {
   @Input() taskId: number | null = null;
+  @Input() movedTask!: Task;
+  @Output() moveTaskUp = new EventEmitter<Task>();
+  @Output() moveTaskDown = new EventEmitter<Task>();
   task: Task | null = null;
 
   contacts: Contact[] = [];
@@ -112,8 +118,11 @@ export class CardTaskComponent {
     return count;
   }
 
+  moveUp() {
+    this.moveTaskUp.emit(this.movedTask);
+  }
 
-
-
-
+  moveDown() {
+    this.moveTaskDown.emit(this.movedTask);
+  }
 }

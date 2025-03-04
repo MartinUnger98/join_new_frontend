@@ -37,6 +37,7 @@ import { DialogTaskDetailComponent } from './dialog-task-detail/dialog-task-deta
 import { HelpviewComponent } from './helpview/helpview.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
+import { HorizontalScrollDirective } from './board/horizontal-scroll.directive';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
     DialogTaskDetailComponent,
     HelpviewComponent,
     PrivacyPolicyComponent,
-    LegalNoticeComponent
+    LegalNoticeComponent,
+    HorizontalScrollDirective
   ],
   imports: [
     BrowserModule,
