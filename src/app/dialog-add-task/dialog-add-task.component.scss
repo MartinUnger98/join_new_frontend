@@ -1,1 +1,33 @@
+p-dialog {
+  @media (max-width: 600px) {
+    ::ng-deep .p-dialog-header,
+    ::ng-deep .p-dialog {
+      min-width: 100%;
+    }
+  }
+  @media (min-width: 600px) {
+    ::ng-deep .p-dialog-header,
+    ::ng-deep .p-dialog {
+      border-top-left-radius: 32px;
+      border-top-right-radius: 32px;
+    }
+    ::ng-deep .p-dialog-content,
+    ::ng-deep .p-dialog {
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+    }
+  }
 
+  .hidden-scrollbar::-webkit-scrollbar,
+  ::ng-deep .p-dialog-content::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  .hidden-scrollbar,
+  ::ng-deep .p-dialog-content {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

@@ -10,11 +10,17 @@
     background-color: #2a3647;
     color: white;
     align-items: flex-start;
+    position: relative;
+    z-index: 10;
     @media (min-width: 600px) {
       border-top-left-radius: 2rem;
       border-top-right-radius: 2rem;
       padding: 3rem;
     }
+  }
+
+  .p-dialog, .p-dialog-content, .p-dialog-header {
+    overflow: visible !important;
   }
 
   .p-dialog-header-icon:hover {
@@ -54,4 +60,12 @@
       border: none;
     }
   }
+
+  .above-header {
+    transform: translateY(-3.5rem);
+    position: relative;
+    z-index: 20; /* Höher als .p-dialog-header (10) */
+  }
+
+
 }

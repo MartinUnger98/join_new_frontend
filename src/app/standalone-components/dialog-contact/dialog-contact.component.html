@@ -22,7 +22,7 @@
       <div
         [style.background-color]="contact?.bg_color"
         class="flex justify-center items-center h-28 w-28 900:w-40 rounded-full text-white text-4xl
-              border-white border-2 border-solid 900:mr-20 900:ml-8 -mt-14 900:mt-0 z-10 mb-8 900:mb-0"
+              border-white border-2 border-solid 900:mr-20 900:ml-8 900:mt-0 z-10 mb-8 900:mb-0 above-header"
       >
         {{ getInitialsForAvatar(contact?.name || '') }}
       </div>
@@ -30,7 +30,7 @@
     }
     @if(!isEditMode) {
       <p-avatar
-      class="avatar-no-btn 900:mr-20 900:ml-8 -mt-14 900:mt-0 z-10 mb-8 900:mb-0"
+      class="avatar-no-btn above-header 900:mr-20 900:ml-8 900:mt-0 z-10 mb-8 900:mb-0"
       icon="pi pi-user"
       size="xlarge"
       shape="circle"

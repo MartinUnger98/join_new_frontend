@@ -1,6 +1,10 @@
 <section
-  class="flex flex-col items-center 1200:items-start"
-  [ngClass]="{'800:pl-72 pt-36 pb-14': !isInDialog}">
+  class="flex flex-col items-center 1200:items-start min-h-full"
+  [ngClass]="{
+    '800:pl-72 pt-36 pb-14': !isInDialog,
+    'min-h-full 600:px-16 900:px-0': isInDialog
+    }"
+  >
   @if(!editingTask) {
     <h1 class="500:text-6xl text-4xl font-bold mb-4 500:mb-12">Add Task</h1>
   }
@@ -11,7 +15,6 @@
       '900:flex-row': isInDialog,
       '1200:flex-row': !isInDialog,
       '420:px-10': editingTask,
-      'px-10': !editingTask,
     }"
     (ngSubmit)="onSubmit()"
   >
