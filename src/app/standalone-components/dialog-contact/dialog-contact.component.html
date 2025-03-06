@@ -1,10 +1,11 @@
 <p-dialog
+  class="contact-dialog-wrapper"
   [modal]="true"
   draggable="false"
   [(visible)]="visible"
   (onHide)="closeDialog()"
 >
-  <ng-template pTemplate="header">
+  <ng-template pTemplate="header" class="contact-dialog">
     <div class="z-5 py-16 600:p-4">
       <img class="w-14 h-16 mb-8 hidden 900:block" src="assets/img/join_logo_white.svg" alt="join_logo_white.svg" />
       <h2 class="text-3xl 600:text-5xl font-bold mb-2">{{ isEditMode ? 'Edit' : 'Add' }} contact</h2>

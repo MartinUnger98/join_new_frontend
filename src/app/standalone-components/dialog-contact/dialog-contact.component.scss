@@ -1,65 +1,55 @@
-:host ::ng-deep .p-progress-spinner {
-  width: 2rem !important;
-  height: 2rem !important;
-}
+:host ::ng-deep .contact-dialog-wrapper {
 
-::ng-deep .p-dialog
-::ng-deep .p-dialog-header {
-  position: relative;
-  overflow: visible;
-}
-
-::ng-deep .p-dialog-content {
-  overflow: visible;
-}
-
-
-::ng-deep .p-dialog-header {
-  padding: 2rem;
-  background-color: #2a3647;
-  color: white;
-  align-items: flex-start;
-  @media (min-width: 600px) {
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    padding: 3rem;
+  .p-progress-spinner {
+    width: 2rem !important;
+    height: 2rem !important;
   }
-}
 
-::ng-deep .p-dialog-header-icon {
-  &:hover {
+  .p-dialog-header {
+    padding: 2rem;
+    background-color: #2a3647;
+    color: white;
+    align-items: flex-start;
+    @media (min-width: 600px) {
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+      padding: 3rem;
+    }
+  }
+
+  .p-dialog-header-icon:hover {
     background-color: #29abe2;
   }
-}
 
-::ng-deep .p-dialog {
-  border-radius: 2rem;
-  width: 100%;
-  @media (min-width: 600px) {
-    margin: 0 4rem;
-    width: 50rem;
+  .p-dialog {
+    border-radius: 2rem;
+    width: 100%;
+    @media (min-width: 600px) {
+      margin: 0 4rem;
+      width: 50rem;
+    }
   }
-}
 
-::ng-deep .p-dialog-content {
-  padding: 0rem 2rem 2rem 2rem;
-  @media (min-width: 600px) {
-    border-bottom-left-radius: 2rem;
-    border-bottom-right-radius: 2rem;
-    padding: 0rem 3rem 3rem 3rem;
+  .p-dialog-content {
+    padding: 0rem 2rem 2rem 2rem;
+    @media (min-width: 600px) {
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+      padding: 0rem 3rem 3rem 3rem;
+    }
+    @media (min-width: 900px) {
+      padding: 3rem;
+    }
   }
-  @media (min-width: 900px) {
-    padding: 3rem;
-  }
-}
 
-::ng-deep .avatar-no-btn {
-  div {
+  .avatar-no-btn div {
     width: 7rem;
     height: 7rem;
+
     span {
       font-size: 2.25rem;
     }
+
     &:hover {
       border: none;
     }
