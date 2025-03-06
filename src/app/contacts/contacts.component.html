@@ -1,6 +1,6 @@
 <section class="flex 800:pl-60 pt-36">
   <article
-    class="mt-8 px-4 1320:px-0 w-full 1320:w-160 flex-col items-center overflow-y-auto calcHeightContacts"
+    class="1000:mt-8 px-4 1320:px-0 w-full 1320:w-160 flex-col items-center overflow-y-auto calcHeightContacts"
     [ngClass]="!showArticleContacts ? 'hidden 1320:flex' : 'flex'"
   >
     <app-button
@@ -12,7 +12,7 @@
       class="fixed z-10 hidden 1000:block"
       (click)="toggleDialog()"
     ></app-button>
-    <div class="mt-16 w-full 1320:w-80 max-h-full">
+    <div class="1000:mt-16 w-full 1320:w-80 max-h-full">
       @for (initial of contactsInitials;track initial) {
       <h1 class="py-8 pl-11 text-2xl font-normal">{{ initial }}</h1>
       <div class="w-full bg-gray-300 h-1px"></div>
@@ -72,7 +72,7 @@
     <div class="mt-4 flex 600:items-center flex-col 600:flex-row">
       <div
         [style.background-color]="selectedContact.bg_color"
-        class="flex justify-center items-center 600:mx-8 h-20 w-20 600:h-28 600:w-28 rounded-full text-white text-5xl border-white border-2 border-solid"
+        class="flex justify-center items-center 600:mx-8 h-20 w-20 600:h-28 600:w-28 rounded-full text-white text-3xl 600:text-5xl border-white border-2 border-solid"
       >
         {{ getInitialsForAvatar(selectedContact.name) }}
       </div>

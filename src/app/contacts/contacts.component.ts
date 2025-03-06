@@ -76,8 +76,10 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   toggleDialog(isEdit: boolean = false, contact: Contact | null = null) {
+    if (contact) {
+      this.selectedContact = contact;
+    }
     this.isEditMode = isEdit;
-    this.selectedContact = contact;
     this.showDialog = true;
   }
 
@@ -85,7 +87,6 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showDialog = false;
     if (success) {
       this.showSuccess(this.isEditMode ? this.backendService.toastMessages.successUpdatedContact : this.backendService.toastMessages.successCreatedContact);
-      this.selectedContact = null;
     }
   }
 

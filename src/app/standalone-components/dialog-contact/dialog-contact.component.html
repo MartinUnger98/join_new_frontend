@@ -1,34 +1,36 @@
 <p-dialog
   [modal]="true"
   draggable="false"
-  [style]="{ width: '50rem' }"
   [(visible)]="visible"
   (onHide)="closeDialog()"
 >
   <ng-template pTemplate="header">
-    <div>
-      <img class="w-14 h-16 mb-8" src="assets/img/join_logo_white.svg" alt="" />
-      <h2 class="text-5xl font-bold mb-2">{{ isEditMode ? 'Edit' : 'Add' }} contact</h2>
+    <div class="z-5 py-16 600:p-4">
+      <img class="w-14 h-16 mb-8 hidden 900:block" src="assets/img/join_logo_white.svg" alt="join_logo_white.svg" />
+      <h2 class="text-3xl 600:text-5xl font-bold mb-2">{{ isEditMode ? 'Edit' : 'Add' }} contact</h2>
       @if(!isEditMode){
-        <span class="text-lg mb-2">Tasks are better with a team!</span>
+        <span class="600:text-lg mb-2">Tasks are better with a team!</span>
       }
       <div class="h-1 w-20 bg-blue-primary"></div>
     </div>
   </ng-template>
 
-  <div class="flex items-center w-full">
+
+  <div class="flex items-center w-full flex-col 900:flex-row">
     @if(isEditMode) {
       <div
         [style.background-color]="contact?.bg_color"
-        class="flex justify-center items-center h-28 w-40 rounded-full text-white text-4xl border-white border-2 border-solid mr-20 ml-8">
+        class="flex justify-center items-center h-28 w-28 900:w-40 rounded-full text-white text-4xl
+              border-white border-2 border-solid 900:mr-20 900:ml-8 -mt-14 900:mt-0 z-10 mb-8 900:mb-0"
+      >
         {{ getInitialsForAvatar(contact?.name || '') }}
       </div>
+
     }
     @if(!isEditMode) {
       <p-avatar
-      class="avatar-no-btn mr-20 ml-8"
+      class="avatar-no-btn 900:mr-20 900:ml-8 -mt-14 900:mt-0 z-10 mb-8 900:mb-0"
       icon="pi pi-user"
-      styleClass="mr-2"
       size="xlarge"
       shape="circle"
     />
@@ -70,7 +72,7 @@
               : 'Invalid phonenumber'
             : ''"
       ></app-input-field>
-      <div class="flex gap-8 mt-4">
+      <div class="flex gap-8 mt-4 flex-col-reverse 500:flex-row">
         <app-button
           text="Cancel"
           btnStyle="secondary"

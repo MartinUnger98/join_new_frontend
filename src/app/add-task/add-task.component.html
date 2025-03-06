@@ -6,8 +6,13 @@
   }
   <form
     [formGroup]="addTaskForm"
-    class="flex justify-start items-start gap-14 flex-col 500:w-auto w-full px-10 500:px-0"
-    [ngClass]="{ '900:flex-row': isInDialog, '1200:flex-row': !isInDialog }"
+    class="flex justify-start items-start gap-14 flex-col 500:w-auto w-full 500:px-0"
+    [ngClass]="{
+      '900:flex-row': isInDialog,
+      '1200:flex-row': !isInDialog,
+      '420:px-10': editingTask,
+      'px-10': !editingTask,
+    }"
     (ngSubmit)="onSubmit()"
   >
     <div class="600:min-w-96 min-w-full flex flex-col gap-5">
