@@ -25,3 +25,10 @@ p-iconField {
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
+
+:host ::ng-deep .contact-dialog-wrapper .p-dialog {
+  @media (min-width: 600px) {
+    margin: 0 !important
+  }
+}

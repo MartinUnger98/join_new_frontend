@@ -11,8 +11,6 @@
         <div class="flex justify-between items-center">
           <p class="text-white px-4 py-1 rounded-lg text-lg" [class]="getCategoryBg(task.category)">{{task.category}}</p>
         </div>
-      } @else {
-        <h1 class="font-bold text-blue-dark text-5xl">Edit Task</h1>
       }
     </ng-template>
     @if (!editMode) {

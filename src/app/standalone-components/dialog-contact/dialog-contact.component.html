@@ -1,5 +1,6 @@
 <p-dialog
   class="contact-dialog-wrapper"
+  [ngClass]="{ 'no-margin-dialog': dialogHasNoMargin }"
   [modal]="true"
   draggable="false"
   [(visible)]="visible"

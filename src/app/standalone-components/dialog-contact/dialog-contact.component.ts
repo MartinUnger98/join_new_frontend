@@ -12,6 +12,7 @@ import { ToastModule } from 'primeng/toast';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-contact',
@@ -36,6 +37,7 @@ export class DialogContactComponent implements OnInit {
   @Input() contact: Contact | null = null;
   @Input() isEditMode: boolean = false;
   @Output() close = new EventEmitter<boolean>();
+  dialogHasNoMargin = false;
   visible: boolean = true;
   isLoading: boolean = false;
   bg_colors: string[] = [
@@ -59,10 +61,12 @@ export class DialogContactComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private formBuilder: FormBuilder,
-    private backendService: BackendServicesService
+    private backendService: BackendServicesService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
+    this.dialogHasNoMargin = this.router.url.includes('/board');
     this.createContactForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
