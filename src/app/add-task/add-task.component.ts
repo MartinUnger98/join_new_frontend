@@ -93,6 +93,7 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     if(task.subtasks){
       this.subTasks = task.subtasks.map(subtask => ({
         value: subtask.value,
+        done: subtask.done,
         edit: false,
       }));
     }
