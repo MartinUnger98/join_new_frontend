@@ -103,9 +103,8 @@ class="
         ></p-checkbox>
         <span>
           I accept the
-          <a class="text-blue-primary font-bold hover:underline" href=""
-            >Privacy Policy</a
-          >
+          <a class="text-blue-primary font-bold hover:underline" routerLink="/privacy-policy"
+            >Privacy Policy</a>
         </span>
       </div>
       @if (f['acceptTerms'].touched && f['acceptTerms'].invalid) {
@@ -138,8 +137,8 @@ class="
     flex gap-8 w-full justify-center py-8
     "
 >
-  <a href="" class="text-gray-400 hover:text-blue-primary">Privacy Policy</a>
-  <a href="" class="text-gray-400 hover:text-blue-primary">Legal Notice</a>
+  <a routerLink="/privacy-policy" class="text-gray-400 hover:text-blue-primary">Privacy Policy</a>
+  <a routerLink="/legal-notice" class="text-gray-400 hover:text-blue-primary">Legal Notice</a>
 </footer>
 
 <p-toast />
