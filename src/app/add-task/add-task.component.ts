@@ -27,8 +27,8 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   addTaskForm: FormGroup = new FormGroup({
     title: new FormControl(''),
     description: new FormControl(''),
-    assignedTo: new FormControl(''),
-    dueDate: new FormControl(''),
+    assigned_to: new FormControl(''),
+    due_date: new FormControl(''),
     priority: new FormControl(''),
     category: new FormControl(''),
     subtasks: new FormControl(''),
@@ -68,8 +68,8 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
       {
         title: ['', Validators.required],
         description: ['', Validators.required],
-        assignedTo: ['', Validators.required],
-        dueDate: ['', Validators.required],
+        assigned_to: ['', Validators.required],
+        due_date: ['', Validators.required],
         priority: ['', Validators.required],
         category: ['', Validators.required],
         subtasks: ['',],
@@ -84,8 +84,8 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     this.addTaskForm.patchValue({
       title: task.title,
       description: task.description,
-      assignedTo: task.assignedTo.map((id) => this.contacts.find((c) => c.id === id)),
-      dueDate: task.dueDate,
+      assigned_to: task.assigned_to.map((id) => this.contacts.find((c) => c.id === id)),
+      due_date: task.due_date,
       priority: task.priority,
       category: this.categories.find((c) => c.name === task.category),
       subtasks: '',
@@ -182,8 +182,8 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
       const task: Task = {
         title: this.addTaskForm.value.title,
         description: this.addTaskForm.value.description,
-        assignedTo: this.addTaskForm.value.assignedTo.map((contact: Contact) => contact.id),
-        dueDate: this.addTaskForm.value.dueDate,
+        assigned_to: this.addTaskForm.value.assigned_to.map((contact: Contact) => contact.id),
+        due_date: this.addTaskForm.value.due_date,
         priority: this.addTaskForm.value.priority,
         category: this.addTaskForm.value.category.name,
         subtasks: this.subTasks,

@@ -36,16 +36,16 @@
     }
     <div class="flex justify-between items-center">
       <div class="flex">
-        @for (contact of task.assignedTo; track contact; let index = $index;) {
+        @for (contact of task.assigned_to; track contact; let index = $index;) {
           @if (index < 4) {
             <div class="min-w-10 min-h-10 flex justify-center items-center rounded-full border-white border-solid border-2 -ml-3" [style.background-color]="getContactBgColor(contact)">
               <p class="text-white">{{ getContactNameById(contact) }}</p>
             </div>
           }
         }
-        @if (task.assignedTo.length > 4) {
+        @if (task.assigned_to.length > 4) {
           <div class="min-w-10 min-h-10 flex justify-center items-center rounded-full bg-gray-300 border-white border-solid border-2 -ml-3">
-            <p class="text-white">+{{ task.assignedTo.length - 4 }}</p>
+            <p class="text-white">+{{ task.assigned_to.length - 4 }}</p>
           </div>
         }
       </div>

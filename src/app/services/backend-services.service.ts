@@ -87,8 +87,8 @@ export class BackendServicesService {
       const body: Task = {
         "title": task.title,
         "description": task.description,
-        "assignedTo": task.assignedTo,
-        "dueDate": task.dueDate,
+        "assigned_to": task.assigned_to,
+        "due_date": task.due_date,
         "priority": task.priority,
         "category": task.category,
         "status": task.status
@@ -106,8 +106,8 @@ export class BackendServicesService {
     const body:Task = {
       "title": task.title,
       "description": task.description,
-      "assignedTo": task.assignedTo,
-      "dueDate": task.dueDate,
+      "assigned_to": task.assigned_to,
+      "due_date": task.due_date,
       "priority": task.priority,
       "category": task.category,
       "status": task.status

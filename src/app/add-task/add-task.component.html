@@ -46,7 +46,7 @@
       <div class="w-full flex flex-col gap-2 max-w-full">
         <p class="420:text-xl">Assigned to</p>
         <p-multiSelect
-          formControlName="assignedTo"
+          formControlName="assigned_to"
           class=""
           [options]="contacts"
           optionLabel="name"
@@ -87,7 +87,7 @@
             ></app-button>
           </ng-template>
         </p-multiSelect>
-        @if (f['assignedTo'].touched && f['assignedTo'].invalid) {
+        @if (f['assigned_to'].touched && f['assigned_to'].invalid) {
           <div class="text-red-600">
             Please select a contact!
           </div>
@@ -101,11 +101,11 @@
     <div class="600:min-w-96 min-w-full flex flex-col gap-5">
       <app-input-field
         title="Due Date"
-        formControlName="dueDate"
-        name="dueDate"
+        formControlName="due_date"
+        name="due_date"
         type="date"
         [errorMessage]="
-          f['dueDate'].touched && f['dueDate'].invalid
+          f['due_date'].touched && f['due_date'].invalid
             ? 'Due Date is required'
             : ''
         "

@@ -14,8 +14,8 @@ export interface Task {
   id?: number;
   title: string;
   description: string;
-  assignedTo: number[];
-  dueDate: string;
+  assigned_to: number[];
+  due_date: string;
   priority: string;
   category: string;
   subtasks?: any[];

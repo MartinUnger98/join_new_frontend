@@ -66,10 +66,10 @@ export class SummaryComponent implements OnInit, OnDestroy {
     this.totalTaskCount = this.getTaskCount();
 
     const urgentTasks = this.tasks
-      .filter((task) => task.priority === 'Urgent' && task.dueDate)
-      .sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+      .filter((task) => task.priority === 'Urgent' && task.due_date)
+      .sort((a, b) => new Date(a.due_date).getTime() - new Date(b.due_date).getTime());
 
-    this.upcomingDeadline = urgentTasks.length ? urgentTasks[0].dueDate : null;
+    this.upcomingDeadline = urgentTasks.length ? urgentTasks[0].due_date : null;
   }
 
   getTaskCount(status?: string, priority?: string): number {
