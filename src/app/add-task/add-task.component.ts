@@ -60,8 +60,6 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   ) {}
 
   async ngOnInit() {
-    console.log(this.editingTask);
-
     await this.backendService.loadContacts();
     this.subscribeObservables();
     this.addTaskForm = this.formBuilder.group(
@@ -216,7 +214,6 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   async updateTask(task: Task) {
-    console.log(task);
     await this.backendService.editTask(task);
   }
 

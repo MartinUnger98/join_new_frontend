@@ -163,7 +163,6 @@ export class DialogContactComponent implements OnInit {
       });
     } else {
       this.showError();
-      console.log(error);
     }
   }
 

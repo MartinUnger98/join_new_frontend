@@ -134,36 +134,26 @@ export class BoardComponent implements OnInit, OnDestroy{
     }
   }
 
-  async closeEditTaskDialog(taskid: number, result: { success: boolean, deleteTask?: boolean }) {
-    const { success, deleteTask = false } = result;
-
+  async closeEditTaskDialog(taskid: number, { success, deleteTask = false }: { success: boolean, deleteTask?: boolean }) {
     this.showDialog = false;
     this.openDialog = '';
     this.selectedTaskId = null;
 
     if (!success && !deleteTask) {
-      let editTask = this.tasks.find(task => task.id === taskid);
-      if (editTask) {
-        await this.backendService.editTask(editTask);
-      }
+      const task = this.tasks.find(t => t.id === taskid);
+      if (task) await this.backendService.editTask(task);
+      return;
     }
 
-    if (success && deleteTask) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: this.backendService.toastMessages.successDeletedTask
-      });
-    }
+    const detail = deleteTask
+      ? this.backendService.toastMessages.successDeletedTask
+      : this.backendService.toastMessages.successUpdatedTask;
 
-    if (success && !deleteTask) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Success',
-        detail: this.backendService.toastMessages.successUpdatedTask
-      });
+    if (success) {
+      this.messageService.add({ severity: 'success', summary: 'Success', detail });
     }
   }
+
 
   setSelectedTaskId(id: number) {
     this.selectedTaskId = id;
