@@ -83,12 +83,18 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showDialog = true;
   }
 
-  closeDialog(success: boolean) {
+  closeDialog(result: Contact | boolean | null) {
     this.showDialog = false;
-    if (success) {
-      this.showSuccess(this.isEditMode ? this.backendService.toastMessages.successUpdatedContact : this.backendService.toastMessages.successCreatedContact);
+    if (typeof result === 'object' && result !== null) {
+      this.showSuccess(this.isEditMode
+        ? this.backendService.toastMessages.successUpdatedContact
+        : this.backendService.toastMessages.successCreatedContact);
+      this.showContactDetails(result);
+    } else if (result === true) {
+      this.showSuccess(this.backendService.toastMessages.successUpdatedContact);
     }
   }
+
 
   showSuccess(detail: string) {
     this.messageService.add({

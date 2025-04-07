@@ -36,7 +36,7 @@ import { Router } from '@angular/router';
 export class DialogContactComponent implements OnInit {
   @Input() contact: Contact | null = null;
   @Input() isEditMode: boolean = false;
-  @Output() close = new EventEmitter<boolean>();
+  @Output() close = new EventEmitter<Contact | boolean | null>();
   dialogHasNoMargin = false;
   visible: boolean = true;
   isLoading: boolean = false;
@@ -120,7 +120,10 @@ export class DialogContactComponent implements OnInit {
       );
       this.isLoading = false;
       this.resetForm();
-      this.closeDialog(true);
+      this.closeDialog({
+        ...createContactJson,
+        bg_color: randomBgColor
+      });
     } catch (error) {
       this.setToastErrorMessage(error);
     }
@@ -174,7 +177,7 @@ export class DialogContactComponent implements OnInit {
     });
   }
 
-  closeDialog(success: boolean = false) {
-    this.close.emit(success);
+  closeDialog(result: Contact | boolean | null = false) {
+    this.close.emit(result);
   }
 }

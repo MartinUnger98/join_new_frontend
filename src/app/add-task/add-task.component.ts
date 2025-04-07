@@ -221,12 +221,26 @@ export class AddTaskComponent implements OnInit, AfterViewInit, OnDestroy{
     this.showDialog = true;
   }
 
-  closeContactDialog(success: boolean) {
+  closeContactDialog(result: Contact | boolean | null) {
     this.showDialog = false;
-    if (success) {
-      this.messageService.add({ severity:'success', summary: 'Success', detail: this.backendService.toastMessages.successCreatedContact });
+
+    if (result === true) {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: this.backendService.toastMessages.successCreatedContact
+      });
+    }
+
+    if (typeof result === 'object' && result !== null) {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: this.backendService.toastMessages.successCreatedContact
+      });
     }
   }
+
 
 
   clearAllInputs() {
