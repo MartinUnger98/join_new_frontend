@@ -52,8 +52,8 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
   getContactsInitials() {
     this.contactsInitials = [];
     this.contacts.forEach((contact) => {
-      const initial = contact.name[0].toUpperCase();
-      if (!this.contactsInitials.includes(initial)) {
+      const initial = contact.name.trim()[0]?.toUpperCase();
+      if (initial && !this.contactsInitials.includes(initial)) {
         this.contactsInitials.push(initial);
       }
     });
@@ -61,7 +61,7 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   getInitialsForAvatar(contactName: string) {
-    let nameParts = contactName.split(' ');
+    let nameParts = contactName.trim().split(/\s+/).filter(Boolean);
     let initials = nameParts.slice(0, 2).map((part) => part[0].toUpperCase());
     return initials.join('');
   }
