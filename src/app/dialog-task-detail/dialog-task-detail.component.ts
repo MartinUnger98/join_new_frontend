@@ -114,6 +114,21 @@ export class DialogTaskDetailComponent implements OnInit, OnDestroy{
     return count;
   }
 
+  async onSubtaskToggle() {
+    if (!this.task) {
+      return;
+    }
+    try {
+      await this.backendService.editTask(this.task, false);
+    } catch (error) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: this.backendService.toastMessages.errorUnexpected,
+      });
+    }
+  }
+
   closeDialog(result: { success: boolean, deleteTask: boolean } = { success: false, deleteTask: false }) {
     this.visible = false;
     this.close.emit(result);

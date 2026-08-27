@@ -91,10 +91,20 @@ export class ContactsComponent implements OnInit, AfterViewInit, OnDestroy {
         : this.backendService.toastMessages.successCreatedContact);
       this.showContactDetails(result);
     } else if (result === true) {
+      this.refreshSelectedContact();
       this.showSuccess(this.backendService.toastMessages.successUpdatedContact);
     }
   }
 
+
+  refreshSelectedContact() {
+    if (!this.selectedContact) return;
+    const updated = this.contacts.find(contact => contact.id === this.selectedContact!.id);
+    if (updated) {
+      this.selectedContact = updated;
+      this.cdRef.detectChanges();
+    }
+  }
 
   showSuccess(detail: string) {
     this.messageService.add({

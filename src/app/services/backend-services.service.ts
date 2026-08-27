@@ -101,7 +101,7 @@ export class BackendServicesService {
     await this.loadTasks();
   }
 
-  public async editTask(task:Task) {
+  public async editTask(task:Task, reload: boolean = true) {
     const url = environment.baseUrl + `/tasks/${task.id}/`;
     const body:Task = {
       "title": task.title,
@@ -117,7 +117,9 @@ export class BackendServicesService {
       body.subtasks = task.subtasks;
     }
     await lastValueFrom(this.http.put(url, body));
-    await this.loadTasks();
+    if (reload) {
+      await this.loadTasks();
+    }
   }
 
   public async deleteTask(id: number): Promise<void> {
